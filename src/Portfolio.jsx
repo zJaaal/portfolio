@@ -1,11 +1,12 @@
 import "./Portfolio.css";
-
+import LoadingPage from "./pages/LoadingPage";
+import AppContextProvider from "./store/AppContextProvider";
+import { useContext } from "react";
+import { AppContext } from "./store/AppContext";
+import MainPage from "./pages/MainPage";
 function Portfolio() {
-  return (
-    <div>
-      <h3>Here goes my portfolio</h3>
-    </div>
-  );
+  const { app } = useContext(AppContext);
+  return <>{!app.loadPage ? <LoadingPage /> : <MainPage />}</>;
 }
 
 export default Portfolio;

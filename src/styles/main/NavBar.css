@@ -1,0 +1,15 @@
+@import "MainPage.css";
+
+.nav-bar {
+  position: fixed;
+  top: 0vh;
+  width: 100vw;
+  height: 70px;
+  background-color: var(--background-color);
+  color: var(--secondary-color);
+}
+
+
+.nav-btn:hover {
+  font-weight: bold;
+}

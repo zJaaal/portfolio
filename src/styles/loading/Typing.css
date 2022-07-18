@@ -1,0 +1,13 @@
+root {
+
+  /* Couldn't add classes to the text */
+
+  --object-color: #8c3d67;
+  --method-color: #54b6d8;
+  --body-color: #88b168;
+}
+
+.typing-cursor {
+  color: white;
+  font-size: 25.996px;
+}
