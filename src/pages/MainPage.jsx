@@ -1,6 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLinkedin,
+  faGithub,
+  faTelegram,
+} from "@fortawesome/free-brands-svg-icons";
 import NavBar from "../components/main/NavBar";
 import HardSkills from "../components/main/HardSkills";
 import SoftSkills from "../components/main/SoftSkills";
@@ -115,6 +120,14 @@ const MainPage = () => {
           style={{ height: "inherit" }}
         >
           <div className="d-flex justify-content-center align-items-center">
+            <a href="https://www.github.com/zJaaal" target={"_blank"}>
+              <FontAwesomeIcon
+                icon={faGithub}
+                style={{ width: "42px", height: "42px" }}
+                color="#6745d9"
+                className={"p-2 pointer"}
+              />
+            </a>
             <a
               href="https://www.linkedin.com/in/jalinson-diaz"
               target={"_blank"}
@@ -127,11 +140,11 @@ const MainPage = () => {
               />
             </a>
 
-            <a href="https://www.github.com/zJaaal" target={"_blank"}>
+            <a href="mailto:zjaaaldev@gmail.com" target={"_blank"}>
               <FontAwesomeIcon
-                icon={faGithub}
+                icon={faEnvelope}
+                color="white"
                 style={{ width: "42px", height: "42px" }}
-                color="#6745d9"
                 className={"p-2 pointer"}
               />
             </a>
@@ -144,6 +157,13 @@ const MainPage = () => {
                 />
               </a>
             </div>
+            <a href="https://t.me/zJaaal" target={"_blank"}>
+              <FontAwesomeIcon
+                icon={faTelegram}
+                style={{ width: "42px", height: "42px" }}
+                className={"p-2 pointer"}
+              />
+            </a>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             <p className="body green-text bold">
