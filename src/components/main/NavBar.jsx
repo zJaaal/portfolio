@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/main/NavBar.css";
 const NavBar = () => {
   return (
-    <div className="nav-bar container-fluid glass-card">
+    <div className="nav-bar container glass-card">
       <div
         className="d-flex justify-content-evenly align-items-center"
         style={{ height: "inherit" }}
