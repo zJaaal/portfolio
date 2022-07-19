@@ -12,6 +12,18 @@ const MainPage = () => {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center main-page area">
       <NavBar />
+      <ul className="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <section
         className="container mt-1"
         id="about-me"
@@ -250,18 +262,6 @@ const MainPage = () => {
           </div>
         </div>
       </section>
-      <ul className="circles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
     </div>
   );
 };
