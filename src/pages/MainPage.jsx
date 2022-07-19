@@ -79,7 +79,9 @@ const MainPage = () => {
           className="row d-flex align-items-center justify-content-center glass-card"
           style={{ height: "inherit" }}
         >
-          <h1 className="text-center purple-text mt-2 bold">Soft Skills</h1>
+          <h1 className="text-center purple-text mt-2 mb-4 bold">
+            Soft Skills
+          </h1>
           <ul className="pl-4" style={{ color: "white" }}>
             <li>
               <h3 className="green-text">Problem Solving: </h3>{" "}
@@ -101,14 +103,16 @@ const MainPage = () => {
               <h3 className="green-text">Curiosity: </h3>
               <p className={"body"}>
                 I started learning programming thanks to my natural impulse to
-                learn things, curiosity is one of my strengths.
+                learn things,<span className="green-text"> curiosity</span> is
+                one of my strengths.
               </p>
             </li>
             <li>
               <h3 className="green-text">Self Management: </h3>
               <p className={"body"}>
                 I am able to organize my time and meet my goals on time, I
-                consider myself someone quite a planner.
+                consider myself someone quite a{" "}
+                <span className="green-text">planner</span>.
               </p>
             </li>
             <li>
@@ -116,8 +120,9 @@ const MainPage = () => {
               <p className={"body"}>
                 I have done some projects with friends who have offered
                 themselves as mentors who are currently part of this world, I
-                have learned a lot about teamwork in this area by developing
-                projects with them through the GitHub platform
+                have learned a lot about
+                <span className="green-text"> teamwork </span> in this area by
+                developing projects with them through the GitHub platform
               </p>
             </li>
             <li>
@@ -126,12 +131,15 @@ const MainPage = () => {
                 Generally when I don't know something or I have doubts, I turn
                 to people with more knowledge to receive guidance, as well as I
                 am also willing to support those who need help, I think that the
-                basis of a good team should be the ability to communicate doubts
-                or be sincere when you don't know about some topic.
+                basis of a good team should be the ability to
+                <span className="green-text"> communicate</span> doubts or be
+                sincere when you don't know about some topic.
               </p>
             </li>
           </ul>
-          <h1 className="text-center purple-text mt-2 bold">Hard Skills</h1>
+          <h1 className="text-center purple-text mt-2 mb-4 bold">
+            Hard Skills
+          </h1>
           <div className="row d-flex justify-content-center">
             <VisibilitySensor>
               {({ isVisible }) => {
