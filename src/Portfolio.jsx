@@ -6,8 +6,8 @@ import { AppContext } from "./store/AppContext";
 import MainPage from "./pages/MainPage";
 function Portfolio() {
   const { app } = useContext(AppContext);
-  return <MainPage />;
+  return <>{!app.loadPage ? <LoadingPage /> : <MainPage />}</>;
 }
-/* {!app.loadPage ? <LoadingPage /> : <MainPage />} */
+/*  */
 
 export default Portfolio;
