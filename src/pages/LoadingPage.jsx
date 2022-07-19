@@ -6,7 +6,7 @@ import "../styles/loading/LoadingPage.css";
 
 const LoadingPage = () => {
   const [showButton, setShowButton] = useState(false);
-  setTimeout(() => setShowButton(true), 6000);
+  setTimeout(() => setShowButton(true), 2000);
   return (
     <div
       className="d-flex flex-column justify-content-center align-items-center loading-page"

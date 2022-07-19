@@ -1,8 +1,12 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import NavBar from "../components/main/NavBar";
 import HardSkills from "../components/main/HardSkills";
-import "../styles/main/MainPage.css";
 import SoftSkills from "../components/main/SoftSkills";
+
+import "../styles/main/MainPage.css";
+
 const MainPage = () => {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center main-page area">
@@ -91,7 +95,7 @@ const MainPage = () => {
           </div>
         </div>
       </section>
-      <section className="container mt-4 mb-4" id="skills">
+      <section className="container mt-4 mb-4 glass-card" id="projects">
         <div
           className="row d-flex align-items-center justify-content-center"
           style={{ height: "inherit" }}
@@ -99,7 +103,52 @@ const MainPage = () => {
           <h1 className="text-center purple-text mt-2 mb-4 bold">Projects</h1>
         </div>
       </section>
-      <footer></footer>
+      <footer
+        className="container nav-bar glass-card mt-4 mb-1"
+        style={{ height: "inherit" }}
+      >
+        <div
+          className="d-flex flex-column justify-content-center align-items-center"
+          style={{ height: "inherit" }}
+        >
+          <div className="d-flex justify-content-center align-items-center">
+            <a
+              href="https://www.linkedin.com/in/jalinson-diaz"
+              target={"_blank"}
+            >
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                color="#0067ee"
+                className={"p-2 pointer"}
+                style={{ width: "42px", height: "42px" }}
+              />
+            </a>
+
+            <a href="https://www.github.com/zJaaal" target={"_blank"}>
+              <FontAwesomeIcon
+                icon={faGithub}
+                style={{ width: "42px", height: "42px" }}
+                color="#6745d9"
+                className={"p-2 pointer"}
+              />
+            </a>
+            <div className="p-2 pointer">
+              <a href="https://www.codewars.com/users/zJaaal" target={"_blank"}>
+                <img
+                  src="https://www.codewars.com/packs/assets/logo.61192cf7.svg"
+                  alt="Codewars Icon"
+                  style={{ width: "42px", height: "42px" }}
+                />
+              </a>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center align-items-center">
+            <p className="body green-text bold">
+              Powered by <span className="italic net-color">zJaaal</span>{" "}
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

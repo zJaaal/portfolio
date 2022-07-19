@@ -5,15 +5,18 @@
   --background-shade: #09090b;
 }
 
-section {
-  overflow: hidden;
-}
 
 .main-page {
   font-family: "Chakra Petch";
   background-color: var(--background-shade);
   color: white;
   position: relative;
+}
+
+.icon {
+  height: 60px;
+  width: 60px;
+  background-color: var(--primary-color);
 }
 
 ul {
@@ -107,6 +110,10 @@ a {
   font-weight: 700;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .medium {
   font-weight: 500;
 }
@@ -132,7 +139,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 
