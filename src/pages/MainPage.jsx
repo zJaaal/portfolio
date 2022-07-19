@@ -1,28 +1,20 @@
 import React from "react";
+import {
+  buildStyles,
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+} from "react-circular-progressbar";
+import VisibilitySensor from "react-visibility-sensor";
 import NavBar from "../components/main/NavBar";
+import "react-circular-progressbar/dist/styles.css";
 import "../styles/main/MainPage.css";
 const MainPage = () => {
   return (
-    <div
-      className="d-flex flex-column align-items-center justify-content-center main-page area"
-      style={{ height: "100%" }}
-    >
-      <ul className="circles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+    <div className="d-flex flex-column align-items-center justify-content-center main-page area">
       <NavBar />
       <section
-        className="container-fluid mt-1"
-        id={"about-me"}
+        className="container mt-1"
+        id="about-me"
         style={{ height: "100vh" }}
       >
         <div
@@ -44,7 +36,7 @@ const MainPage = () => {
           </div>
           <div className="col-lg-6 col-sm-12 col-md-12 col-xs-12">
             <div className="d-flex flex-column align-items-center justify-content-center">
-              <p className="text-justify body">
+              <p className="text-justify body ">
                 Passionate about technology and driven by curiosity, I have been
                 learning programming since 2020, starting with part of the
                 <span className="net-color bold"> .NET</span> stack,
@@ -70,13 +62,13 @@ const MainPage = () => {
           </div>
         </div>
       </section>
-      <section className="container-fluid mt-4" id={"skills"}>
+      <section className="container mt-4 mb-4" id="skills">
         <div
           className="row d-flex align-items-center glass-card"
           style={{ height: "inherit" }}
         >
           <h1 className="text-center purple-text mt-2 bold">Soft Skills</h1>
-          <ul className="p-4">
+          <ul className="pl-4" style={{ color: "white" }}>
             <li>
               <h3 className="green-text">Problem Solving: </h3>{" "}
               <p className={"body"}>
@@ -128,8 +120,148 @@ const MainPage = () => {
             </li>
           </ul>
           <h1 className="text-center purple-text mt-2 bold">Hard Skills</h1>
+          <div className="row d-flex justify-content-center">
+            <VisibilitySensor>
+              {({ isVisible }) => {
+                const percentage = isVisible ? 95 : 0;
+                return (
+                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+                    <CircularProgressbar
+                      minValue={0}
+                      value={percentage}
+                      text={`JavaScript ${percentage}%`}
+                      strokeWidth={4}
+                      styles={buildStyles({
+                        pathColor: "#fedf1e",
+                        trailColor: "#16161A",
+                        textColor: "#fedf1e",
+                        textSize: "10px",
+                      })}
+                    />
+                  </div>
+                );
+              }}
+            </VisibilitySensor>
+            <VisibilitySensor>
+              {({ isVisible }) => {
+                const percentage = isVisible ? 80 : 0;
+                return (
+                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+                    <CircularProgressbar
+                      minValue={0}
+                      value={percentage}
+                      text={`HTML ${percentage}%`}
+                      strokeWidth={4}
+                      styles={buildStyles({
+                        pathColor: "#fe5b00",
+                        trailColor: "#16161A",
+                        textColor: "#fe5b00",
+                        textSize: "10px",
+                      })}
+                    />
+                  </div>
+                );
+              }}
+            </VisibilitySensor>
+            <VisibilitySensor>
+              {({ isVisible }) => {
+                const percentage = isVisible ? 75 : 0;
+                return (
+                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+                    <CircularProgressbar
+                      minValue={0}
+                      value={percentage}
+                      text={`CSS ${percentage}%`}
+                      strokeWidth={4}
+                      styles={buildStyles({
+                        pathColor: "#0067ee",
+                        trailColor: "#16161A",
+                        textColor: "#0067ee",
+                        textSize: "10px",
+                      })}
+                    />
+                  </div>
+                );
+              }}
+            </VisibilitySensor>
+            <VisibilitySensor>
+              {({ isVisible }) => {
+                const percentage = isVisible ? 60 : 0;
+                return (
+                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+                    <CircularProgressbar
+                      minValue={0}
+                      value={percentage}
+                      text={`React ${percentage}%`}
+                      strokeWidth={4}
+                      styles={buildStyles({
+                        pathColor: "#01a0cb",
+                        trailColor: "#16161A",
+                        textColor: "#01a0cb",
+                        textSize: "10px",
+                      })}
+                    />
+                  </div>
+                );
+              }}
+            </VisibilitySensor>
+            <VisibilitySensor>
+              {({ isVisible }) => {
+                const percentage = isVisible ? 90 : 0;
+                return (
+                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+                    <CircularProgressbar
+                      minValue={0}
+                      value={percentage}
+                      text={`Material UI ${percentage}%`}
+                      strokeWidth={4}
+                      styles={buildStyles({
+                        pathColor: "#01a0cb",
+                        trailColor: "#16161A",
+                        textColor: "#01a0cb",
+                        textSize: "10px",
+                      })}
+                    />
+                  </div>
+                );
+              }}
+            </VisibilitySensor>
+            <VisibilitySensor>
+              {({ isVisible }) => {
+                const percentage = isVisible ? 90 : 0;
+                return (
+                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+                    <CircularProgressbar
+                      minValue={0}
+                      value={percentage}
+                      text={`Bootstrap ${percentage}%`}
+                      strokeWidth={4}
+                      styles={buildStyles({
+                        pathColor: "#B115E0",
+                        trailColor: "#16161A",
+                        textColor: "#B115E0",
+                        textSize: "10px",
+                      })}
+                    />
+                  </div>
+                );
+              }}
+            </VisibilitySensor>
+          </div>
         </div>
       </section>
+      <ul className="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
     </div>
   );
 };

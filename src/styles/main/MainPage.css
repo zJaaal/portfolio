@@ -64,7 +64,6 @@ a {
   line-height: 1.5;
   letter-spacing: 0.00938em;
   margin-bottom: 0.35em;
-  color: white;
 }
 
 .green-text {
@@ -125,10 +124,6 @@ a {
 .area {
   background: var(--background-color);
   background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
-  width: 100%;
-  height: 100vh;
-
-
 }
 
 .circles {
@@ -136,7 +131,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 
