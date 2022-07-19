@@ -7,9 +7,15 @@ const NavBar = () => {
         className="d-flex justify-content-evenly align-items-center"
         style={{ height: "inherit" }}
       >
-        <h4 className="pointer nav-btn">About Me</h4>
-        <h4 className="pointer nav-btn">Skills</h4>
-        <h4 className="pointer nav-btn">Projects</h4>
+        <a className="pointer" href="#about-me">
+          <h5 className="nav-btn">About Me</h5>
+        </a>
+        <a className="pointer" href="#skills">
+          <h5 className="nav-btn">Skills</h5>
+        </a>
+        <a className="pointer" href="#projects">
+          <h5 className="nav-btn">Projects</h5>
+        </a>
       </div>
     </div>
   );

@@ -1,8 +1,12 @@
 :root {
-  --primary-color: #630c7e;
+  --primary-color: #B115E0;
   --secondary-color: #2CB67D;
   --background-color: #16161A;
   --background-shade: #09090b;
+}
+
+section {
+  overflow: hidden;
 }
 
 .main-page {
@@ -11,9 +15,19 @@
   color: white;
 }
 
-.green-text {
-  color: var(--secondary-color)
+ul {
+  color: var(--secondary-color);
 }
+
+p.body {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* skills colors */
 
 .net-color {
   color: #6745d9;
@@ -39,11 +53,26 @@
   color: #fedf1e;
 }
 
+.codewars-color {
+  color: #c52800;
+}
+
+/* text */
+
 .body {
   font-size: 1rem;
   line-height: 1.5;
   letter-spacing: 0.00938em;
   margin-bottom: 0.35em;
+  color: white;
+}
+
+.green-text {
+  color: var(--secondary-color)
+}
+
+.purple-text {
+  color: var(--primary-color);
 }
 
 .glass-card {

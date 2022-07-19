@@ -5,9 +5,9 @@ const MainPage = () => {
   return (
     <div
       className="d-flex flex-column align-items-center justify-content-center main-page area"
-      style={{ height: "100vh" }}
+      style={{ height: "100%" }}
     >
-      <ul class="circles">
+      <ul className="circles">
         <li></li>
         <li></li>
         <li></li>
@@ -20,9 +20,13 @@ const MainPage = () => {
         <li></li>
       </ul>
       <NavBar />
-      <div className="container-fluid mt-4" id={"about-me"}>
+      <section
+        className="container-fluid mt-1"
+        id={"about-me"}
+        style={{ height: "100vh" }}
+      >
         <div
-          className="row d-flex align-items-center glass-card enter"
+          className="row d-flex align-content-center glass-card enter"
           style={{ height: "inherit" }}
         >
           <div className="col-lg-6 col-sm-12 col-md-12 col-xs-12">
@@ -32,7 +36,7 @@ const MainPage = () => {
                 src="https://avatars.githubusercontent.com/u/63567962?v=4"
                 alt="zJaaal Profile Picture"
               />
-              <h3>Jalinson Diaz</h3>
+              <h3 className="mt-1">Jalinson Diaz</h3>
               <h4 className="green-text bold text-center">
                 Frontend Developer
               </h4>
@@ -65,7 +69,67 @@ const MainPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
+      <section className="container-fluid mt-4" id={"skills"}>
+        <div
+          className="row d-flex align-items-center glass-card"
+          style={{ height: "inherit" }}
+        >
+          <h1 className="text-center purple-text mt-2 bold">Soft Skills</h1>
+          <ul className="p-4">
+            <li>
+              <h3 className="green-text">Problem Solving: </h3>{" "}
+              <p className={"body"}>
+                I consider myself really good at{" "}
+                <span className="green-text">Problem Solving, </span>I
+                constantly test myself against problems in{" "}
+                <a href="https://www.codewars.com/users/zJaaal" target="_blank">
+                  <span className="codewars-color">CodeWars</span>
+                </a>{" "}
+                . You can find some solutions at my{" "}
+                <a href="https://www.github.com/zJaaal" target="_blank">
+                  <span className="net-color">GitHub </span>
+                </a>
+                profile.
+              </p>
+            </li>
+            <li>
+              <h3 className="green-text">Curiosity: </h3>
+              <p className={"body"}>
+                I started learning programming thanks to my natural impulse to
+                learn things, curiosity is one of my strengths.
+              </p>
+            </li>
+            <li>
+              <h3 className="green-text">Self Management: </h3>
+              <p className={"body"}>
+                I am able to organize my time and meet my goals on time, I
+                consider myself someone quite a planner.
+              </p>
+            </li>
+            <li>
+              <h3 className="green-text">Teamwork: </h3>
+              <p className={"body"}>
+                I have done some projects with friends who have offered
+                themselves as mentors who are currently part of this world, I
+                have learned a lot about teamwork in this area by developing
+                projects with them through the GitHub platform
+              </p>
+            </li>
+            <li>
+              <h3 className="green-text">Communication: </h3>
+              <p className={"body"}>
+                Generally when I don't know something or I have doubts, I turn
+                to people with more knowledge to receive guidance, as well as I
+                am also willing to support those who need help, I think that the
+                basis of a good team should be the ability to communicate doubts
+                or be sincere when you don't know about some topic.
+              </p>
+            </li>
+          </ul>
+          <h1 className="text-center purple-text mt-2 bold">Hard Skills</h1>
+        </div>
+      </section>
     </div>
   );
 };

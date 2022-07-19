@@ -6,6 +6,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   width: 100vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .code {
