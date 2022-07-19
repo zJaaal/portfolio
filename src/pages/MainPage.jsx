@@ -101,6 +101,9 @@ const MainPage = () => {
           style={{ height: "inherit" }}
         >
           <h1 className="text-center purple-text mt-2 mb-4 bold">Projects</h1>
+          <h3 className="text-center green-text ">
+            I'm still working on the page
+          </h3>
         </div>
       </section>
       <footer

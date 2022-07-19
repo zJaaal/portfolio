@@ -7,13 +7,13 @@ const HardSkills = () => {
     <>
       <VisibilitySensor>
         {({ isVisible }) => {
-          const percentage = isVisible ? 95 : 0;
+          const percentage = isVisible ? 85 : 0;
           return (
             <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
               <CircularProgressbar
                 minValue={0}
                 value={percentage}
-                text={`JavaScript ${percentage}%`}
+                text={`JavaScript`}
                 strokeWidth={4}
                 styles={buildStyles({
                   pathColor: "#fedf1e",
@@ -34,7 +34,7 @@ const HardSkills = () => {
               <CircularProgressbar
                 minValue={0}
                 value={percentage}
-                text={`HTML ${percentage}%`}
+                text={`HTML`}
                 strokeWidth={4}
                 styles={buildStyles({
                   pathColor: "#fe5b00",
@@ -49,13 +49,13 @@ const HardSkills = () => {
       </VisibilitySensor>{" "}
       <VisibilitySensor>
         {({ isVisible }) => {
-          const percentage = isVisible ? 75 : 0;
+          const percentage = isVisible ? 65 : 0;
           return (
             <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
               <CircularProgressbar
                 minValue={0}
                 value={percentage}
-                text={`CSS ${percentage}%`}
+                text={`CSS`}
                 strokeWidth={4}
                 styles={buildStyles({
                   pathColor: "#0067ee",
@@ -76,7 +76,7 @@ const HardSkills = () => {
               <CircularProgressbar
                 minValue={0}
                 value={percentage}
-                text={`React ${percentage}%`}
+                text={`React`}
                 strokeWidth={4}
                 styles={buildStyles({
                   pathColor: "#01a0cb",
@@ -91,13 +91,13 @@ const HardSkills = () => {
       </VisibilitySensor>{" "}
       <VisibilitySensor>
         {({ isVisible }) => {
-          const percentage = isVisible ? 90 : 0;
+          const percentage = isVisible ? 85 : 0;
           return (
             <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
               <CircularProgressbar
                 minValue={0}
                 value={percentage}
-                text={`Material UI ${percentage}%`}
+                text={`Material UI`}
                 strokeWidth={4}
                 styles={buildStyles({
                   pathColor: "#01a0cb",
@@ -112,13 +112,13 @@ const HardSkills = () => {
       </VisibilitySensor>{" "}
       <VisibilitySensor>
         {({ isVisible }) => {
-          const percentage = isVisible ? 90 : 0;
+          const percentage = isVisible ? 85 : 0;
           return (
             <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
               <CircularProgressbar
                 minValue={0}
                 value={percentage}
-                text={`Bootstrap ${percentage}%`}
+                text={`Bootstrap`}
                 strokeWidth={4}
                 styles={buildStyles({
                   pathColor: "#B115E0",

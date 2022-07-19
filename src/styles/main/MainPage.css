@@ -19,8 +19,8 @@
   background-color: var(--primary-color);
 }
 
-ul {
-  color: var(--secondary-color);
+li {
+  list-style: none;
 }
 
 p.body {
