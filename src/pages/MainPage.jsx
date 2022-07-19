@@ -76,7 +76,7 @@ const MainPage = () => {
       </section>
       <section className="container mt-4 mb-4" id="skills">
         <div
-          className="row d-flex align-items-center glass-card"
+          className="row d-flex align-items-center justify-content-center glass-card"
           style={{ height: "inherit" }}
         >
           <h1 className="text-center purple-text mt-2 bold">Soft Skills</h1>
