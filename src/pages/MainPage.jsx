@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  buildStyles,
-  CircularProgressbar,
-  CircularProgressbarWithChildren,
-} from "react-circular-progressbar";
-import VisibilitySensor from "react-visibility-sensor";
 import NavBar from "../components/main/NavBar";
-import "react-circular-progressbar/dist/styles.css";
+import HardSkills from "../components/main/HardSkills";
 import "../styles/main/MainPage.css";
+import SoftSkills from "../components/main/SoftSkills";
 const MainPage = () => {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center main-page area">
@@ -82,194 +77,29 @@ const MainPage = () => {
           <h1 className="text-center purple-text mt-2 mb-4 bold">
             Soft Skills
           </h1>
-          <ul className="pl-4" style={{ color: "white" }}>
-            <li>
-              <h3 className="green-text">Problem Solving: </h3>{" "}
-              <p className={"body"}>
-                I consider myself really good at{" "}
-                <span className="green-text">Problem Solving, </span>I
-                constantly test myself against problems in{" "}
-                <a href="https://www.codewars.com/users/zJaaal" target="_blank">
-                  <span className="codewars-color">CodeWars</span>
-                </a>{" "}
-                . You can find some solutions at my{" "}
-                <a href="https://www.github.com/zJaaal" target="_blank">
-                  <span className="net-color">GitHub </span>
-                </a>
-                profile.
-              </p>
-            </li>
-            <li>
-              <h3 className="green-text">Curiosity: </h3>
-              <p className={"body"}>
-                I started learning programming thanks to my natural impulse to
-                learn things,<span className="green-text"> curiosity</span> is
-                one of my strengths.
-              </p>
-            </li>
-            <li>
-              <h3 className="green-text">Self Management: </h3>
-              <p className={"body"}>
-                I am able to organize my time and meet my goals on time, I
-                consider myself someone quite a{" "}
-                <span className="green-text">planner</span>.
-              </p>
-            </li>
-            <li>
-              <h3 className="green-text">Teamwork: </h3>
-              <p className={"body"}>
-                I have done some projects with friends who have offered
-                themselves as mentors who are currently part of this world, I
-                have learned a lot about
-                <span className="green-text"> teamwork </span> in this area by
-                developing projects with them through the GitHub platform
-              </p>
-            </li>
-            <li>
-              <h3 className="green-text">Communication: </h3>
-              <p className={"body"}>
-                Generally when I don't know something or I have doubts, I turn
-                to people with more knowledge to receive guidance, as well as I
-                am also willing to support those who need help, I think that the
-                basis of a good team should be the ability to
-                <span className="green-text"> communicate</span> doubts or be
-                sincere when you don't know about some topic.
-              </p>
-            </li>
-          </ul>
+          <SoftSkills />
+        </div>
+        <div
+          className="row d-flex align-items-center justify-content-center glass-card mt-4"
+          style={{ height: "inherit" }}
+        >
           <h1 className="text-center purple-text mt-2 mb-4 bold">
             Hard Skills
           </h1>
           <div className="row d-flex justify-content-center">
-            <VisibilitySensor>
-              {({ isVisible }) => {
-                const percentage = isVisible ? 95 : 0;
-                return (
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-                    <CircularProgressbar
-                      minValue={0}
-                      value={percentage}
-                      text={`JavaScript ${percentage}%`}
-                      strokeWidth={4}
-                      styles={buildStyles({
-                        pathColor: "#fedf1e",
-                        trailColor: "#16161A",
-                        textColor: "#fedf1e",
-                        textSize: "10px",
-                      })}
-                    />
-                  </div>
-                );
-              }}
-            </VisibilitySensor>
-            <VisibilitySensor>
-              {({ isVisible }) => {
-                const percentage = isVisible ? 80 : 0;
-                return (
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-                    <CircularProgressbar
-                      minValue={0}
-                      value={percentage}
-                      text={`HTML ${percentage}%`}
-                      strokeWidth={4}
-                      styles={buildStyles({
-                        pathColor: "#fe5b00",
-                        trailColor: "#16161A",
-                        textColor: "#fe5b00",
-                        textSize: "10px",
-                      })}
-                    />
-                  </div>
-                );
-              }}
-            </VisibilitySensor>
-            <VisibilitySensor>
-              {({ isVisible }) => {
-                const percentage = isVisible ? 75 : 0;
-                return (
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-                    <CircularProgressbar
-                      minValue={0}
-                      value={percentage}
-                      text={`CSS ${percentage}%`}
-                      strokeWidth={4}
-                      styles={buildStyles({
-                        pathColor: "#0067ee",
-                        trailColor: "#16161A",
-                        textColor: "#0067ee",
-                        textSize: "10px",
-                      })}
-                    />
-                  </div>
-                );
-              }}
-            </VisibilitySensor>
-            <VisibilitySensor>
-              {({ isVisible }) => {
-                const percentage = isVisible ? 60 : 0;
-                return (
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-                    <CircularProgressbar
-                      minValue={0}
-                      value={percentage}
-                      text={`React ${percentage}%`}
-                      strokeWidth={4}
-                      styles={buildStyles({
-                        pathColor: "#01a0cb",
-                        trailColor: "#16161A",
-                        textColor: "#01a0cb",
-                        textSize: "10px",
-                      })}
-                    />
-                  </div>
-                );
-              }}
-            </VisibilitySensor>
-            <VisibilitySensor>
-              {({ isVisible }) => {
-                const percentage = isVisible ? 90 : 0;
-                return (
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-                    <CircularProgressbar
-                      minValue={0}
-                      value={percentage}
-                      text={`Material UI ${percentage}%`}
-                      strokeWidth={4}
-                      styles={buildStyles({
-                        pathColor: "#01a0cb",
-                        trailColor: "#16161A",
-                        textColor: "#01a0cb",
-                        textSize: "10px",
-                      })}
-                    />
-                  </div>
-                );
-              }}
-            </VisibilitySensor>
-            <VisibilitySensor>
-              {({ isVisible }) => {
-                const percentage = isVisible ? 90 : 0;
-                return (
-                  <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-                    <CircularProgressbar
-                      minValue={0}
-                      value={percentage}
-                      text={`Bootstrap ${percentage}%`}
-                      strokeWidth={4}
-                      styles={buildStyles({
-                        pathColor: "#B115E0",
-                        trailColor: "#16161A",
-                        textColor: "#B115E0",
-                        textSize: "10px",
-                      })}
-                    />
-                  </div>
-                );
-              }}
-            </VisibilitySensor>
+            <HardSkills />
           </div>
         </div>
       </section>
+      <section className="container mt-4 mb-4" id="skills">
+        <div
+          className="row d-flex align-items-center justify-content-center"
+          style={{ height: "inherit" }}
+        >
+          <h1 className="text-center purple-text mt-2 mb-4 bold">Projects</h1>
+        </div>
+      </section>
+      <footer></footer>
     </div>
   );
 };

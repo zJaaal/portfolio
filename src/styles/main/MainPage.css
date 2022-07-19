@@ -13,6 +13,7 @@ section {
   font-family: "Chakra Petch";
   background-color: var(--background-shade);
   color: white;
+  position: relative;
 }
 
 ul {
@@ -76,11 +77,12 @@ a {
 
 .glass-card {
   background: rgba(22, 22, 26, 0.55);
-  /* box-shadow: 0 8px 25px 0 var(--primary-color); */
+  /* box-shadow: 0 6px 15px 0 var(--secondary-color); */
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-radius: 10px;
 }
+
 
 .enter {
   animation-name: enter;
@@ -126,7 +128,7 @@ a {
 }
 
 .circles {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
