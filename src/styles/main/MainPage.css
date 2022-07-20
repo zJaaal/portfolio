@@ -31,7 +31,15 @@ a {
   text-decoration: none;
 }
 
+.project-title {
+  min-width: 134px;
+}
+
 /* skills colors */
+
+.firebase-color {
+  color: #F57C00;
+}
 
 .g-color {
   color: #0188f9;

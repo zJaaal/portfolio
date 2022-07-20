@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLink } from "@fortawesome/free-solid-svg-icons";
 import {
   faLinkedin,
   faGithub,
@@ -102,13 +102,315 @@ const MainPage = () => {
       </section>
       <section className="container mt-4 mb-4 glass-card" id="projects">
         <div
-          className="row d-flex align-items-center justify-content-center"
+          className="d-flex flex-column align-items-center justify-content-center"
           style={{ height: "inherit" }}
         >
           <h1 className="text-center purple-text mt-2 mb-4 bold">Projects</h1>
-          <h3 className="text-center green-text ">
-            I'm still working on the page
-          </h3>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">React Calendar</h5>
+              <a
+                href="https://github.com/zJaaal/calendar-mern-app"
+                target={"_blank"}
+              >
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  style={{ width: "30px", height: "30px" }}
+                  color={"#6745d9"}
+                />
+              </a>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                A calendar app where you can create events and watch events
+                created by other users. This was my first project creating an
+                app with the <span className="react-color bold">MERN</span>{" "}
+                stack.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg"
+                  alt="React Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://d33wubrfki0l68.cloudfront.net/0834d0215db51e91525a25acf97433051f280f2f/c30f5/img/redux.svg"
+                  alt="React Redux Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/materialui-colored.svg"
+                  alt="MUI Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://brandeps.com/logo-download/R/React-Router-logo-vector-01.svg"
+                  alt="React Router Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">Calendar Backend</h5>
+              <a
+                href="https://github.com/zJaaal/calendar-backend"
+                target={"_blank"}
+              >
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  style={{ width: "30px", height: "30px" }}
+                  color={"#6745d9"}
+                />
+              </a>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                This is the REST service I made in{" "}
+                <span className="green-text bold">Node.js, Express.js</span> and
+                <span className="green-text bold"> MongoDB</span>. I used{" "}
+                <span className="bold">JWT </span>
+                for authentication and{" "}
+                <span className="react-color bold">Joi</span> to validate the
+                data for React Calendar.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://brandeps.com/logo-download/N/Node-JS-logo-vector-02.svg"
+                  alt="Node.js Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://cdn.iconscout.com/icon/free/png-256/mongodb-4-1175139.png"
+                  alt="MongoDB Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://jwt.io/img/pic_logo.svg"
+                  alt="JWT Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">Journal App</h5>
+              <a
+                href="https://github.com/zJaaal/journal-react-app"
+                target={"_blank"}
+              >
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  style={{ width: "30px", height: "30px" }}
+                  color={"#6745d9"}
+                />
+              </a>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                This an app to create a Journal about your daylife. I used this
+                app to learn <span className="net-color bold">React Redux</span>{" "}
+                and
+                <span className="net-color bold"> Redux Thunk </span>
+                for API requests. I used{" "}
+                <span className="firebase-color bold">Firebase</span> as Backend
+                in this project.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg"
+                  alt="React Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://d33wubrfki0l68.cloudfront.net/0834d0215db51e91525a25acf97433051f280f2f/c30f5/img/redux.svg"
+                  alt="React Redux Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/materialui-colored.svg"
+                  alt="MUI Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://brandeps.com/logo-download/R/React-Router-logo-vector-01.svg"
+                  alt="React Router Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://img.icons8.com/color/344/firebase.png"
+                  alt="Firebase Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">JS Player</h5>
+              <div
+                className="d-flex justify-content-center"
+                style={{ width: "inherit" }}
+              >
+                <a href="https://github.com/zJaaal/js-player" target={"_blank"}>
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                    color={"#6745d9"}
+                  />
+                </a>
+                <a href="https://js-player.netlify.app/" target={"_blank"}>
+                  <FontAwesomeIcon
+                    icon={faLink}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                This is an app where you can listen a 30sec preview of your
+                favorite song. I made it with{" "}
+                <span className="js-color">Vanilla JS</span> and Deezer API.
+                Here I learned the best practices to handle events and create
+                templates as components. This project was an introduction of how
+                <span className="react-color"> React</span> works.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg"
+                  alt="JS Logo"
+                />
+                <img
+                  style={{ width: "40x", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg"
+                  alt="HTML Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg"
+                  alt="CSS Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">JS Todo App</h5>
+              <div
+                className="d-flex justify-content-center"
+                style={{ width: "inherit" }}
+              >
+                <a
+                  href="https://github.com/zJaaal/js-todo-app"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                    color={"#6745d9"}
+                  />
+                </a>
+                <a
+                  href="https://zjaaal.github.io/js-todo-app/"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faLink}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                This is an app where you can manage your tasks of the day. I
+                made it with
+                <span className="js-color"> Vanilla JS</span>. Here I praticed
+                creation of events and dynamical rendering.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg"
+                  alt="JS Logo"
+                />
+                <img
+                  style={{ width: "40x", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg"
+                  alt="HTML Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg"
+                  alt="CSS Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">JS Calculator</h5>
+              <div
+                className="d-flex justify-content-center"
+                style={{ width: "inherit" }}
+              >
+                <a
+                  href="https://github.com/zJaaal/zJaaal.github.io"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                    color={"#6745d9"}
+                  />
+                </a>
+                <a href="https://zjaaal.github.io/" target={"_blank"}>
+                  <FontAwesomeIcon
+                    icon={faLink}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                I developed a simple calculator to practice{" "}
+                <span className="html-color">HTML </span>
+                and <span className="css-color">CSS</span>, also I learned a bit
+                about design and color palettes, I can say that the color
+                palette I used on this project, is one of my favorites. I made
+                it with
+                <span className="js-color"> Vanilla JS</span>.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg"
+                  alt="JS Logo"
+                />
+                <img
+                  style={{ width: "40x", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg"
+                  alt="HTML Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg"
+                  alt="CSS Logo"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <footer
@@ -116,7 +418,7 @@ const MainPage = () => {
         style={{ height: "inherit" }}
       >
         <div
-          className="d-flex flex-column justify-content-center align-items-center"
+          className="d-flex flex-column justify-content-center align-items-center mt-3"
           style={{ height: "inherit" }}
         >
           <div className="d-flex justify-content-center align-items-center">
