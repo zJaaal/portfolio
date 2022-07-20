@@ -57,6 +57,21 @@ const HardSkills = () => {
         />
         <h4 className="c-sharp-color mt-1">C#</h4>
       </div>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+          alt="Google Logo"
+        />
+        <h4 className="c-sharp-color mt-1">
+          <span className="g-color">G</span>
+          <span className="oe-color">o</span>
+          <span className="o2-color">o</span>
+          <span className="g-color">g</span>
+          <span className="l-color">l</span>
+          <span className="oe-color">e</span>
+        </h4>
+      </div>
     </>
   );
 };
