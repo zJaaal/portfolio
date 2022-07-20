@@ -1,136 +1,62 @@
-import React from "react";
-import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-import VisibilitySensor from "react-visibility-sensor";
 const HardSkills = () => {
   return (
     <>
-      <VisibilitySensor>
-        {({ isVisible }) => {
-          const percentage = isVisible ? 85 : 0;
-          return (
-            <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-              <CircularProgressbar
-                minValue={0}
-                value={percentage}
-                text={`JavaScript`}
-                strokeWidth={4}
-                styles={buildStyles({
-                  pathColor: "#fedf1e",
-                  trailColor: "#16161A",
-                  textColor: "#fedf1e",
-                  textSize: "10px",
-                })}
-              />
-            </div>
-          );
-        }}
-      </VisibilitySensor>{" "}
-      <VisibilitySensor>
-        {({ isVisible }) => {
-          const percentage = isVisible ? 80 : 0;
-          return (
-            <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-              <CircularProgressbar
-                minValue={0}
-                value={percentage}
-                text={`HTML`}
-                strokeWidth={4}
-                styles={buildStyles({
-                  pathColor: "#fe5b00",
-                  trailColor: "#16161A",
-                  textColor: "#fe5b00",
-                  textSize: "10px",
-                })}
-              />
-            </div>
-          );
-        }}
-      </VisibilitySensor>{" "}
-      <VisibilitySensor>
-        {({ isVisible }) => {
-          const percentage = isVisible ? 65 : 0;
-          return (
-            <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-              <CircularProgressbar
-                minValue={0}
-                value={percentage}
-                text={`CSS`}
-                strokeWidth={4}
-                styles={buildStyles({
-                  pathColor: "#0067ee",
-                  trailColor: "#16161A",
-                  textColor: "#0067ee",
-                  textSize: "10px",
-                })}
-              />
-            </div>
-          );
-        }}
-      </VisibilitySensor>{" "}
-      <VisibilitySensor>
-        {({ isVisible }) => {
-          const percentage = isVisible ? 60 : 0;
-          return (
-            <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-              <CircularProgressbar
-                minValue={0}
-                value={percentage}
-                text={`React`}
-                strokeWidth={4}
-                styles={buildStyles({
-                  pathColor: "#01a0cb",
-                  trailColor: "#16161A",
-                  textColor: "#01a0cb",
-                  textSize: "10px",
-                })}
-              />
-            </div>
-          );
-        }}
-      </VisibilitySensor>{" "}
-      <VisibilitySensor>
-        {({ isVisible }) => {
-          const percentage = isVisible ? 85 : 0;
-          return (
-            <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-              <CircularProgressbar
-                minValue={0}
-                value={percentage}
-                text={`Material UI`}
-                strokeWidth={4}
-                styles={buildStyles({
-                  pathColor: "#01a0cb",
-                  trailColor: "#16161A",
-                  textColor: "#01a0cb",
-                  textSize: "10px",
-                })}
-              />
-            </div>
-          );
-        }}
-      </VisibilitySensor>{" "}
-      <VisibilitySensor>
-        {({ isVisible }) => {
-          const percentage = isVisible ? 85 : 0;
-          return (
-            <div className="col-6 col-sm-6 col-md-3 col-lg-3 p-2">
-              <CircularProgressbar
-                minValue={0}
-                value={percentage}
-                text={`Bootstrap`}
-                strokeWidth={4}
-                styles={buildStyles({
-                  pathColor: "#B115E0",
-                  trailColor: "#16161A",
-                  textColor: "#B115E0",
-                  textSize: "10px",
-                })}
-              />
-            </div>
-          );
-        }}
-      </VisibilitySensor>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg"
+          alt="JS Logo"
+        />
+        <h4 className="js-color mt-1">JavaScript</h4>
+      </div>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg"
+          alt="HTML Logo"
+        />
+        <h4 className="html-color mt-1">HTML</h4>
+      </div>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg"
+          alt="CSS Logo"
+        />
+        <h4 className="css-color mt-1">CSS</h4>
+      </div>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg"
+          alt="React Logo"
+        />
+        <h4 className="react-color mt-1">React.js</h4>
+      </div>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/materialui-colored.svg"
+          alt="MUI Logo"
+        />
+        <h4 className="mui-color mt-1">Material UI</h4>
+      </div>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/bootstrap-colored.svg"
+          alt="Bootstrap Logo"
+        />
+        <h4 className="bootstrap-color mt-1">Bootstrap</h4>
+      </div>
+      <div className="d-flex flex-column align-items-center col-6 col-sm-6 col-md-3 col-lg-3 p-2">
+        <img
+          style={{ width: "90px", height: "90px" }}
+          src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/csharp-colored.svg"
+          alt="C# Logo"
+        />
+        <h4 className="c-sharp-color mt-1">C#</h4>
+      </div>
     </>
   );
 };
