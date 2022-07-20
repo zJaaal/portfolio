@@ -11,7 +11,7 @@ const SoftSkills = () => {
           test myself against problems in{" "}
           <a href="https://www.codewars.com/users/zJaaal" target="_blank">
             <span className="codewars-color bold">CodeWars</span>
-          </a>{" "}
+          </a>
           . You can find some solutions at my{" "}
           <a href="https://www.github.com/zJaaal" target="_blank">
             <span className="net-color bold">GitHub </span>
