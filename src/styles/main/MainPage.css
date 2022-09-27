@@ -35,7 +35,32 @@ a {
   min-width: 134px;
 }
 
+.skills-btn:hover {
+  cursor: pointer;
+  font-weight: 700;
+}
+
 /* skills colors */
+
+.my-color {
+  color: #00638b;
+}
+
+.chakra-color {
+  color: #00cabf;
+}
+
+.SQL-color {
+  color: #f68900;
+}
+
+.knex-color {
+  color: #f65b00;
+}
+
+.mongoose-color {
+  color: #980000;
+}
 
 .firebase-color {
   color: #F57C00;
@@ -78,7 +103,7 @@ a {
 }
 
 .react-color {
-  color: #01a0cb;
+  color: #03c8e4;
 }
 
 .html-color {
@@ -93,8 +118,44 @@ a {
   color: #fedf1e;
 }
 
+.ts-color {
+  color: #007bc7;
+}
+
+.jest-color {
+  color: #a83c4a;
+}
+
+.mocha-color {
+  color: #966546;
+}
+
+.vite-color {
+  color: #ffc524;
+}
+
+.rtl-color {
+  color: #f30b0b;
+}
+
 .codewars-color {
   color: #c52800;
+}
+
+.redux-color {
+  color: #764abc;
+}
+
+.node-color {
+  color: #29a04a;
+}
+
+.mongo-color {
+  color: #00a845;
+}
+
+.jwt-red {
+  color: #ff004b;
 }
 
 /* text */
