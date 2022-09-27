@@ -1,11 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLink } from "@fortawesome/free-solid-svg-icons";
-import {
-  faLinkedin,
-  faGithub,
-  faTelegram,
-} from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import NavBar from "../components/main/NavBar";
 import HardSkills from "../components/main/HardSkills";
 import SoftSkills from "../components/main/SoftSkills";
@@ -46,7 +42,7 @@ const MainPage = () => {
               />
               <h3 className="mt-1">Jalinson Diaz</h3>
               <h4 className="green-text bold text-center">
-                Frontend Developer
+                Fullstack Developer
               </h4>
             </div>
           </div>
@@ -65,14 +61,16 @@ const MainPage = () => {
                 have solid knowledge in
                 <span className="html-color bold"> HTML</span>,
                 <span className="css-color bold"> CSS</span>,{" "}
-                <span className="js-color bold"> JavaScript</span>, and
+                <span className="js-color bold"> JavaScript</span>,{" "}
+                <span className="ts-color bold">TypeScript</span> and
                 <span className="react-color bold"> React.js</span>. Although my
-                priority currently is the Front-end. I have basic knowledge in{" "}
-                <span className="green-text bold">
-                  Node.js, Express and MongoDB
+                priority currently is the Front-end. I also handle Backend
+                Technologies as {/**/}
+                <span className="node-color bold">
+                  Node.js, Express, MongoDB {/**/}
                 </span>
-                . And I am open to the possibility of expanding my horizons to
-                other branches such as: Backend, Mobile and DevOps.
+                and <span className="my-color bold">My</span>
+                <span className="SQL-color bold">SQL</span>
               </p>
             </div>
           </div>
@@ -95,9 +93,7 @@ const MainPage = () => {
           <h1 className="text-center purple-text mt-2 mb-4 bold">
             Hard Skills
           </h1>
-          <div className="row d-flex justify-content-center">
-            <HardSkills />
-          </div>
+          <HardSkills />
         </div>
       </section>
       <section className="container mt-4 mb-4 glass-card" id="projects">
@@ -106,6 +102,179 @@ const MainPage = () => {
           style={{ height: "inherit" }}
         >
           <h1 className="text-center purple-text mt-2 mb-4 bold">Projects</h1>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">
+                Nin<span className="js-color ">JS</span>
+              </h5>
+              <div
+                className="d-flex justify-content-center"
+                style={{ width: "inherit" }}
+              >
+                <a
+                  href="https://github.com/BrunoMalagoli/NinJS-Vite"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                    color={"#6745d9"}
+                  />
+                </a>
+                <a href="https://nin-js.netlify.app/" target={"_blank"}>
+                  <FontAwesomeIcon
+                    icon={faLink}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                An educational website with Ninja theme where you can test your
+                knowledge in <span className="js-color bold">JavaScript</span>{" "}
+                with multiple code quizes. It also provides educational content
+                between questions, so you can also learn while answering the
+                questions. I made this project with my{" "}
+                <span className="react-color bold">Alkemy</span> Team.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg"
+                  alt="React Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/300px-Typescript_logo_2020.svg.png"
+                  alt="TypeScript Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://cdn.discordapp.com/icons/660863154703695893/3c863d6a98b828fa8b3407d1b4542ccd.webp?size=40"
+                  alt="Chakra UI Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://brandeps.com/logo-download/R/React-Router-logo-vector-01.svg"
+                  alt="React Router Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">
+                Nin<span className="js-color">JS</span> Backend
+              </h5>
+              <a
+                href="https://github.com/zJaaal/ninjs-backend"
+                target={"_blank"}
+              >
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  style={{ width: "30px", height: "30px" }}
+                  color={"#6745d9"}
+                />
+              </a>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                A <span className="node-color bold">NodeJS</span> service made
+                for the <span className="bold">Nin</span>
+                <span className="js-color bold">JS</span> Website to handle
+                users and their progress. Developed using{" "}
+                <span className="ts-color bold">TypeScript</span>, {/**/}
+                <span className="node-color bold">Express, MongoDB</span>,
+                <span className="react-color bold"> Yup</span> for validation
+                and {/* */}
+                <span className="bold">JWT</span> to handle user authorization.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://brandeps.com/logo-download/N/Node-JS-logo-vector-02.svg"
+                  alt="Node.js Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/300px-Typescript_logo_2020.svg.png"
+                  alt="TypeScript Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://cdn.iconscout.com/icon/free/png-256/mongodb-4-1175139.png"
+                  alt="MongoDB Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://jwt.io/img/pic_logo.svg"
+                  alt="JWT Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">
+                React Responsive Design (Beta)
+              </h5>
+              <div
+                className="d-flex justify-content-center"
+                style={{ width: "inherit" }}
+              >
+                <a
+                  href="https://github.com/dandresfg/react-responsive-design"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                    color={"#6745d9"}
+                  />
+                </a>
+                <a
+                  href="https://www.npmjs.com/package/react-responsive-design"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faLink}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                This library saves your time when you deal with responsive
+                design, we know you have to hide components in desktop or
+                mobile, and that might be difficult when you have to mix a lot
+                of classNames in the same component. With this library you can
+                keep the responsive logic hidden for your components. I'm
+                contributing in this library.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg"
+                  alt="React Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/300px-Typescript_logo_2020.svg.png"
+                  alt="TypeScript"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://vitest.dev/logo.svg"
+                  alt="Vitest Logo"
+                />
+              </div>
+            </div>
+          </div>
           <div className="row d-flex justify-content-center p-2 mb-5">
             <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
               <h5 className="p-2 text-center">React Calendar</h5>
@@ -169,8 +338,8 @@ const MainPage = () => {
             <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
               <p className="body p-2">
                 This is the REST service I made in{" "}
-                <span className="green-text bold">Node.js, Express.js</span> and
-                <span className="green-text bold"> MongoDB</span>. I used{" "}
+                <span className="node-color bold">Node.js, Express.js</span> and
+                <span className="node-color bold"> MongoDB</span>. I used{" "}
                 <span className="bold">JWT </span>
                 for authentication and{" "}
                 <span className="react-color bold">Joi</span> to validate the
@@ -459,13 +628,6 @@ const MainPage = () => {
                 />
               </a>
             </div>
-            <a href="https://t.me/zJaaal" target={"_blank"}>
-              <FontAwesomeIcon
-                icon={faTelegram}
-                style={{ width: "42px", height: "42px" }}
-                className={"p-2 pointer"}
-              />
-            </a>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             <p className="body green-text bold">
