@@ -104,6 +104,71 @@ const MainPage = () => {
           <h1 className="text-center purple-text mt-2 mb-4 bold">Projects</h1>
           <div className="row d-flex justify-content-center p-2 mb-5">
             <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
+              <h5 className="p-2 text-center">React Scroll Utilities</h5>
+              <div
+                className="d-flex justify-content-center"
+                style={{ width: "inherit" }}
+              >
+                <a
+                  href="https://github.com/zJaaal/react-scroll-utilities/#readme"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                    color={"#6745d9"}
+                  />
+                </a>
+                <a
+                  href="https://npmjs.com/package/react-scroll-utilities"
+                  target={"_blank"}
+                >
+                  <FontAwesomeIcon
+                    icon={faLink}
+                    style={{ width: "30px", height: "30px", padding: "5px" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 d-flex flex-column">
+              <p className="body p-2">
+                React Scroll Utilities is a Lightweight library to track scroll
+                events like, proximity to components, direction of scroll and
+                render a component if it's on screen sight and manage animations
+                on scroll. This package is deployed by CI/CD to npm.
+              </p>
+              <h4 className="text-center">Technologies</h4>
+              <div className="d-flex justify-content-evenly mb-2">
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg"
+                  alt="React Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/300px-Typescript_logo_2020.svg.png"
+                  alt="TypeScript Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://raw.githubusercontent.com/npm/logos/master/npm%20square/n-64.png"
+                  alt="NPM Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://testing-library.com/img/octopus-128x128.png"
+                  alt="React Testing Library Logo"
+                />
+                <img
+                  style={{ width: "40px", height: "40px" }}
+                  src="https://vitest.dev/logo.svg"
+                  alt="Vitest Logo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-center p-2 mb-5">
+            <div className="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex flex-column align-items-center justify-content-start project-title">
               <h5 className="p-2 text-center">
                 Nin<span className="js-color ">JS</span>
               </h5>

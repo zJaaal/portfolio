@@ -39,7 +39,7 @@ const Extras = () => {
         <img
           style={{ width: "90px", height: "90px" }}
           src="https://testing-library.com/img/octopus-128x128.png"
-          alt="RTL Logo"
+          alt="React Testing Library Logo"
         />
         <h4 className="rtl-color mt-1 text-center">React Testing Library</h4>
       </div>
