@@ -40,7 +40,8 @@ Astro scopes `<style>` to the component, so styles stay in the component file. T
 
 Every number that means something gets a named constant with its unit in the name, for example `THEME_STORAGE_KEY`, `HERO_VIDEO_MAX_MB`, `LOCALE_COOKIE_MAX_AGE_S`.
 
-- **In CSS:** every spacing, size, radius, color, duration and easing comes from a token variable (`var(--space-4)`, `var(--dur-enter)`). Raw `px` and hex values are allowed only in `src/styles/tokens.json`.
+- **In CSS:** every spacing, size, radius, color, duration and easing comes from a token variable (`var(--space-4)`, `var(--motion-enter)`). Raw values and hex colors are allowed only in `src/styles/tokens.json`.
+- **`rem`, never `px`** (owner, 2026-11-18): sizes scale with the reader's font size. The only `px` allowed are 1px hairlines and borders. Media queries use `em`.
 - **Allowed literals:** `0`, `1`, `-1` as an index or identity, `100` for percent conversion, `1px` hairlines, and array positions.
 
 ## 4. Readability

@@ -30,9 +30,9 @@
 
 :root {
     /* The parallel lines: three strokes centered under the portrait (DESIGN.md §6). */
-    --portrait: 96px;
+    --portrait: 6rem;
     --stroke: var(--route-stroke-phone);
-    --pitch: 14px;
+    --pitch: 0.875rem;
     --lx1: calc(var(--portrait) / 2 - var(--pitch) - var(--stroke) / 2);
     --lx2: calc(var(--portrait) / 2 - var(--stroke) / 2);
     --lx3: calc(var(--portrait) / 2 + var(--pitch) - var(--stroke) / 2);
@@ -41,17 +41,17 @@
     scrollbar-color: var(--color-hairline) var(--color-bg);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 40em) {
     :root {
-        --portrait: 128px;
+        --portrait: 8rem;
         --col-gap: var(--space-6);
         --gutter: var(--space-8);
     }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 80em) {
     :root {
-        --portrait: 160px;
+        --portrait: 10rem;
         --stroke: var(--route-stroke-desktop);
         --col-gap: var(--space-8);
         --gutter: var(--layout-gutter-desktop);
@@ -88,12 +88,12 @@ a {
 }
 
 a:hover {
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 0.125rem;
 }
 
 :focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 3px;
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
     border-radius: var(--radius-sm);
 }
 

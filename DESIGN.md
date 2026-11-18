@@ -21,19 +21,21 @@ The site is **one transit line**. It starts at the About terminus (who I am), ru
 
 ## 2. Spacing
 
-A 4px grid with named steps (`--space-*`). Use a step, never a raw number.
+A 4px grid (0.25rem) with named steps (`--space-*`). Use a step, never a raw number.
 
-| Step | px | Use |
+**Everything is in `rem`**, so the whole layout scales with the reader's font size (owner, 2026-11-18). The px below are at the default 16px, for reference only. Exceptions: 1px hairlines and borders stay 1px, and breakpoints use `em` (40em and 80em).
+
+| Step | rem (px at 16) | Use |
 |---|---|---|
-| `1` | 4 | Icon to label, meta line to its station name |
-| `2` | 8 | Between chips and buttons; tight stacks |
-| `3` | 12 | Inside small items |
-| `4` | 16 | Item padding; phone gutter; between rows |
-| `6` | 24 | Between stations in a row; between related blocks |
-| `8` | 32 | Section padding on a phone; above a key or legend |
-| `12` | 48 | Between sections on a phone |
-| `16` | 64 | Desktop gutter; between sections on desktop |
-| `24`, `32` | 96, 128 | Breathing room around the map and the termini |
+| `1` | 0.25 (4) | Icon to label, meta line to its station name |
+| `2` | 0.5 (8) | Between chips and buttons; tight stacks |
+| `3` | 0.75 (12) | Inside small items |
+| `4` | 1 (16) | Item padding; phone gutter; between rows |
+| `6` | 1.5 (24) | Between stations in a row; between related blocks |
+| `8` | 2 (32) | Section padding on a phone; above a key or legend |
+| `12` | 3 (48) | Between sections on a phone |
+| `16` | 4 (64) | Desktop gutter; between sections on desktop |
+| `24`, `32` | 6, 8 (96, 128) | Breathing room around the map and the termini |
 
 - More space above a heading than below it.
 - Siblings get their spacing from the parent's `gap`, not margins on children.
@@ -114,8 +116,8 @@ Each color has one job. A color used outside its role weakens the role. `scripts
 
 - **One continuous stroke.** The route never breaks between sections. Branches leave and rejoin with a smooth curve, like `git log --graph` drawn by a transit designer.
 - **Every station is a link** with a visible name. There are no hover-only labels and no tooltips.
-- **Desktop:** a horizontal map in the first viewport. dotCMS arcs above the trunk; independent work and tooling arc below.
-- **Phone (<960px):** one vertical rail down the left edge, colored by section, with stations stacked to its right.
+- **Desktop:** a horizontal map in the first viewport (≥80em). dotCMS arcs above the trunk; independent work and tooling arc below.
+- **Phone and tablet (<80em, 1280px at default size):** one vertical rail down the left edge, colored by section, with stations stacked to its right.
 - **The sprite** sits on the line. It is decorative, `aria-hidden`, and never covers a station name.
 
 ## 7. Motion
