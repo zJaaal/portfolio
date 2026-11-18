@@ -14,13 +14,18 @@ These rules bind everything in this repo. They are adapted from Che Bondi's `doc
 | Shared types | `models.ts` (feature or shared) | Re-declared in a second file |
 | Component props | `interface Props` in the component's frontmatter, or `Component.models.ts` when another file needs them | Spread across several files |
 | Constants | `constants.ts` (feature or shared) | Inline literals in logic |
-| Styles | The component's scoped `<style>` block, using token variables only | Inline `style=""`, global class soup |
+| Styles | `ComponentName.module.css` next to the component (a CSS Module), using token variables only | `<style>` blocks in `.astro` files, inline `style=""`, global class soup |
 | Pure logic | `utils/<topic>.ts` | Inside a component's frontmatter beyond a few lines |
 | Browser side effects | `shared/scripts/<topic>.ts` | Inline `<script>` bodies that do more than call one |
 | Content | `src/content/` collections, or `src/i18n/*.json` for UI strings | Hardcoded copy in components |
 | A component | `ComponentName/ComponentName.astro` + `index.ts` | Two components in one file |
 
-Astro scopes `<style>` to the component, so styles stay in the component file. This is the one place we depart from Falcon, which kept styles in a separate `.styles.ts` file. A component's frontmatter reads props, content and translations, then the template lays them out. Anything more moves to a util.
+Styles live in a CSS Module beside the component (`RunMap/RunMap.module.css`), imported as `import styles from './RunMap.module.css'`. Modules keep the scoping Astro's `<style>` gave us, and the markup file stays markup. In the template, write `class={styles.node}`; for several classes or conditions, use `cx(styles, 'node', live && 'live')` from `shared/utils/cx.ts`. Rules for modules:
+
+- **Every selector starts with a class.** A bare `h1 {}` or `svg {}` in a module is global; give the element a class instead.
+- **Global names stay global.** The few global classes (`wrap`, `meta`, `sr-only` in `global.css`) are written as plain strings in the template and as `:global(.meta)` in a module. A child component's internals are reached with `:global(...)`.
+- **Inline `style` carries only build-time positions** (the map's coordinates as custom properties), never visual styling.
+- The only exception is `src/pages/index.astro`, the `/` redirect page, which inlines its few rules because it must work on its own. A component's frontmatter reads props, content and translations, then the template lays them out. Anything more moves to a util.
 
 ## 2. Types
 
@@ -57,7 +62,7 @@ Every number that means something gets a named constant with its unit in the nam
 
 The site is static HTML. Every byte of JavaScript and every font file has to justify itself.
 
-- **Zero JS by default.** No UI framework runtime. The only client scripts are the theme toggle, the language selector and locale remembering, each a small module in `shared/scripts/`, inlined where it must run before paint (theme) so there is no flash.
+- **Zero JS by default.** No UI framework runtime. The only client scripts are the theme toggle, the language selector and locale remembering, and the map's walking sprite, each a small module in `shared/scripts/`, inlined where it must run before paint (theme) so there is no flash.
 - **Budgets** (checked in CI on the built `dist/`):
   - each page under 50 KB of HTML + CSS + JS (gzip), excluding media;
   - at most 2 font files per page on first load.
@@ -133,6 +138,7 @@ Before every PR:
 - [ ] Types in `models.ts`, constants in `constants.ts`, no enums, no `any`
 - [ ] No raw CSS values outside `tokens.json`; spacing, type and color follow DESIGN.md
 - [ ] Components only lay out; logic is in utils; browser APIs only in `shared/scripts/`
+- [ ] Styles are in the component's `.module.css`; no `<style>` blocks; every module selector starts with a class
 - [ ] No nested loops, no unnamed long conditions, no logic inline in templates
 - [ ] Every new string exists in both `en.json` and `es.json`; new content exists in both languages
 - [ ] Works with JS off; theme and language work with the keyboard

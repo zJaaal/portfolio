@@ -1,0 +1,190 @@
+[
+  {
+    "id": "learned-to-program",
+    "line": "origin",
+    "start": "2020-01",
+    "end": "2020-01",
+    "ongoing": false,
+    "page": false,
+    "name": {
+      "en": "Learned to program",
+      "es": "Aprendí a programar"
+    },
+    "role": {
+      "en": "C# and .NET",
+      "es": "C# y .NET"
+    }
+  },
+  {
+    "id": "moved-to-buenos-aires",
+    "line": "origin",
+    "start": "2022-02",
+    "end": "2022-02",
+    "ongoing": false,
+    "page": false,
+    "name": {
+      "en": "Moved to Buenos Aires",
+      "es": "Me mudé a Buenos Aires"
+    },
+    "role": {
+      "en": "from Venezuela",
+      "es": "desde Venezuela"
+    }
+  },
+  {
+    "id": "react-scroll-utilities",
+    "line": "tooling",
+    "start": "2022-10",
+    "end": "2023-01",
+    "ongoing": false,
+    "page": true,
+    "name": {
+      "en": "react-scroll-utilities",
+      "es": "react-scroll-utilities"
+    },
+    "role": {
+      "en": "npm library · scroll hooks",
+      "es": "librería npm · hooks de scroll"
+    }
+  },
+  {
+    "id": "joined-dotcms",
+    "line": "origin",
+    "start": "2023-03",
+    "end": "2023-03",
+    "ongoing": false,
+    "page": false,
+    "name": {
+      "en": "Joined dotCMS",
+      "es": "Entré a dotCMS"
+    },
+    "role": {
+      "en": "[…]",
+      "es": "[…]"
+    }
+  },
+  {
+    "id": "content-types",
+    "line": "dotcms",
+    "start": "2023-03",
+    "end": "2023-05",
+    "ongoing": false,
+    "page": true,
+    "name": {
+      "en": "Content Types",
+      "es": "Content Types"
+    },
+    "role": {
+      "en": "built the form builder redesign",
+      "es": "implementé el rediseño del editor de formularios"
+    }
+  },
+  {
+    "id": "template-builder",
+    "line": "dotcms",
+    "start": "2023-05",
+    "end": "2023-09",
+    "ongoing": false,
+    "page": true,
+    "name": {
+      "en": "Template Builder",
+      "es": "Template Builder"
+    },
+    "role": {
+      "en": "built most of it",
+      "es": "construí gran parte"
+    }
+  },
+  {
+    "id": "new-edit-content",
+    "line": "dotcms",
+    "start": "2023-09",
+    "end": "2023-11",
+    "ongoing": false,
+    "page": true,
+    "name": {
+      "en": "New Edit Content",
+      "es": "New Edit Content"
+    },
+    "role": {
+      "en": "laid the foundations",
+      "es": "sentamos las bases"
+    }
+  },
+  {
+    "id": "uve",
+    "line": "dotcms",
+    "start": "2023-11",
+    "end": "2025-06",
+    "ongoing": false,
+    "page": true,
+    "name": {
+      "en": "UVE + SDKs",
+      "es": "UVE + SDKs"
+    },
+    "role": {
+      "en": "planned and built",
+      "es": "planifiqué y construí"
+    }
+  },
+  {
+    "id": "dev-scripts",
+    "line": "tooling",
+    "start": "2023-11",
+    "ongoing": false,
+    "page": true,
+    "name": {
+      "en": "dotCMS dev scripts",
+      "es": "Scripts de dotCMS"
+    },
+    "role": {
+      "en": "cornerstone of Artemis, now built on it",
+      "es": "la piedra angular de Artemis, hoy hechos con él"
+    }
+  },
+  {
+    "id": "content-drive",
+    "line": "dotcms",
+    "start": "2025-06",
+    "ongoing": true,
+    "page": true,
+    "name": {
+      "en": "Content Drive",
+      "es": "Content Drive"
+    },
+    "role": {
+      "en": "leading and building",
+      "es": "liderando y construyendo"
+    }
+  },
+  {
+    "id": "che-bondi",
+    "line": "independent",
+    "start": "2026-10",
+    "ongoing": true,
+    "page": true,
+    "name": {
+      "en": "Che Bondi",
+      "es": "Che Bondi"
+    },
+    "role": {
+      "en": "live Buenos Aires buses",
+      "es": "colectivos de Buenos Aires en vivo"
+    }
+  },
+  {
+    "id": "artemis",
+    "line": "independent",
+    "start": "2026-11",
+    "ongoing": true,
+    "page": true,
+    "name": {
+      "en": "Artemis",
+      "es": "Artemis"
+    },
+    "role": {
+      "en": "framework for AI agent commands",
+      "es": "framework para comandos de agentes de IA"
+    }
+  }
+]

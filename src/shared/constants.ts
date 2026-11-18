@@ -4,7 +4,11 @@ export const LOCALE_COOKIE = 'lang';
 export const LOCALE_COOKIE_MAX_AGE_S = 31_536_000;
 
 export const LINKS = {
-    GITHUB: 'https://github.com/zJaaal'
+    GITHUB: 'https://github.com/zJaaal',
+    LINKEDIN: 'https://www.linkedin.com/in/zjaaal/',
+    ARTEMIS: 'https://github.com/zJaaal/artemis',
+    ARTEMIS_NPM: 'https://www.npmjs.com/package/@zjaaal/artemis',
+    SCROLL_UTILITIES_NPM: 'https://www.npmjs.com/package/react-scroll-utilities'
 } as const;
 
 /** Material Symbols Rounded 400 path data (viewBox 0 -960 960 960). */

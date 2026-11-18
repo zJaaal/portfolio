@@ -1,5 +1,6 @@
 ---
 import { ICON_PATHS, type IconName } from '../../constants';
+import styles from './Icon.module.css';
 
 interface Props {
     name: IconName;
@@ -9,15 +10,6 @@ interface Props {
 const { name, class: className } = Astro.props;
 ---
 
-<svg class:list={['icon', className]} viewBox="0 -960 960 960" aria-hidden="true">
+<svg class:list={[styles.icon, className]} viewBox="0 -960 960 960" aria-hidden="true">
     <path d={ICON_PATHS[name]}></path>
 </svg>
-
-<style>
-    .icon {
-        width: 1.25rem;
-        height: 1.25rem;
-        fill: currentColor;
-        flex: none;
-    }
-</style>

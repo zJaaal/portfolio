@@ -14,7 +14,7 @@ The site is **one transit line**. It starts at the About terminus (who I am), ru
 
 - **Sentence case everywhere:** headings, buttons, labels, station names (proper nouns keep their capitals). Never Title Case for UI. All caps only in the `pixel` role, which imitates game UI.
 - **One narrator, first person:** "I led Content Drive", "Lideré Content Drive". Never "Jalinson is…".
-- **Ownership first:** every station says what I did (*led*, *planned and built*, *redesigned*, *built most of*) before what it's made with.
+- **Ownership first:** every station says what I did (*led*, *planned and built*, *built*, *built most of*) before what it's made with.
 - **Bilingual, equal:** every string exists in `en.json` and `es.json`. Spanish is neutral and uses tú ("Escríbeme", not "Escribime"). Keep product names and English terms of art (Product Engineer, framework, SDK) as they are.
 - **No invented claims:** no metrics, quotes or outcomes that aren't real and sourced.
 - **Personality is seasoning:** game and music references (inventory flavor text, the guitar-tab divider, sprite poses) appear in small text and decoration, never in headings or in the facts about work.
@@ -87,12 +87,12 @@ Each color has one job. A color used outside its role weakens the role. `scripts
 | `bg` | `#120C1F` | `#F7F4FC` | The page. Purple-black and pale lilac, never neutral gray. |
 | `surface` | `#1C1530` | `#FFFFFF` | Code blocks, inventory items, media frames. One level only, never nested. |
 | `text` | `#EDE8F7` | `#18121F` | Names, body, station names |
-| `muted` | `#A9A0C4` | `#5C5470` | Meta, roles, legend (≥4.5:1) |
-| `dim` | `#C4BBDA` | `#4E4663` | Older stations' names: recency is tone (≥4.5:1) |
+| `muted` | `#A9A0C4` | `#46405A` | Meta, roles, legend (≥4.5:1; light aims near 7:1, since thin mono text on the pale page reads fainter than its ratio) |
+| `dim` | `#C4BBDA` | `#3A3350` | Older stations' names: recency is tone (≥4.5:1) |
 | `link` | `#A891FF` | `#5536C8` | Links inside running text |
-| `line-dotcms` | `#8B6CF0` | `#6A4BDB` | The dotCMS line and the "zJ" bullet. **Identity, never decoration.** |
-| `line-independent` | `#F2B544` | `#A86A00` | Artemis and Che Bondi's line |
-| `line-tooling` | `#4FC9AE` | `#0B8A70` | Scripts and libraries |
+| `line-dotcms` | `#8B6CF0` | `#5A3CC8` | The dotCMS line and the "zJ" bullet. **Identity, never decoration.** |
+| `line-independent` | `#F2B544` | `#7A4D00` | Artemis and Che Bondi's line |
+| `line-tooling` | `#4FC9AE` | `#066350` | Scripts and libraries |
 | `station` | `#EDE8F7` | `#18121F` | Station rings and termini |
 | `focus` | text color | text color | The focus ring: 2px, offset 3px |
 | `selection-*` | `#4A3790` / white | `#DCD0FF` / ink | Text selection |

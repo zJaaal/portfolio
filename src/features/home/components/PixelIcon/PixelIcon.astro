@@ -1,0 +1,15 @@
+---
+import { LIT, PIXEL_GRID, PIXEL_ICONS, type PixelIconName } from './PixelIcon.constants';
+import styles from './PixelIcon.module.css';
+
+interface Props {
+    name: PixelIconName;
+}
+
+const { name } = Astro.props;
+const pixels = PIXEL_ICONS[name].flatMap((row, y) => [...row].flatMap((cell, x) => (cell === LIT ? [{ x, y }] : [])));
+---
+
+<svg class={styles.icon} viewBox={`0 0 ${PIXEL_GRID} ${PIXEL_GRID}`} shape-rendering="crispEdges" fill="currentColor" aria-hidden="true">
+    {pixels.map(({ x, y }) => <rect x={x} y={y} width="1" height="1" />)}
+</svg>

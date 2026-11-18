@@ -12,7 +12,7 @@ _Last updated: 2026-11-18_
 - three parallel lines descending to an "under construction" stop;
 - the motto as the end of the line.
 
-It is available in English (`/en/`) and Spanish (`/es/`). `/` picks the visitor's language from the saved cookie, then the browser.
+It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English unless the visitor chose Spanish with the switch (saved cookie).
 
 - **Deploy:** Cloudflare Workers Builds deploys `main`. PR branches get preview versions. GitHub Actions (`.github/workflows/site.yml`) runs `pnpm check` and `pnpm build`.
 - **Domain and email:** `zjaaal.dev` is a Worker custom domain (`wrangler.jsonc`). Email Routing for `me@zjaaal.dev` is still to be enabled by the owner.
@@ -22,7 +22,7 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` picks the visitor'
 - **Direction: Line Diagram.** The career is a transit line. The contract is in `.impeccable/surfaces/src-pages-lang-index-astro.md`, and the rules are in `DESIGN.md`.
   - **Lines:** three parallel lines with identity colors: dotCMS (purple), tooling (teal), independent (amber). They start at the portrait.
   - **Time and space:** the lines are coherent in time and space. The long axis is real time, each line starts on its real start date, each station sits on its real date, and "now" is just before the Contact terminus. The dates come from the owner's PRs and are recorded in `PRODUCT.md` (local only).
-  - **Origin:** the line starts before dotCMS: Venezuela, electronics, learning to program in 2020, react-scroll-utilities, Buenos Aires, then dotCMS.
+  - **Origin:** the line starts before dotCMS: Venezuela, electronics, learning to program in 2020, the move to Buenos Aires (2022-02), react-scroll-utilities, then dotCMS.
   - **Termini:** About starts the line, and Contact ends it with the motto.
   - **Level select:** each station opens its own page (`/[lang]/work/[slug]`). The map shrinks into a sticky mini-map with the sprite at the current station, and each page ends with previous and next stops. On phones the stops sit in a bottom bar.
   - **Sprite:** a 10×12 pixel-art placeholder of the owner rides the line. The final art (and a pixel portrait) is still to be made. For now the portrait is the GitHub avatar pixelated.
@@ -33,15 +33,12 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` picks the visitor'
 
 ## Next (one section at a time; the owner reviews copy after each)
 
-1. **The map:**
-   - stations as a content collection (`src/content/`) with dates and lines, and positions computed from the dates;
-   - the horizontal desktop map and the phone/tablet rails;
-   - the origin segment and the sprite.
+1. **The map:** merged. A roguelike run map (see the code in `features/home`): my path drops from the portrait, each work line branches off it, every road ends at Contact, and a pixel sprite walks it as the page scrolls. One fluid tree from 48em up, a column on phones.
+   - **Open:** DESIGN.md (§0, §6, motion) and the surface contract still describe the transit-line direction and need a rewrite. "Joined dotCMS" has a `[…]` placeholder role. Station links 404 until step 3. The Playwright overlap check lives in a scratch script; it belongs in the step 5 suite.
 
-   Prototypes: `.impeccable/mocks/specimen/home.html` and `station.html` (local only, gitignored).
 2. **About:** the origin story, how I work (three or four behavioral sentences, no soft-skills list), and off the clock (guitar, metalcore, Zelda, Terraria, roguelikes).
 3. **Station pages:** Content Drive, UVE + SDKs, New Edit Content, Content Types fields, Template Builder, Artemis, Che Bondi, tooling. Each has "what I owned", the problem, key decisions, media and links.
-4. **Contact:** `me@zjaaal.dev`, GitHub, LinkedIn (`https://www.linkedin.com/in/jalinson-diaz/`); add LinkedIn to the JSON-LD `sameAs`.
+4. **Contact:** `me@zjaaal.dev`, GitHub, LinkedIn (`https://www.linkedin.com/in/zjaaal/`, already in the JSON-LD `sameAs`).
 5. **Hardening:**
    - an edge Worker for `/` locale negotiation;
    - Vitest (locale parity, utils);
@@ -54,7 +51,7 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` picks the visitor'
 
 - **Media:** the Che Bondi screen recording, and dotCMS screenshots (Content Drive, UVE, Content Types, Template Builder).
 - **Links:** URLs of the UVE and SDK blog posts.
-- **Sprite and portrait:** who makes the pixel art (the owner in Aseprite, a commission, or code placeholders).
+- **Sprite and portrait:** who makes the sprite's final pixel art. The portrait now comes from the GitHub avatar at build time (`pnpm portrait`): change the photo on GitHub, then redeploy. The owner is taking a new photo.
 - **Email:** enable Email Routing for `me@zjaaal.dev`.
 
 ## Gotchas

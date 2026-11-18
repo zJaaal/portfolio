@@ -27,7 +27,7 @@ OWN-WORLD:
 
 STORY: The visitor reads the line left to right on desktop, or top to bottom on a phone:
 1. **Start terminus (About):** name, Product Engineer, and two or three sentences in first person.
-2. **dotCMS line:** Content Drive (led), UVE + SDKs (planned and built), Content Types form builder (redesigned), Template Builder (built most of it).
+2. **dotCMS line:** Content Drive (leading and building), UVE + SDKs (planned and built), Content Types form builder (built the redesign), Template Builder (built most of it).
 3. **Tooling spur:** dev scripts on Artemis, react-scroll-utilities.
 4. **Independent line:** Artemis, Che Bondi.
 5. **End terminus (Contact):** email as text.

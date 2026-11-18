@@ -29,13 +29,9 @@
 }
 
 :root {
-    /* The parallel lines: three strokes centered under the portrait (DESIGN.md §6). */
     --portrait: 6rem;
-    --stroke: var(--route-stroke-phone);
-    --pitch: 0.875rem;
-    --lx1: calc(var(--portrait) / 2 - var(--pitch) - var(--stroke) / 2);
-    --lx2: calc(var(--portrait) / 2 - var(--stroke) / 2);
-    --lx3: calc(var(--portrait) / 2 + var(--pitch) - var(--stroke) / 2);
+    /* My own path runs down from the portrait's center (DESIGN.md §6). */
+    --trunk: calc(var(--portrait) / 2);
     --col-gap: var(--space-4);
     --gutter: var(--layout-gutter-phone);
     scrollbar-color: var(--color-hairline) var(--color-bg);
@@ -52,7 +48,6 @@
 @media (min-width: 80em) {
     :root {
         --portrait: 10rem;
-        --stroke: var(--route-stroke-desktop);
         --col-gap: var(--space-8);
         --gutter: var(--layout-gutter-desktop);
     }

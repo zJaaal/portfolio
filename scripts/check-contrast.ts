@@ -5,7 +5,9 @@
  * Minimums:
  * - Text pairs need 4.5:1 (AA): text, muted, dim and link text on the page and on surfaces; text on a line badge;
  *   selected text on its highlight.
- * - Control pairs need 3:1 (non-text contrast): the route lines and stations on the page, and the focus ring.
+ * - Line colors are also text (the "in progress" and "line cleared" tags), so they need 4.5:1 on the page.
+ * - Control pairs need 3:1 (non-text contrast): the lines on surfaces, the page color as an icon on a filled
+ *   node, stations on the page, and the focus ring.
  * - Hairlines need 1.3:1 so dividers stay visible. There is no WCAG minimum for decoration; the number is Che
  *   Bondi's, where fainter lines vanished on real screens.
  *
@@ -37,9 +39,12 @@ const PAIRS = [
     ['link', 'surface', TEXT_MIN],
     ['onBadge', 'lineDotcms', TEXT_MIN],
     ['selectionText', 'selectionBg', TEXT_MIN],
-    ['lineDotcms', 'bg', CONTROL_MIN],
-    ['lineIndependent', 'bg', CONTROL_MIN],
-    ['lineTooling', 'bg', CONTROL_MIN],
+    ['lineDotcms', 'bg', TEXT_MIN],
+    ['lineIndependent', 'bg', TEXT_MIN],
+    ['lineTooling', 'bg', TEXT_MIN],
+    ['bg', 'lineDotcms', CONTROL_MIN],
+    ['bg', 'lineIndependent', CONTROL_MIN],
+    ['bg', 'lineTooling', CONTROL_MIN],
     ['lineDotcms', 'surface', CONTROL_MIN],
     ['lineIndependent', 'surface', CONTROL_MIN],
     ['lineTooling', 'surface', CONTROL_MIN],

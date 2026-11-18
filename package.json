@@ -9,11 +9,12 @@
     "scripts": {
         "tokens": "node scripts/build-tokens.ts",
         "contrast": "node scripts/check-contrast.ts",
-        "dev": "pnpm tokens && astro dev",
-        "build": "pnpm tokens && astro build",
+        "dev": "pnpm tokens && pnpm portrait && astro dev",
+        "build": "pnpm tokens && pnpm portrait && astro build",
         "preview": "wrangler dev",
         "check": "pnpm tokens && astro check && pnpm contrast",
-        "release": "pnpm build && wrangler deploy"
+        "release": "pnpm build && wrangler deploy",
+        "portrait": "node scripts/build-portrait.ts"
     },
     "dependencies": {
         "@astrojs/sitemap": "^3.7.6",
@@ -21,6 +22,7 @@
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.12",
+        "sharp": "0.34.5",
         "typescript": "^5.9.3",
         "wrangler": "^4.164.0"
     }

@@ -1,0 +1,87 @@
+.origin {
+    display: grid;
+    grid-template-columns: var(--portrait) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding-top: var(--space-8);
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+}
+
+.portrait {
+    width: var(--portrait);
+    height: var(--portrait);
+    border-radius: 50%;
+    border: var(--route-portrait-ring) solid var(--color-station);
+    overflow: hidden;
+    background: var(--color-surface);
+    flex: none;
+}
+
+.portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    display: block;
+}
+
+/* My own path leaves the portrait in pixel steps; the run map continues it (RunMap). */
+.stem {
+    background: linear-gradient(to bottom, var(--color-muted) var(--route-dot), transparent 0)
+        calc(var(--trunk) - var(--route-dot) / 2) 0 / var(--route-dot)
+        calc(var(--route-dot) + var(--route-dot-gap)) repeat-y;
+    flex: 1;
+    min-height: var(--space-8);
+}
+
+.intro {
+    padding-bottom: var(--space-8);
+    min-width: 0;
+}
+
+.name {
+    font-family: var(--type-display-family);
+    font-size: var(--type-display-size);
+    font-weight: var(--type-display-weight);
+    line-height: var(--type-display-leading);
+    letter-spacing: var(--type-display-tracking);
+    text-wrap: balance;
+}
+
+.role {
+    font-size: var(--type-lead-size);
+    line-height: var(--type-lead-leading);
+    color: var(--color-muted);
+    margin-top: var(--space-2);
+}
+
+.bio {
+    font-size: var(--type-lead-size);
+    line-height: var(--type-lead-leading);
+    max-width: var(--layout-measure);
+    margin-top: var(--space-6);
+    text-wrap: pretty;
+}
+
+@media (max-width: 39.99em) {
+    .name {
+        font-size: 2rem;
+    }
+
+    .bio {
+        font-size: var(--type-body-size);
+    }
+}
+
+@media (min-width: 80em) {
+    .origin {
+        padding-top: var(--space-16);
+    }
+
+    .intro {
+        padding-bottom: var(--space-12);
+    }
+}
