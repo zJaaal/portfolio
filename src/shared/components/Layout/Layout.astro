@@ -1,0 +1,91 @@
+---
+import '../../../styles/global.css';
+import { LOCALES, localizedPath, useTranslations, type Locale } from '../../../i18n';
+import { LINKS, THEME_STORAGE_KEY } from '../../constants';
+import { Header } from '../Header';
+
+interface Props {
+    locale: Locale;
+    /** Path after the locale, e.g. "/" or "/work/artemis/". */
+    path?: string;
+    title?: string;
+    description?: string;
+}
+
+const { locale, path = '/', title, description } = Astro.props;
+const t = useTranslations(locale);
+const site = Astro.site ?? new URL('https://zjaaal.dev');
+const pageTitle = title ?? t('meta.title');
+const pageDescription = description ?? t('meta.description');
+const canonical = new URL(localizedPath(locale, path), site).href;
+const ogImage = new URL('/portrait-placeholder.png', site).href;
+const OG_LOCALE = { en: 'en_US', es: 'es_419' } as const;
+
+// GEO: who this is, in a form search and AI engines read directly.
+const person = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Jalinson Diaz',
+    alternateName: 'zJaaal',
+    jobTitle: 'Product Engineer',
+    url: new URL(localizedPath(locale), site).href,
+    image: ogImage,
+    worksFor: { '@type': 'Organization', name: 'dotCMS', url: 'https://www.dotcms.com' },
+    homeLocation: { '@type': 'Place', name: 'Buenos Aires, Argentina' },
+    sameAs: [LINKS.GITHUB],
+    knowsLanguage: ['en', 'es'],
+    description: pageDescription
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonical} />
+        {
+            LOCALES.map((alt) => (
+                <link rel="alternate" hreflang={alt} href={new URL(localizedPath(alt, path), site).href} />
+            ))
+        }
+        <link rel="alternate" hreflang="x-default" href={new URL(localizedPath('en', path), site).href} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <meta name="author" content="Jalinson Diaz" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#120C1F" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F4FC" />
+
+        <meta property="og:type" content="profile" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:locale" content={OG_LOCALE[locale]} />
+        <meta property="og:site_name" content="zJaaal" />
+        <meta name="twitter:card" content="summary" />
+
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="preload" href="/fonts/overpass-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+        <script type="application/ld+json" set:html={JSON.stringify(person)} />
+
+        <!-- Applies the saved theme before first paint, so there is no flash. -->
+        <script is:inline define:vars={{ key: THEME_STORAGE_KEY }}>
+            try {
+                const saved = localStorage.getItem(key);
+                if (saved === 'light' || saved === 'dark') {
+                    document.documentElement.dataset.theme = saved;
+                }
+            } catch {
+                /* ignoreStorageBlocked */
+            }
+        </script>
+    </head>
+    <body>
+        <Header locale={locale} />
+        <slot />
+    </body>
+</html>

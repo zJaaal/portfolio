@@ -1,0 +1,5 @@
+# Search and AI engines are welcome: this site exists to be found and cited.
+User-agent: *
+Allow: /
+
+Sitemap: https://zjaaal.dev/sitemap-index.xml

@@ -1,0 +1,11 @@
+{
+    // Static assets on Cloudflare Workers (docs/ARCHITECTURE.md). The locale Worker for "/" comes later.
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "portfolio",
+    "compatibility_date": "2026-11-01",
+    "routes": [{ "pattern": "zjaaal.dev", "custom_domain": true }],
+    "assets": {
+        "directory": "./dist",
+        "not_found_handling": "404-page"
+    }
+}
