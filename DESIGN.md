@@ -1,6 +1,6 @@
 # Design Guidelines
 
-These are the binding visual rules for every page, in both themes and both languages. The values live in `src/styles/tokens.json`, and `scripts/build-tokens.ts` turns them into `tokens.css`. This document says which value to use and when. Product truth is in [PRODUCT.md](PRODUCT.md), and code rules are in [docs/CODE_STANDARDS.md](docs/CODE_STANDARDS.md).
+These are the binding visual rules for every page, in both themes and both languages. The values live in `src/styles/tokens.json`, and `scripts/build-tokens.ts` turns them into `tokens.css`. This document says which value to use and when. Product truth is in `PRODUCT.md` (local only), and code rules are in [docs/CODE_STANDARDS.md](docs/CODE_STANDARDS.md).
 
 **A review comment is a rule for the whole site.** When one page breaks a rule, check every page.
 
