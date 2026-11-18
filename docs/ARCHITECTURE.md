@@ -21,7 +21,7 @@ portfolio/
     │       └── shared/        constants.ts, models.ts
     ├── shared/                Used by two or more features
     │   ├── components/        Layout, Header, LangSelect, ThemeToggle, Video, …
-    │   ├── scripts/           The only browser side effects: theme, locale memory
+    │   ├── scripts/           The only browser side effects: theme, locale memory, the map's walk
     │   ├── utils/             Pure helpers: locale negotiation, localized paths
     │   ├── constants.ts
     │   └── models.ts
@@ -38,7 +38,8 @@ The feature names (home, work, …) are decided with the visual direction, not h
 
 ```
 WorkCard/
-├── WorkCard.astro          Frontmatter reads props and content; template lays out; scoped <style>
+├── WorkCard.astro          Frontmatter reads props and content; template lays out
+├── WorkCard.module.css     Its styles, scoped as a CSS Module
 ├── WorkCard.models.ts      Props, only when another file needs them
 ├── WorkCard.constants.ts   Named numbers used only here (only if any)
 ├── WorkCard.utils.ts       Pure logic used only here (only if any)
@@ -59,10 +60,7 @@ pages → features → shared → i18n, styles, content
 ## Locale routing
 
 - **URLs:** every page exists at `/en/…` and `/es/…`, using Astro i18n with `prefixDefaultLocale: true`. Each page links its twin with `<link rel="alternate" hreflang>`, and both share an `x-default`.
-- **`/` is decided at the edge.** A small Worker (`worker/`, with `run_worker_first` for `/` only) picks the locale in this order:
-  1. the `lang` cookie;
-  2. `Accept-Language`;
-  3. English.
+- **`/` is decided at the edge.** A small Worker (`worker/`, with `run_worker_first` for `/` only) picks the locale: the `lang` cookie if the visitor chose a language with the switch, otherwise English. The browser's language is deliberately ignored: English is the default (owner's call, 2026-11-18).
 
   It then redirects with `302`. All other paths are static assets served without the Worker. With no Worker (for example, local `astro preview`), `/` renders a plain page linking both languages.
 - **Remembering:** the language selector is a real link to the twin page. Clicking it also sets the `lang` cookie (`shared/scripts/locale.ts`), so the next visit to `/` lands in the chosen language.

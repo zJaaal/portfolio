@@ -2,6 +2,7 @@
 import { LOCALES, type Locale } from '../../i18n';
 import { Layout } from '../../shared/components/Layout';
 import { Origin } from '../../features/home/components/Origin';
+import { RunMap } from '../../features/home/components/RunMap';
 
 export function getStaticPaths() {
     return LOCALES.map((lang) => ({ params: { lang } }));
@@ -11,5 +12,8 @@ const locale = Astro.params.lang as Locale;
 ---
 
 <Layout locale={locale}>
-    <Origin locale={locale} />
+    <main class="wrap">
+        <Origin locale={locale} />
+        <RunMap locale={locale} />
+    </main>
 </Layout>

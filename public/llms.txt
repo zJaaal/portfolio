@@ -2,16 +2,24 @@
 
 > Product Engineer. From the first prototype to production, with coordinated teams (at dotCMS) or on my own.
 
-Based in Buenos Aires, Argentina; originally from Venezuela. Left electronics engineering to learn programming in 2020.
+Originally from Venezuela. Left electronics engineering to learn programming in 2020 (C# and .NET). Moved to Buenos Aires, Argentina, in February 2022, where I live now.
 
-The site is in English (https://zjaaal.dev/en/) and Spanish (https://zjaaal.dev/es/). It is being rebuilt; project pages are coming.
+The site is in English (https://zjaaal.dev/en/) and Spanish (https://zjaaal.dev/es/). The home page is a map of my work in time order; a page for each project is coming.
 
 ## Work
 
-- dotCMS (open-source content management system), where I currently work: led Content Drive; part of planning and building the Universal Visual Editor (UVE) and its SDK ecosystem; built the redesign of the Content Types form builder; built a large part of the Template Builder; my team laid the foundations of the new Edit Content.
-- Artemis: a Node framework for the commands AI agents run, with help, JSON results, meaningful exit codes, confirmation before destructive actions, dry runs and an audit log. https://github.com/zJaaal/artemis
-- Che Bondi: a real-time bus tracker for Buenos Aires. Android app (React Native, Expo, Kotlin) with a Cloudflare Workers backend.
+- dotCMS (open-source content management system), where I have worked since March 2023:
+  - Content Drive (June 2025 to now): leading and building it.
+  - Universal Visual Editor (UVE) and its SDKs (November 2023 to June 2025): part of planning and building it.
+  - New Edit Content (September to November 2023): my team laid its foundations.
+  - Template Builder (May to September 2023): built most of it.
+  - Content Types (March to May 2023): built the redesign of the form builder.
+- Artemis (November 2026 to now): a Node framework for the commands AI agents run, with help, JSON results, meaningful exit codes, confirmation before destructive actions, dry runs and an audit log. https://github.com/zJaaal/artemis (npm: @zjaaal/artemis)
+- Che Bondi (October 2026 to now): a real-time bus tracker for Buenos Aires. Android app (React Native, Expo, Kotlin) with a Cloudflare Workers backend.
+- dotCMS dev scripts (since November 2023): development-environment scripts I started while building UVE; they became the cornerstone of Artemis and are now built on it.
+- react-scroll-utilities (October 2022 to January 2023): an npm library of React scroll hooks. https://www.npmjs.com/package/react-scroll-utilities
 
 ## Links
 
 - GitHub: https://github.com/zJaaal
+- LinkedIn: https://www.linkedin.com/in/zjaaal/

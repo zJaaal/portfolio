@@ -7,9 +7,18 @@
     "theme.toLight": "Cambiar a tema claro",
     "intro.role": "Product Engineer",
     "intro.bio": "Del primer prototipo a producción, en equipos coordinados o por mi cuenta.",
-    "wip.title": "El mapa está en construcción",
-    "wip.body": "Ha sido un camino largo: de Venezuela a Buenos Aires, de la electrónica al software. Ahora estoy dibujando el mapa. Próxima parada, pronto.",
-    "wip.github": "Mientras tanto, mi GitHub",
     "motto.line1": "Solo quienes se atreven a fallar",
-    "motto.line2": "son los que van a triunfar"
+    "motto.line2": "son los que van a triunfar",
+    "map.label": "Trabajo",
+    "map.contact": "Contacto",
+    "map.contactMeta": "¿Agregamos la próxima parada?",
+    "map.key": "Líneas",
+    "line.dotcms": "dotCMS",
+    "line.independent": "Independiente",
+    "line.tooling": "Herramientas",
+    "map.inProgress": "en curso",
+    "map.lineCleared": "línea completada",
+    "map.now": "hoy",
+    "map.since": "desde",
+    "meta.ogAlt": "El retrato pixelado de Jalinson Diaz y un camino por sus líneas de trabajo"
 }

@@ -7,9 +7,18 @@
     "theme.toLight": "Switch to light theme",
     "intro.role": "Product Engineer",
     "intro.bio": "From the first prototype to production, with coordinated teams or on my own.",
-    "wip.title": "The map is under construction",
-    "wip.body": "It's been a long route: from Venezuela to Buenos Aires, from electronics to software. I'm drawing the map now. Next stop, soon.",
-    "wip.github": "Meanwhile, my GitHub",
     "motto.line1": "Only those willing to fail",
-    "motto.line2": "are the ones who will succeed"
+    "motto.line2": "are the ones who will succeed",
+    "map.label": "Work",
+    "map.contact": "Contact",
+    "map.contactMeta": "Want to add the next stop?",
+    "map.key": "Lines",
+    "line.dotcms": "dotCMS",
+    "line.independent": "Independent",
+    "line.tooling": "Tooling",
+    "map.inProgress": "in progress",
+    "map.lineCleared": "line cleared",
+    "map.now": "now",
+    "map.since": "since",
+    "meta.ogAlt": "Jalinson Diaz's pixel portrait and a road through his lines of work"
 }

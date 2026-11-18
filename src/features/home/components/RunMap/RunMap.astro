@@ -1,0 +1,200 @@
+---
+import { getCollection } from 'astro:content';
+import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
+import { LANE_STEP_PCT } from '../../shared/constants';
+import { LINE, NODE_KIND, type RunNode } from '../../shared/models';
+import { acrossCss, downCss } from '../../utils/css';
+import { formatSpan } from '../../utils/dates';
+import { buildRun } from '../../utils/run';
+import { toSegments } from '../../utils/segments';
+import { cx } from '../../../../shared/utils/cx';
+import { PixelIcon } from '../PixelIcon';
+import type { PixelIconName } from '../PixelIcon/PixelIcon.constants';
+import { Sprite } from '../Sprite';
+import styles from './RunMap.module.css';
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const entries = await getCollection('stations');
+const spanWords = { now: t('map.now'), since: t('map.since') };
+const copy = new Map(
+    entries.map(({ id, data }) => [
+        id,
+        {
+            name: data.name[locale],
+            role: data.role[locale],
+            tag: data.ongoing,
+            // Start nodes show their year with the role instead.
+            dates: data.line === LINE.ORIGIN ? undefined : formatSpan(data, locale, spanWords)
+        }
+    ])
+);
+// The start node shows its year with its role, so the label is sized with it.
+const labels = new Map(
+    entries.map(({ id, data }) => {
+        const text = copy.get(id)!;
+        const role = data.line === LINE.ORIGIN ? `${data.start.slice(0, 4)} · ${text.role}` : text.role;
+
+        return [id, { ...text, role }];
+    })
+);
+const run = buildRun(
+    entries.map(({ id, data }) => ({ id, line: data.line, start: data.start, ongoing: data.ongoing, page: data.page })),
+    labels,
+    { name: t('map.contact'), role: t('map.contactMeta'), tag: false }
+);
+
+/** Both layouts' coordinates, as custom properties the stylesheet picks from per breakpoint. */
+const at = ({ desk, narrow }: RunNode['at']): string =>
+    [
+        `--dx: ${acrossCss(desk.x)}`,
+        `--dy: ${downCss(desk.y)}`,
+        `--nx: ${acrossCss(narrow.x)}`,
+        `--ny: ${downCss(narrow.y)}`
+    ].join('; ');
+
+const runs = run.paths.flatMap((path) => {
+    const { segments, corners } = toSegments(path, run.nodes);
+
+    return [
+        ...segments.map((segment) => ({
+            class: cx(styles, 'seg', segment.axis, path.style, `line-${path.line}`),
+            style: [
+                `--dl: ${segment.box.desk.left}`,
+                `--dt: ${segment.box.desk.top}`,
+                `--dlen: ${segment.box.desk.length}`,
+                `--nl: ${segment.box.narrow.left}`,
+                `--nt: ${segment.box.narrow.top}`,
+                `--nlen: ${segment.box.narrow.length}`
+            ].join('; ')
+        })),
+        ...corners.map((corner) => ({
+            class: cx(styles, 'corner', 'at', path.style, `line-${path.line}`),
+            style: [
+                `--dx: ${corner.desk.x}`,
+                `--dy: ${corner.desk.y}`,
+                `--nx: ${corner.narrow.x}`,
+                `--ny: ${corner.narrow.y}`
+            ].join('; ')
+        }))
+    ];
+});
+
+const iconFor = (node: RunNode): PixelIconName => {
+    if (node.kind === NODE_KIND.STOP) {
+        return node.line as Exclude<typeof node.line, typeof LINE.ORIGIN>;
+    }
+
+    return node.kind === NODE_KIND.BOSS ? 'boss' : node.kind === NODE_KIND.CLEARED ? 'cleared' : 'door';
+};
+
+const stops = run.nodes.filter((node) => node.kind === NODE_KIND.START || node.kind === NODE_KIND.STOP);
+const ends = run.nodes.filter((node) => node.kind === NODE_KIND.DOOR || node.kind === NODE_KIND.CLEARED);
+const boss = run.nodes.find((node) => node.kind === NODE_KIND.BOSS)!;
+const years = stops.filter((node) => node.kind === NODE_KIND.STOP && node.firstOfYear);
+const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
+---
+
+<div class={styles.map} style={`--lanes: ${run.laneCount}`}>
+<nav
+    class={styles.run}
+    data-run
+    aria-label={t('map.label')}
+    style={`--dh: ${downCss(run.height.desk)}; --nh: ${downCss(run.height.narrow)}; --lane-step: ${LANE_STEP_PCT}cqw`}>
+    <!-- The paths: square pixels on a grid. Decorative; the list below carries the meaning. -->
+    <div class={styles.paths} aria-hidden="true">
+        {runs.map((piece) => <span class={piece.class} style={piece.style} />)}
+    </div>
+
+    <div class={styles.years} aria-hidden="true">
+        {
+            years.map((node) => (
+                <span class={cx(styles, 'year', 'at')} style={at(node.at)}>
+                    {node.year}
+                </span>
+            ))
+        }
+    </div>
+
+    <ol class={styles.stops}>
+        {
+            stops.map((node) => {
+                const station = node.station!;
+                const text = copy.get(node.id)!;
+                const Tag = station.page ? 'a' : 'div';
+
+                return (
+                    <li
+                        class={cx(styles, 'node', 'at', `line-${node.line}`, node.kind, station.ongoing ? 'live' : 'done')}
+                        data-node={node.id}
+                        style={at(node.at)}>
+                        <Tag class={styles.hit} href={station.page ? localizedPath(locale, `/work/${node.id}/`) : undefined}>
+                            <span class={styles.tile} data-tile>
+                                {node.kind === NODE_KIND.STOP && <PixelIcon name={iconFor(node)} />}
+                            </span>
+                            <span class={styles.label}>
+                                <span class={styles.name}>{text.name}</span>
+                                {text.dates && <span class={styles.dates}>{text.dates}</span>}
+                                <span class="meta">
+                                    {node.kind === NODE_KIND.START ? `${node.year} · ${text.role}` : text.role}
+                                </span>
+                                {station.ongoing && <span class={styles.tag}>{t('map.inProgress')}</span>}
+                            </span>
+                        </Tag>
+                    </li>
+                );
+            })
+        }
+        <li class={cx(styles, 'node', 'at', 'boss')} data-node={boss.id} style={at(boss.at)}>
+            <a class={styles.hit} href={localizedPath(locale, '/contact/')}>
+                <span class={styles.tile} data-tile><PixelIcon name="boss" /></span>
+                <span class={styles.label}>
+                    <span class={styles.name}>{t('map.contact')}</span>
+                    <span class="meta">{t('map.contactMeta')}</span>
+                </span>
+            </a>
+        </li>
+    </ol>
+
+    <div class={styles.ends} aria-hidden="true">
+        {
+            ends.map((node) => (
+                <span class={cx(styles, 'node', 'at', `line-${node.line}`, node.kind)} style={at(node.at)}>
+                    <span class={styles.tile} data-tile>
+                        <PixelIcon name={iconFor(node)} />
+                    </span>
+                    {node.kind === NODE_KIND.CLEARED && <span class={cx(styles, 'label', 'tag')}>{t('map.lineCleared')}</span>}
+                </span>
+            ))
+        }
+    </div>
+
+    <!-- The sprite's road: one point per turn, the nodes marked as rests. Read by the walk script. -->
+    <div class={styles.walk} aria-hidden="true">
+        {run.walk.map((step) => <span class={styles.at} data-waypoint data-rest={step.rest} style={at(step.at)} />)}
+    </div>
+
+    <span class={cx(styles, 'sprite', 'at')} data-sprite style={at(run.sprite)}><span class={styles.body} data-body><Sprite /></span></span>
+</nav>
+
+<script>
+    import '../../../../shared/scripts/walk';
+</script>
+
+<div class={styles.after}>
+    <p class={`meta ${styles.key}`}>
+        <span class="sr-only">{t('map.key')}:</span>
+        {keyLines.map((line) => <span class={styles[`line-${line}`]}><i />{t(`line.${line}`)}</span>)}
+    </p>
+
+    <!-- The end of the run: the motto (PRODUCT.md, Brand Commitments). -->
+    <p class={styles.motto}>
+        <span>{t('motto.line1')}</span>
+        <span>{t('motto.line2')}</span>
+    </p>
+</div>
+</div>

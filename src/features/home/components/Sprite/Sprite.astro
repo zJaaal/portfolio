@@ -1,0 +1,55 @@
+---
+/**
+ * Placeholder sprite of the owner (10×12 pixels) until the final pixel art exists (HANDOFF.md,
+ * "Waiting on the owner"). Decorative: hidden from assistive technology. The pixel colors are the
+ * art itself, not theme roles, so they stay here as data.
+ */
+interface Props {
+    class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const PIXELS = [
+    { x: 3, y: 0, w: 4, h: 1, fill: '#1B1716' },
+    { x: 2, y: 1, w: 6, h: 1, fill: '#1B1716' },
+    { x: 2, y: 2, w: 1, h: 1, fill: '#1B1716' },
+    { x: 7, y: 2, w: 1, h: 1, fill: '#1B1716' },
+    { x: 3, y: 2, w: 4, h: 1, fill: '#C98F68' },
+    { x: 2, y: 3, w: 6, h: 1, fill: '#0E0B12' },
+    { x: 3, y: 3, w: 1, h: 1, fill: '#9FB4C0' },
+    { x: 6, y: 3, w: 1, h: 1, fill: '#9FB4C0' },
+    { x: 2, y: 4, w: 6, h: 1, fill: '#C98F68' },
+    { x: 3, y: 5, w: 4, h: 1, fill: '#C98F68' },
+    { x: 1, y: 6, w: 8, h: 2, fill: '#8C2433' },
+    { x: 2, y: 6, w: 1, h: 1, fill: '#5A5560' },
+    { x: 7, y: 6, w: 1, h: 1, fill: '#5A5560' },
+    { x: 2, y: 8, w: 6, h: 1, fill: '#8C2433' },
+    { x: 1, y: 8, w: 1, h: 1, fill: '#C98F68' },
+    { x: 8, y: 8, w: 1, h: 1, fill: '#C98F68' },
+    { x: 3, y: 9, w: 4, h: 1, fill: '#2B3A55' },
+] as const;
+
+/** Two walking frames: legs apart, legs together. */
+const LEGS_APART = [
+    { x: 3, y: 10, w: 1, h: 1, fill: '#2B3A55' },
+    { x: 6, y: 10, w: 1, h: 1, fill: '#2B3A55' },
+    { x: 2, y: 11, w: 2, h: 1, fill: '#D9603A' },
+    { x: 6, y: 11, w: 2, h: 1, fill: '#D9603A' }
+] as const;
+
+const LEGS_TOGETHER = [
+    { x: 4, y: 10, w: 1, h: 1, fill: '#2B3A55' },
+    { x: 5, y: 10, w: 1, h: 1, fill: '#2B3A55' },
+    { x: 3, y: 11, w: 2, h: 1, fill: '#D9603A' },
+    { x: 5, y: 11, w: 2, h: 1, fill: '#D9603A' }
+] as const;
+---
+
+<svg class={className} viewBox="0 0 10 12" shape-rendering="crispEdges" aria-hidden="true">
+    {PIXELS.map(({ x, y, w, h, fill }) => <rect x={x} y={y} width={w} height={h} fill={fill} />)}
+    <g class="legs-apart">{LEGS_APART.map(({ x, y, w, h, fill }) => <rect x={x} y={y} width={w} height={h} fill={fill} />)}</g>
+    <g class="legs-together">
+        {LEGS_TOGETHER.map(({ x, y, w, h, fill }) => <rect x={x} y={y} width={w} height={h} fill={fill} />)}
+    </g>
+</svg>

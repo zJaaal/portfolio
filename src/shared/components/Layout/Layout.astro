@@ -1,7 +1,8 @@
 ---
 import '../../../styles/global.css';
 import { LOCALES, localizedPath, useTranslations, type Locale } from '../../../i18n';
-import { LINKS, THEME_STORAGE_KEY } from '../../constants';
+import { THEME_STORAGE_KEY } from '../../constants';
+import { personSchema } from '../../utils/person';
 import { Header } from '../Header';
 
 interface Props {
@@ -18,24 +19,12 @@ const site = Astro.site ?? new URL('https://zjaaal.dev');
 const pageTitle = title ?? t('meta.title');
 const pageDescription = description ?? t('meta.description');
 const canonical = new URL(localizedPath(locale, path), site).href;
-const ogImage = new URL('/portrait-placeholder.png', site).href;
+const ogImage = new URL('/og.png', site).href;
+const portrait = new URL('/portrait.png', site).href;
 const OG_LOCALE = { en: 'en_US', es: 'es_419' } as const;
 
 // GEO: who this is, in a form search and AI engines read directly.
-const person = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'Jalinson Diaz',
-    alternateName: 'zJaaal',
-    jobTitle: 'Product Engineer',
-    url: new URL(localizedPath(locale), site).href,
-    image: ogImage,
-    worksFor: { '@type': 'Organization', name: 'dotCMS', url: 'https://www.dotcms.com' },
-    homeLocation: { '@type': 'Place', name: 'Buenos Aires, Argentina' },
-    sameAs: [LINKS.GITHUB],
-    knowsLanguage: ['en', 'es'],
-    description: pageDescription
-};
+const person = personSchema({ url: new URL(localizedPath(locale), site).href, image: portrait, description: pageDescription });
 ---
 
 <!doctype html>
@@ -63,12 +52,17 @@ const person = {
         <meta property="og:description" content={pageDescription} />
         <meta property="og:url" content={canonical} />
         <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={t('meta.ogAlt')} />
         <meta property="og:locale" content={OG_LOCALE[locale]} />
         <meta property="og:site_name" content="zJaaal" />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
 
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="preload" href="/fonts/overpass-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+        <!-- The map's labels and dates are set in the mono face, right below the fold. -->
+        <link rel="preload" href="/fonts/overpass-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 
         <script type="application/ld+json" set:html={JSON.stringify(person)} />
 

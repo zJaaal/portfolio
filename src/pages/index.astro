@@ -1,5 +1,5 @@
 ---
-// "/" picks a language: the saved choice, then the browser's languages, then English.
+// "/" opens in English unless the visitor chose Spanish with the language switch (saved in a cookie).
 // The edge Worker will do this server-side later (docs/ARCHITECTURE.md); this page is the fallback.
 import { LOCALE_COOKIE } from '../shared/constants';
 ---
@@ -17,8 +17,7 @@ import { LOCALE_COOKIE } from '../shared/constants';
         <link rel="alternate" hreflang="x-default" href="https://zjaaal.dev/en/" />
         <script is:inline define:vars={{ cookie: LOCALE_COOKIE }}>
             const saved = document.cookie.match(new RegExp('(?:^|; )' + cookie + '=(en|es)'));
-            const browser = (navigator.languages || [navigator.language]).find((l) => /^(en|es)/i.test(l));
-            const lang = saved ? saved[1] : browser ? browser.slice(0, 2).toLowerCase() : 'en';
+            const lang = saved ? saved[1] : 'en';
             location.replace('/' + lang + '/');
         </script>
         <style>

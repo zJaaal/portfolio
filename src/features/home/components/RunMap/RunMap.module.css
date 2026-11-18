@@ -1,0 +1,594 @@
+/* ---------- the map: everything is placed from build-time coordinates ---------- */
+.run {
+    --h: var(--nh);
+    --size: var(--route-node-phone);
+    --icon: var(--route-icon-phone);
+    position: relative;
+    height: var(--h);
+    container-type: inline-size;
+}
+
+/* Labels on narrow screens share one column right of every lane; the key and motto align to it. */
+.map {
+    --label-left: calc(var(--trunk) + var(--route-lane-pitch) * (var(--lanes) + 1));
+}
+
+.at {
+    --x: var(--nx);
+    --y: var(--ny);
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+}
+
+.line-dotcms {
+    --c: var(--color-line-dotcms);
+}
+
+.line-independent {
+    --c: var(--color-line-independent);
+}
+
+.line-tooling {
+    --c: var(--color-line-tooling);
+}
+
+.line-origin {
+    --c: var(--color-muted);
+}
+
+/* Paths: pixel tiles spaced evenly so the first and last pixel sit centered on each end. Each
+   tile is a pixel centered in its gap; the box runs half a tile past both ends, and \`space\`
+   pins the first and last tile to its edges. Both edges stay transparent, so rounding never shows. */
+.seg,
+.corner {
+    --d: var(--route-dot);
+    --tile: calc(var(--d) + var(--route-dot-gap));
+    --g: calc(var(--route-dot-gap) / 2);
+    position: absolute;
+}
+
+.seg.across {
+    left: calc(var(--l) - var(--tile) / 2);
+    top: calc(var(--t) - var(--d) / 2);
+    width: calc(var(--len) + var(--tile));
+    height: var(--d);
+    background: linear-gradient(
+            to right,
+            transparent var(--g),
+            var(--c) var(--g) calc(var(--g) + var(--d)),
+            transparent calc(var(--g) + var(--d))
+        )
+        0 0 / var(--tile) 100% space no-repeat;
+}
+
+.seg.down {
+    left: calc(var(--l) - var(--d) / 2);
+    top: calc(var(--t) - var(--tile) / 2);
+    width: var(--d);
+    height: calc(var(--len) + var(--tile));
+    background: linear-gradient(
+            to bottom,
+            transparent var(--g),
+            var(--c) var(--g) calc(var(--g) + var(--d)),
+            transparent calc(var(--g) + var(--d))
+        )
+        0 0 / 100% var(--tile) no-repeat space;
+}
+
+/* My path, side roads and the future share the pixel grid; only their color is quieter. */
+.quiet {
+    --c: var(--color-muted);
+}
+
+.seg {
+    --l: var(--nl);
+    --t: var(--nt);
+    --len: var(--nlen);
+}
+
+.corner {
+    left: calc(var(--x) - var(--d) / 2);
+    top: calc(var(--y) - var(--d) / 2);
+    width: var(--d);
+    height: var(--d);
+    background: var(--c);
+}
+
+/* Nodes: a ring with a pixel icon. The "in progress" tag says what is live; done names step down. */
+.stops,
+.ends {
+    position: absolute;
+    inset: 0;
+}
+
+/* Only the stops take the pointer; the decorative layers above them let it through. */
+.ends,
+.walk {
+    pointer-events: none;
+}
+
+.node {
+    width: 0;
+    height: 0;
+}
+
+.hit {
+    color: inherit;
+    text-decoration: none;
+}
+
+.tile {
+    position: absolute;
+    left: calc(var(--size) / -2);
+    top: calc(var(--size) / -2);
+    width: var(--size);
+    height: var(--size);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: var(--route-node-ring) solid var(--c);
+    color: var(--c);
+}
+
+.tile :global(svg) {
+    width: var(--icon);
+    height: var(--icon);
+}
+
+/* A burst ring for arrivals; still until the sprite reaches the node. */
+.tile::after {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--route-node-ring));
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.start {
+    --size: var(--space-4);
+}
+
+.start .tile {
+    border-color: var(--color-muted);
+}
+
+.door,
+.cleared {
+    --size: var(--route-end-phone);
+}
+
+.door .tile {
+    border: var(--route-node-ring) dashed var(--color-muted);
+    color: var(--color-muted);
+}
+
+.door .tile :global(svg),
+.cleared .tile :global(svg) {
+    width: calc(var(--size) / 2);
+    height: calc(var(--size) / 2);
+}
+
+.boss {
+    --size: var(--route-boss-phone);
+    --c: var(--color-station);
+}
+
+.boss .tile {
+    background: var(--color-station);
+    color: var(--color-bg);
+}
+
+.boss .tile :global(svg) {
+    width: calc(var(--size) / 2);
+    height: calc(var(--size) / 2);
+}
+
+/* Labels: on narrow screens, one column right of every lane, so no label crosses a lane. */
+.label {
+    position: absolute;
+    top: 0;
+    left: calc(var(--label-left) - var(--x));
+    translate: 0 -50%;
+    width: max-content;
+    max-width: calc(100cqw - var(--label-left));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    margin-left: calc(-1 * var(--space-2));
+    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+}
+
+.name {
+    font-family: var(--type-station-family);
+    font-size: var(--type-heading-size);
+    font-weight: var(--type-station-weight);
+    line-height: var(--type-station-leading);
+    letter-spacing: var(--type-station-tracking);
+    color: var(--color-text);
+    text-wrap: balance;
+    text-decoration: underline 0.125rem transparent;
+    text-underline-offset: 0.2em;
+}
+
+a.hit:hover .name {
+    text-decoration-color: var(--c);
+}
+
+a.hit:focus-visible {
+    outline: none;
+}
+
+a.hit:focus-visible .tile {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+a.hit:focus-visible .label {
+    outline: 0.125rem solid var(--color-focus);
+}
+
+/* The icon's shadow: a pixel bar under it, shown only while the icon floats. */
+.tile::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(50% + var(--icon) / 2 + var(--icon) / 16);
+    width: calc(var(--icon) / 2);
+    height: calc(var(--icon) / 8);
+    translate: -50% 0;
+    background: currentColor;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* The node the sprite stands on draws above its neighbors, so its arrival ring is never cut. */
+[data-here] {
+    z-index: 1;
+}
+
+/* The node the sprite stands on lights up its name. */
+[data-here] .name {
+    color: var(--color-text);
+}
+
+.name {
+    transition:
+        color var(--motion-micro) var(--motion-ease-out),
+        text-decoration-color var(--motion-micro) var(--motion-ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    /* Hover: the icon lifts two pixels and floats over its shadow, like a pickup in a game. The
+       node keeps its size, so the road's pixels around it never get covered. */
+    .tile {
+        --lift: calc(var(--icon) / -4);
+    }
+
+    @media (hover: hover) {
+        a.hit:hover .tile::before {
+            animation: shadow calc(var(--motion-page) * 3) var(--motion-ease-in-out) var(--motion-micro) infinite;
+            opacity: 0.35;
+        }
+
+        a.hit:hover .tile :global(svg) {
+            animation:
+                lift var(--motion-micro) var(--motion-ease-out) both,
+                float calc(var(--motion-page) * 3) var(--motion-ease-in-out) var(--motion-micro) infinite;
+        }
+    }
+
+    a.hit:focus-visible .tile::before {
+        animation: shadow calc(var(--motion-page) * 3) var(--motion-ease-in-out) var(--motion-micro) infinite;
+        opacity: 0.35;
+    }
+
+    a.hit:focus-visible .tile :global(svg) {
+        animation:
+            lift var(--motion-micro) var(--motion-ease-out) both,
+            float calc(var(--motion-page) * 3) var(--motion-ease-in-out) var(--motion-micro) infinite;
+    }
+
+    /* Arrival: the node pops and sends out one pixel-stepped ring. */
+    [data-here] .tile {
+        animation: arrive var(--motion-page) var(--motion-ease-out);
+    }
+
+    [data-here] .tile::after {
+        animation: burst calc(var(--motion-page) * 2) steps(4) both;
+    }
+
+    /* The sprite hops once when it lands. */
+    [data-arrived] .body :global(svg) {
+        animation: hop calc(var(--motion-sprite-frame) * 2) steps(2);
+    }
+}
+
+@keyframes lift {
+    to {
+        translate: 0 var(--lift);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        translate: 0 var(--lift);
+    }
+
+    50% {
+        translate: 0 calc(var(--lift) / 2);
+    }
+}
+
+/* The shadow narrows while the icon is high and widens as it sinks. */
+@keyframes shadow {
+    0%,
+    100% {
+        scale: 0.75 1;
+    }
+
+    50% {
+        scale: 1 1;
+    }
+}
+
+@keyframes arrive {
+    40% {
+        scale: 1.2;
+    }
+}
+
+@keyframes burst {
+    from {
+        opacity: 1;
+        scale: 1;
+    }
+
+    to {
+        opacity: 0;
+        scale: 1.8;
+    }
+}
+
+@keyframes hop {
+    50% {
+        translate: 0 calc(var(--route-sprite-height) / -6);
+    }
+}
+
+.done .name {
+    color: var(--color-dim);
+    font-weight: 600;
+}
+
+.start .name {
+    font-size: var(--type-body-size);
+    font-weight: 600;
+    color: var(--color-dim);
+}
+
+/* When it ran: set like the role, in the muted tone. */
+.dates {
+    font-family: var(--type-meta-family);
+    font-size: var(--type-meta-size);
+    line-height: var(--type-meta-leading);
+    color: var(--color-muted);
+}
+
+.label :global(.meta) {
+    text-wrap: pretty;
+}
+
+.tag {
+    font-family: var(--type-pixel-family);
+    font-size: var(--type-pixel-size);
+    letter-spacing: var(--type-pixel-tracking);
+    line-height: var(--type-pixel-leading);
+    text-transform: uppercase;
+    color: var(--c);
+}
+
+.cleared .label {
+    background: none;
+}
+
+/* Years sit left of my path, in the portrait's half-width, where no lane ever runs. */
+.year {
+    --year-gap: var(--space-2);
+    left: calc(var(--trunk) - var(--year-gap));
+    translate: -100% -50%;
+    font-family: var(--type-pixel-family);
+    font-size: var(--type-pixel-size);
+    letter-spacing: var(--type-pixel-tracking);
+    color: var(--color-muted);
+}
+
+/* The sprite is me. Standing still, it waits on my own path at the newest floor. */
+.sprite {
+    width: 0;
+    height: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Its feet stand on the path. */
+.body {
+    position: absolute;
+    width: var(--route-sprite-width);
+    height: var(--route-sprite-height);
+    translate: -50% calc(var(--route-dot) - 100%);
+}
+
+/* Hovering the node it stands on: it steps aside, to the node's left, clear of the icon. */
+[data-aside] .body {
+    translate: calc(-50% - var(--aside) - var(--route-sprite-width) / 2 - var(--space-1)) calc(var(--route-dot) - 100%);
+}
+
+/* The step aside is a short walk: eased like the road walk, legs stepping on the way. */
+@media (prefers-reduced-motion: no-preference) {
+    .body {
+        transition: translate calc(var(--motion-page) * 1.5) var(--motion-ease-in-out);
+    }
+}
+
+.body :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+.body :global(.legs-together) {
+    opacity: 0;
+}
+
+/* The walk script takes over: the sprite moves by translate from the map's corner. */
+.run[data-walk] .sprite {
+    left: 0;
+    top: 0;
+}
+
+.walk {
+    position: absolute;
+    inset: 0;
+    visibility: hidden;
+}
+
+[data-left] .body :global(svg) {
+    scale: -1 1;
+}
+
+/* Legs step on the clock while it walks. */
+@media (prefers-reduced-motion: no-preference) {
+    [data-walking] .body :global(.legs-apart),
+    [data-walking] .body :global(.legs-together),
+    [data-stepping] .body :global(.legs-apart),
+    [data-stepping] .body :global(.legs-together) {
+        animation: step calc(var(--motion-sprite-frame) * 2) steps(1) infinite;
+    }
+
+    [data-walking] .body :global(.legs-together),
+    [data-stepping] .body :global(.legs-together) {
+        animation-direction: reverse;
+    }
+}
+
+@keyframes step {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ---------- after the map: the key and the motto ---------- */
+/* The key and the motto close the page on the intro's column, mirroring the name and bio. */
+.after {
+    display: grid;
+    grid-template-columns: var(--portrait) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding-bottom: var(--space-16);
+}
+
+.key {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding-top: var(--space-8);
+}
+
+.key span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.key i {
+    width: var(--space-4);
+    height: var(--space-4);
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c, var(--color-muted));
+}
+
+.motto {
+    grid-column: 2;
+    margin-top: var(--space-12);
+    font-family: var(--type-title-family);
+    font-size: var(--type-title-size);
+    font-weight: var(--type-title-weight);
+    line-height: var(--type-title-leading);
+    letter-spacing: var(--type-title-tracking);
+    text-wrap: balance;
+}
+
+.motto span {
+    display: block;
+}
+
+.motto span:first-child {
+    color: var(--color-muted);
+}
+
+/* ---------- the tree, from tablets up: one fluid layout computed from the map's own width.
+   Lanes sit at fixed shares of the map; each label hangs under its node, right of its road, and
+   takes the lane's width (up to 13rem), so the tree fills any width without further breakpoints. */
+@media (min-width: 48em) {
+    .run {
+        --h: var(--dh);
+        --size: var(--route-node);
+        --icon: var(--route-icon);
+    }
+
+    .at {
+        --x: var(--dx);
+        --y: var(--dy);
+    }
+
+    .seg {
+        --l: var(--dl);
+        --t: var(--dt);
+        --len: var(--dlen);
+    }
+
+    .door,
+    .cleared {
+        --size: var(--route-end);
+    }
+
+    .boss {
+        --size: var(--route-boss);
+    }
+
+    .start {
+        --size: var(--space-6);
+    }
+
+    .label {
+        left: calc(var(--route-dot) / 2 + var(--space-1));
+        top: calc(var(--size) / 2 + var(--space-1));
+        translate: none;
+        margin-left: 0;
+        max-width: min(
+            var(--route-label),
+            calc(var(--lane-step) - var(--route-wobble) * 2 - var(--route-dot) - var(--space-2))
+        );
+    }
+
+    .name {
+        font-size: var(--type-station-size);
+    }
+
+    .year {
+        --year-gap: var(--space-3);
+    }
+}
+
