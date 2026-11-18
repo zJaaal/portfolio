@@ -1,0 +1,17 @@
+# Jalinson Diaz (zJaaal)
+
+> Product Engineer. From the first prototype to production, with coordinated teams (at dotCMS) or on my own.
+
+Based in Buenos Aires, Argentina; originally from Venezuela. Left electronics engineering to learn programming in 2020.
+
+The site is in English (https://zjaaal.dev/en/) and Spanish (https://zjaaal.dev/es/). It is being rebuilt; project pages are coming.
+
+## Work
+
+- dotCMS (open-source content management system), where I currently work: led Content Drive; part of planning and building the Universal Visual Editor (UVE) and its SDK ecosystem; built the redesign of the Content Types form builder; built a large part of the Template Builder; my team laid the foundations of the new Edit Content.
+- Artemis: a Node framework for the commands AI agents run, with help, JSON results, meaningful exit codes, confirmation before destructive actions, dry runs and an audit log. https://github.com/zJaaal/artemis
+- Che Bondi: a real-time bus tracker for Buenos Aires. Android app (React Native, Expo, Kotlin) with a Cloudflare Workers backend.
+
+## Links
+
+- GitHub: https://github.com/zJaaal

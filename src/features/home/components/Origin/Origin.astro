@@ -1,0 +1,213 @@
+---
+import { useTranslations, type Locale } from '../../../../i18n';
+import { LINKS } from '../../../../shared/constants';
+import { Icon } from '../../../../shared/components/Icon';
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<main class="wrap origin">
+    <div class="start">
+        <div class="portrait">
+            <img src="/portrait-placeholder.png" width="40" height="40" alt="Jalinson Diaz" />
+        </div>
+        <div class="stem" aria-hidden="true"></div>
+    </div>
+
+    <div class="intro">
+        <h1>Jalinson Diaz</h1>
+        <p class="role">{t('intro.role')}</p>
+        <p class="bio">{t('intro.bio')}</p>
+    </div>
+
+    <section class="next" aria-labelledby="wip-title">
+        <div class="rails" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="stop">
+            <h2 id="wip-title">{t('wip.title')}</h2>
+            <p>{t('wip.body')}</p>
+            <a href={LINKS.GITHUB} rel="me">{t('wip.github')}<Icon name="arrowOutward" /></a>
+        </div>
+    </section>
+
+    <!-- The end of the line: the motto (PRODUCT.md, Brand Commitments). -->
+    <p class="motto">
+        <span>{t('motto.line1')}</span>
+        <span>{t('motto.line2')}</span>
+    </p>
+</main>
+
+<style>
+    .origin {
+        display: grid;
+        grid-template-columns: var(--portrait) minmax(0, 1fr);
+        column-gap: var(--col-gap);
+        padding-top: var(--space-8);
+        padding-bottom: var(--space-16);
+    }
+
+    .start {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .portrait {
+        width: var(--portrait);
+        height: var(--portrait);
+        border-radius: 50%;
+        border: var(--route-station-ring) solid var(--color-station);
+        overflow: hidden;
+        background: var(--color-surface);
+        flex: none;
+    }
+
+    .portrait img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        image-rendering: pixelated;
+        display: block;
+    }
+
+    /* The three lines leave the portrait: independent (left), tooling, dotCMS (right). */
+    .stem,
+    .rails {
+        background:
+            linear-gradient(var(--color-line-independent), var(--color-line-independent)) no-repeat
+                var(--lx1) 0 / var(--stroke) 100%,
+            linear-gradient(var(--color-line-tooling), var(--color-line-tooling)) no-repeat var(--lx2) 0 /
+                var(--stroke) 100%,
+            linear-gradient(var(--color-line-dotcms), var(--color-line-dotcms)) no-repeat var(--lx3) 0 /
+                var(--stroke) 100%;
+    }
+
+    .stem {
+        flex: 1;
+        min-height: var(--space-8);
+    }
+
+    .intro {
+        padding-bottom: var(--space-12);
+        min-width: 0;
+    }
+
+    h1 {
+        font-family: var(--type-display-family);
+        font-size: var(--type-display-size);
+        font-weight: var(--type-display-weight);
+        line-height: var(--type-display-leading);
+        letter-spacing: var(--type-display-tracking);
+        text-wrap: balance;
+    }
+
+    .role {
+        font-size: var(--type-lead-size);
+        line-height: var(--type-lead-leading);
+        color: var(--color-muted);
+        margin-top: var(--space-2);
+    }
+
+    .bio {
+        font-size: var(--type-lead-size);
+        line-height: var(--type-lead-leading);
+        max-width: var(--layout-measure);
+        margin-top: var(--space-6);
+        text-wrap: pretty;
+    }
+
+    .next {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: var(--portrait) minmax(0, 1fr);
+        column-gap: var(--col-gap);
+    }
+
+    .rails {
+        position: relative;
+        min-height: 100%;
+    }
+
+    /* The lines end together at one capsule: the next stop. */
+    .rails::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: calc(var(--lx1) - var(--space-2));
+        width: calc(var(--lx3) - var(--lx1) + var(--stroke) + var(--space-4));
+        height: 28px;
+        border-radius: var(--radius-pill);
+        background: var(--color-bg);
+        border: var(--route-station-ring) solid var(--color-station);
+    }
+
+    .stop {
+        padding: var(--space-12) 0 0;
+    }
+
+    h2 {
+        font-family: var(--type-station-family);
+        font-size: var(--type-station-size);
+        font-weight: var(--type-station-weight);
+        line-height: var(--type-station-leading);
+        letter-spacing: var(--type-station-tracking);
+        text-wrap: balance;
+    }
+
+    .stop p {
+        max-width: var(--layout-measure);
+        color: var(--color-muted);
+        margin-top: var(--space-2);
+    }
+
+    .stop a {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        min-height: 44px;
+        margin-top: var(--space-2);
+        font-weight: 600;
+    }
+
+    .motto {
+        grid-column: 2;
+        margin-top: var(--space-16);
+        font-family: var(--type-title-family);
+        font-size: var(--type-title-size);
+        font-weight: var(--type-title-weight);
+        line-height: var(--type-title-leading);
+        letter-spacing: var(--type-title-tracking);
+        text-wrap: balance;
+    }
+
+    .motto span {
+        display: block;
+    }
+
+    .motto span:first-child {
+        color: var(--color-muted);
+    }
+
+    @media (max-width: 639px) {
+        .motto {
+            grid-column: 1 / -1;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .bio {
+            font-size: var(--type-body-size);
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .origin {
+            padding-top: var(--space-16);
+        }
+    }
+</style>

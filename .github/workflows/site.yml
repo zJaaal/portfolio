@@ -1,0 +1,46 @@
+# The site's checks on every PR and on main (docs/ARCHITECTURE.md). Checks only: Cloudflare Workers Builds is
+# connected to the repo and deploys main itself, so no Cloudflare token lives in GitHub.
+# Same shape as Che Bondi's workflows: Linux only, cached pnpm store, a newer push cancels the older run.
+name: site
+
+on:
+    pull_request:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+jobs:
+    checks:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+            # After setup-node, so the pnpm shims belong to the pinned Node; pnpm's version comes from package.json.
+            - name: Enable Corepack
+              run: corepack enable
+            - name: Locate the pnpm store
+              id: pnpm-store
+              run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+            - uses: actions/cache@v4
+              with:
+                  path: ${{ steps.pnpm-store.outputs.path }}
+                  key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+                  restore-keys: pnpm-store-${{ runner.os }}-
+            - name: Install
+              run: pnpm install --frozen-lockfile
+            # Types (astro check) and the token contrast pairs, both themes.
+            - name: Check
+              run: pnpm check
+            - name: Build
+              run: pnpm build
+

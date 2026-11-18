@@ -1,0 +1,136 @@
+@import './tokens.css';
+
+@font-face {
+    font-family: 'Overpass Variable';
+    src: url('/fonts/overpass-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Overpass Variable';
+    src: url('/fonts/overpass-latin-ext-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+1E00-1EFF;
+}
+
+@font-face {
+    font-family: 'Overpass Mono Variable';
+    src: url('/fonts/overpass-mono-latin-wght-normal.woff2') format('woff2');
+    font-weight: 300 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Departure Mono';
+    src: url('/fonts/DepartureMono-Regular.woff2') format('woff2');
+    font-display: swap;
+}
+
+:root {
+    /* The parallel lines: three strokes centered under the portrait (DESIGN.md §6). */
+    --portrait: 96px;
+    --stroke: var(--route-stroke-phone);
+    --pitch: 14px;
+    --lx1: calc(var(--portrait) / 2 - var(--pitch) - var(--stroke) / 2);
+    --lx2: calc(var(--portrait) / 2 - var(--stroke) / 2);
+    --lx3: calc(var(--portrait) / 2 + var(--pitch) - var(--stroke) / 2);
+    --col-gap: var(--space-4);
+    --gutter: var(--layout-gutter-phone);
+    scrollbar-color: var(--color-hairline) var(--color-bg);
+}
+
+@media (min-width: 640px) {
+    :root {
+        --portrait: 128px;
+        --col-gap: var(--space-6);
+        --gutter: var(--space-8);
+    }
+}
+
+@media (min-width: 1280px) {
+    :root {
+        --portrait: 160px;
+        --stroke: var(--route-stroke-desktop);
+        --col-gap: var(--space-8);
+        --gutter: var(--layout-gutter-desktop);
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--type-body-family);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+::selection {
+    background: var(--color-selection-bg);
+    color: var(--color-selection-text);
+}
+
+a {
+    color: var(--color-link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+a:hover {
+    text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+.wrap {
+    width: 100%;
+    max-width: var(--layout-max-map);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.meta {
+    font-family: var(--type-meta-family);
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    line-height: var(--type-meta-leading);
+    color: var(--color-muted);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

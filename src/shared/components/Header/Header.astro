@@ -1,0 +1,153 @@
+---
+import { LOCALES, localizedPath, useTranslations, type Locale } from '../../../i18n';
+import { Icon } from '../Icon';
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<header class="wrap header">
+    <a class="home" href={localizedPath(locale)}>{t('header.home')}</a>
+    <div class="controls">
+        <nav class="lang" aria-label={t('header.language')} data-current={locale}>
+            <a
+                href={localizedPath('en')}
+                hreflang="en"
+                lang="en"
+                data-locale-link
+                aria-current={locale === 'en' ? 'page' : undefined}>EN</a
+            >
+            <span class="track" aria-hidden="true"><i></i><b></b><i></i></span>
+            <a
+                href={localizedPath('es')}
+                hreflang="es"
+                lang="es"
+                data-locale-link
+                aria-current={locale === 'es' ? 'page' : undefined}>ES</a
+            >
+        </nav>
+        <button
+            class="theme"
+            type="button"
+            data-theme-toggle
+            data-to-dark={t('theme.toDark')}
+            data-to-light={t('theme.toLight')}
+            aria-label={t('theme.toDark')}>
+            <Icon name="darkMode" class="when-dark" />
+            <Icon name="lightMode" class="when-light" />
+        </button>
+    </div>
+</header>
+
+<script>
+    import '../../scripts/theme';
+    import '../../scripts/locale';
+</script>
+
+<style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-4);
+        min-height: 64px;
+    }
+
+    .home {
+        font-family: var(--font-mono);
+        font-size: var(--type-meta-size);
+        font-weight: 600;
+        color: var(--color-text);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+    }
+
+    .lang {
+        display: flex;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: var(--type-meta-size);
+        font-weight: 600;
+    }
+
+    .lang a {
+        color: var(--color-muted);
+        text-decoration: none;
+        min-width: 40px;
+        min-height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: var(--radius-sm);
+        transition: color var(--motion-micro) var(--motion-ease-out);
+    }
+
+    .lang a:hover,
+    .lang a[aria-current] {
+        color: var(--color-text);
+    }
+
+    .track {
+        display: flex;
+        align-items: center;
+    }
+
+    .track i {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 3px solid var(--color-station);
+        background: var(--color-bg);
+    }
+
+    .track b {
+        width: 20px;
+        height: 4px;
+        background: var(--color-line-dotcms);
+    }
+
+    .lang[data-current='en'] .track i:first-child,
+    .lang[data-current='es'] .track i:last-child {
+        background: var(--color-station);
+    }
+
+    .theme {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        border: 1px solid var(--color-hairline);
+        background: transparent;
+        color: var(--color-text);
+        cursor: pointer;
+        transition: border-color var(--motion-micro) var(--motion-ease-out);
+    }
+
+    .theme:hover {
+        border-color: var(--color-muted);
+    }
+
+    .theme :global(.when-light) {
+        display: none;
+    }
+
+    :global(html[data-effective='light']) .theme :global(.when-light) {
+        display: block;
+    }
+
+    :global(html[data-effective='light']) .theme :global(.when-dark) {
+        display: none;
+    }
+</style>

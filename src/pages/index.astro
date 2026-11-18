@@ -1,0 +1,32 @@
+---
+// "/" picks a language: the saved choice, then the browser's languages, then English.
+// The edge Worker will do this server-side later (docs/ARCHITECTURE.md); this page is the fallback.
+import { LOCALE_COOKIE } from '../shared/constants';
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Jalinson Diaz · Product Engineer</title>
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://zjaaal.dev/en/" />
+        <link rel="alternate" hreflang="en" href="https://zjaaal.dev/en/" />
+        <link rel="alternate" hreflang="es" href="https://zjaaal.dev/es/" />
+        <link rel="alternate" hreflang="x-default" href="https://zjaaal.dev/en/" />
+        <script is:inline define:vars={{ cookie: LOCALE_COOKIE }}>
+            const saved = document.cookie.match(new RegExp('(?:^|; )' + cookie + '=(en|es)'));
+            const browser = (navigator.languages || [navigator.language]).find((l) => /^(en|es)/i.test(l));
+            const lang = saved ? saved[1] : browser ? browser.slice(0, 2).toLowerCase() : 'en';
+            location.replace('/' + lang + '/');
+        </script>
+        <style>
+            body { font-family: system-ui, sans-serif; background: #120c1f; color: #ede8f7; padding: 24px; }
+            a { color: #a891ff; }
+        </style>
+    </head>
+    <body>
+        <p><a href="/en/">English</a> · <a href="/es/">Español</a></p>
+    </body>
+</html>
