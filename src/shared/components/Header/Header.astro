@@ -21,7 +21,6 @@ const t = useTranslations(locale);
                 data-locale-link
                 aria-current={locale === 'en' ? 'page' : undefined}>EN</a
             >
-            <span class="track" aria-hidden="true"><i></i><b></b><i></i></span>
             <a
                 href={localizedPath('es')}
                 hreflang="es"
@@ -74,9 +73,13 @@ const t = useTranslations(locale);
         gap: var(--space-2);
     }
 
+    /* A segmented pill: the current language is filled, the other is a plain link. */
     .lang {
         display: flex;
         align-items: center;
+        padding: 3px;
+        border: 1px solid var(--color-hairline);
+        border-radius: var(--radius-pill);
         font-family: var(--font-mono);
         font-size: var(--type-meta-size);
         font-weight: 600;
@@ -85,41 +88,23 @@ const t = useTranslations(locale);
     .lang a {
         color: var(--color-muted);
         text-decoration: none;
-        min-width: 40px;
-        min-height: 44px;
+        min-width: 44px;
+        min-height: 36px;
         display: grid;
         place-items: center;
-        border-radius: var(--radius-sm);
-        transition: color var(--motion-micro) var(--motion-ease-out);
+        border-radius: var(--radius-pill);
+        transition:
+            color var(--motion-micro) var(--motion-ease-out),
+            background var(--motion-micro) var(--motion-ease-out);
     }
 
-    .lang a:hover,
-    .lang a[aria-current] {
+    .lang a:hover {
         color: var(--color-text);
     }
 
-    .track {
-        display: flex;
-        align-items: center;
-    }
-
-    .track i {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        border: 3px solid var(--color-station);
-        background: var(--color-bg);
-    }
-
-    .track b {
-        width: 20px;
-        height: 4px;
-        background: var(--color-line-dotcms);
-    }
-
-    .lang[data-current='en'] .track i:first-child,
-    .lang[data-current='es'] .track i:last-child {
-        background: var(--color-station);
+    .lang a[aria-current] {
+        background: var(--color-text);
+        color: var(--color-bg);
     }
 
     .theme {
