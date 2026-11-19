@@ -6,6 +6,7 @@
 }
 
 .start {
+    grid-row: 1 / span 2;
     display: flex;
     flex-direction: column;
 }
@@ -58,12 +59,54 @@
     margin-top: var(--space-2);
 }
 
+.line-dotcms {
+    --c: var(--color-line-dotcms);
+}
+
+.line-independent {
+    --c: var(--color-line-independent);
+}
+
 .bio {
     font-size: var(--type-lead-size);
     line-height: var(--type-lead-leading);
     max-width: var(--layout-measure);
     margin-top: var(--space-6);
     text-wrap: pretty;
+}
+
+.now {
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    color: var(--color-muted);
+    max-width: var(--layout-measure);
+    margin-top: var(--space-3);
+    text-wrap: pretty;
+}
+
+/* A station named here takes its line's color and links to its node on the map. */
+.mention {
+    color: var(--c);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
+}
+
+.mention:hover {
+    text-decoration-color: currentColor;
+}
+
+.mention:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+/* The key sits under the intro, before the map, on the intro's column: my path runs past it
+   unbroken at every width. */
+.key {
+    grid-column: 2;
+    padding-bottom: var(--space-8);
 }
 
 @media (max-width: 39.99em) {

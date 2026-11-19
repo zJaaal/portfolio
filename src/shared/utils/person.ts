@@ -1,4 +1,4 @@
-import { LINKS } from '../constants';
+import { EMAIL, LINKS } from '../constants';
 
 interface PersonInput {
     /** The page's own language home, as an absolute URL. */
@@ -21,6 +21,7 @@ export function personSchema({ url, image, description }: PersonInput): Record<s
         alternateName: 'zJaaal',
         jobTitle: 'Product Engineer',
         url,
+        email: `mailto:${EMAIL}`,
         image,
         description,
         worksFor: { '@type': 'Organization', name: 'dotCMS', url: 'https://www.dotcms.com' },

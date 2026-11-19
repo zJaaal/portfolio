@@ -15,7 +15,7 @@ _Last updated: 2026-11-18_
 It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English unless the visitor chose Spanish with the switch (saved cookie).
 
 - **Deploy:** Cloudflare Workers Builds deploys `main`. PR branches get preview versions. GitHub Actions (`.github/workflows/site.yml`) runs `pnpm check` and `pnpm build`.
-- **Domain and email:** `zjaaal.dev` is a Worker custom domain (`wrangler.jsonc`). Email Routing for `me@zjaaal.dev` is still to be enabled by the owner.
+- **Domain and email:** `zjaaal.dev` is a Worker custom domain (`wrangler.jsonc`). Email Routing delivers `me@zjaaal.dev`; the address is in the home footer, the JSON-LD and `llms.txt`.
 
 ## Decided
 
@@ -33,8 +33,8 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
 
 ## Next (one section at a time; the owner reviews copy after each)
 
-1. **The map:** merged. A roguelike run map (see the code in `features/home`): my path drops from the portrait, each work line branches off it, every road ends at Contact, and a pixel sprite walks it as the page scrolls. One fluid tree from 48em up, a column on phones.
-   - **Open:** DESIGN.md (§0, §6, motion) and the surface contract still describe the transit-line direction and need a rewrite. "Joined dotCMS" has a `[…]` placeholder role. Station links 404 until step 3. The Playwright overlap check lives in a scratch script; it belongs in the step 5 suite.
+1. **The map:** merged. A roguelike run map (see the code in `features/home`): my path drops from the portrait, each work line branches off it, every road ends at Contact, and a pixel sprite walks it as the page scrolls. One fluid tree from 48em up, a column on phones. Contact is a `mailto:` link showing the address. The key (lines, next stop, line cleared) sits under the intro, before the map. Years are a gutter tick for every year 2020 to 2026 (first node of the year; years without a node sit halfway between neighbours). A cleared line's flag sits one floor below its last station. The intro has a draft "Now" line linking to the map nodes; the owner rewrites it.
+   - **Open:** Station links 404 until step 3. The Playwright overlap check lives in a scratch script; it belongs in the step 5 suite.
 
 2. **About:** the origin story, how I work (three or four behavioral sentences, no soft-skills list), and off the clock (guitar, metalcore, Zelda, Terraria, roguelikes).
 3. **Station pages:** Content Drive, UVE + SDKs, New Edit Content, Content Types fields, Template Builder, Artemis, Che Bondi, tooling. Each has "what I owned", the problem, key decisions, media and links.
@@ -52,7 +52,6 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
 - **Media:** the Che Bondi screen recording, and dotCMS screenshots (Content Drive, UVE, Content Types, Template Builder).
 - **Links:** URLs of the UVE and SDK blog posts.
 - **Sprite and portrait:** who makes the sprite's final pixel art. The portrait now comes from the GitHub avatar at build time (`pnpm portrait`): change the photo on GitHub, then redeploy. The owner is taking a new photo.
-- **Email:** enable Email Routing for `me@zjaaal.dev`.
 
 ## Gotchas
 

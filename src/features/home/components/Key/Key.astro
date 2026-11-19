@@ -1,0 +1,40 @@
+---
+import { useTranslations, type Locale } from '../../../../i18n';
+import { LINE } from '../../shared/models';
+import { PixelIcon } from '../PixelIcon';
+import styles from './Key.module.css';
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
+// What the map's markers mean: the lines, then the door to the next stop and the flag of a cleared line.
+const markers = [
+    { icon: 'door', label: t('map.nextStop') },
+    { icon: 'cleared', label: t('map.lineCleared') }
+] as const;
+---
+
+<ul class={`meta ${styles.key}`} aria-label={t('map.key')}>
+    {
+        keyLines.map((line) => (
+            <li class={styles[`line-${line}`]}>
+                <i class={styles.ring} />
+                {t(`line.${line}`)}
+            </li>
+        ))
+    }
+    {
+        markers.map((marker) => (
+            <li>
+                <span class={styles.icon}>
+                    <PixelIcon name={marker.icon} />
+                </span>
+                {marker.label}
+            </li>
+        ))
+    }
+</ul>

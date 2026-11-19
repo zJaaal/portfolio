@@ -1,0 +1,40 @@
+/* The map's key: lines as rings, then the door and the flag, all at one small size. */
+.key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.key li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.ring {
+    width: var(--space-4);
+    height: var(--space-4);
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c, var(--color-muted));
+}
+
+.icon {
+    width: var(--space-4);
+    height: var(--space-4);
+    color: var(--color-muted);
+}
+
+.line-dotcms {
+    --c: var(--color-line-dotcms);
+}
+
+.line-independent {
+    --c: var(--color-line-independent);
+}
+
+.line-tooling {
+    --c: var(--color-line-tooling);
+}

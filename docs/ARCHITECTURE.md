@@ -21,7 +21,7 @@ portfolio/
     │       └── shared/        constants.ts, models.ts
     ├── shared/                Used by two or more features
     │   ├── components/        Layout, Header, LangSelect, ThemeToggle, Video, …
-    │   ├── scripts/           The only browser side effects: theme, locale memory, the map's walk
+    │   ├── scripts/           The only browser side effects: theme, locale memory, the map's walk, jumps to map nodes
     │   ├── utils/             Pure helpers: locale negotiation, localized paths
     │   ├── constants.ts
     │   └── models.ts

@@ -25,6 +25,7 @@ import {
     type RunNode,
     type RunPath,
     type RunStation,
+    type YearTick,
     type WalkStep,
     type WorkLine
 } from '../shared/models';
@@ -148,37 +149,43 @@ function placeNodes(
     const isOrigin = (station: RunStation): boolean => station.line === LINE.ORIGIN;
     const nodeSize = (layout: Layout, station: RunStation): number =>
         isOrigin(station) ? NODE_SIZE_REM.start[layout] : NODE_REM[layout];
-    const stopFloors = Object.fromEntries(
-        LAYOUTS.map((layout) => [
-            layout,
-            stack(
-                sorted.map((station) =>
-                    floorHeight(
-                        layout,
-                        nodeSize(layout, station),
-                        labelHeight(labels.get(station.id)!, layout, isOrigin(station))
-                    )
-                )
-            )
-        ])
-    ) as Record<Layout, ReturnType<typeof stack>>;
+    const heightOf = (layout: Layout, station: RunStation): number =>
+        floorHeight(layout, nodeSize(layout, station), labelHeight(labels.get(station.id)!, layout, isOrigin(station)));
+    // A cleared line's flag sits one floor below its last station. In the tree that is the next
+    // floor (another lane, so nothing shares its row); on narrow screens labels share one column,
+    // so the flag gets a short floor of its own.
+    const clearedLines = lanes.filter((line) => !stations.some((station) => station.line === line && station.ongoing));
+    const lastIndex = (line: WorkLine): number => sorted.findLastIndex((station) => station.line === line);
+    const flagBelow = clearedLines.filter((line) => lastIndex(line) < sorted.length - 1);
+    const narrowSlots: { stop?: number; flag?: WorkLine }[] = sorted.flatMap((_, i) => [
+        { stop: i },
+        ...flagBelow.filter((line) => lastIndex(line) === i).map((line) => ({ flag: line }))
+    ]);
+    const narrowFloors = stack(
+        narrowSlots.map((slot) =>
+            slot.stop === undefined ? FUTURE_FLOOR_REM : heightOf(LAYOUT.NARROW, sorted[slot.stop])
+        )
+    );
+    const stopFloors: Record<Layout, ReturnType<typeof stack>> = {
+        desk: stack(sorted.map((station) => heightOf(LAYOUT.DESK, station))),
+        narrow: sorted.map((_, i) => narrowFloors[narrowSlots.findIndex((slot) => slot.stop === i)])
+    };
+    const edgeLane = lanes.length - 1;
     const visits = new Map<Line, number>();
-    let previousYear: number | undefined;
 
     const stops = sorted.map((station, floor): RunNode => {
-        const year = Number(station.start.slice(0, 4));
         const visit = visits.get(station.line) ?? 0;
         // A small zig-zag along each lane, so a path wanders like a run map instead of a ruler.
         const lane = station.line === LINE.ORIGIN ? null : laneX(lanes.indexOf(station.line), visit % 2 === 0 ? -1 : 1);
 
         visits.set(station.line, visit + 1);
-        const node: RunNode = {
+
+        return {
             id: station.id,
             kind: isOrigin(station) ? NODE_KIND.START : NODE_KIND.STOP,
             line: station.line,
             station,
-            year,
-            firstOfYear: year !== previousYear,
+            edge: lanes.indexOf(station.line as WorkLine) === edgeLane,
             at: both((layout) => ({
                 x: lane?.[layout] ?? AT_TRUNK,
                 y: nodeDepth(layout, stopFloors[layout][floor], nodeSize(layout, station))
@@ -186,41 +193,44 @@ function placeNodes(
             floorTop: { desk: stopFloors.desk[floor].top, narrow: stopFloors.narrow[floor].top },
             floorBottom: { desk: stopFloors.desk[floor].bottom, narrow: stopFloors.narrow[floor].bottom }
         };
-
-        previousYear = year;
-
-        return node;
     });
 
-    const lastBottom = { desk: stopFloors.desk.at(-1)!.bottom, narrow: stopFloors.narrow.at(-1)!.bottom };
+    // The bottom row holds every line that has no flag below its last station: the doors.
+    const bottomLines = lanes.filter((line) => !flagBelow.includes(line));
+    const lastBottom = { desk: stopFloors.desk.at(-1)!.bottom, narrow: narrowFloors.at(-1)!.bottom };
     const endFloors = {
         desk: stack(
             [floorHeight(LAYOUT.DESK, NODE_SIZE_REM.cleared.desk, TAG_LINE_REM + LABEL_PADDING_REM)],
             lastBottom.desk
         ),
         narrow: stack(
-            lanes.map(() => FUTURE_FLOOR_REM),
+            bottomLines.map(() => FUTURE_FLOOR_REM),
             lastBottom.narrow
         )
     };
-    const ends = lanes.map((line, index): RunNode => {
+    const ends = lanes.map((line): RunNode => {
         const lastStop = stops.findLast((stop) => stop.line === line)!;
-        const live = stops.some((stop) => stop.line === line && stop.station!.ongoing);
-        const deskFloor = endFloors.desk[0];
-        const narrowFloor = endFloors.narrow[index];
+        const live = !clearedLines.includes(line);
+        const below = flagBelow.includes(line);
+        const floors: Record<Layout, ReturnType<typeof stack>[number]> = below
+            ? {
+                  desk: stopFloors.desk[lastIndex(line) + 1],
+                  narrow: narrowFloors[narrowSlots.findIndex((slot) => slot.flag === line)]
+              }
+            : { desk: endFloors.desk[0], narrow: endFloors.narrow[bottomLines.indexOf(line)] };
 
         return {
             id: `${live ? NODE_KIND.DOOR : NODE_KIND.CLEARED}-${line}`,
             kind: live ? NODE_KIND.DOOR : NODE_KIND.CLEARED,
             line,
-            firstOfYear: false,
+            edge: false,
             // A door or flag sits straight below its line's last node.
             at: atDepth(lastStop.at, {
-                desk: nodeDepth(LAYOUT.DESK, deskFloor, NODE_SIZE_REM.cleared.desk),
-                narrow: narrowFloor.center
+                desk: nodeDepth(LAYOUT.DESK, floors.desk, NODE_SIZE_REM.cleared.desk),
+                narrow: floors.narrow.center
             }),
-            floorTop: { desk: deskFloor.top, narrow: narrowFloor.top },
-            floorBottom: { desk: deskFloor.bottom, narrow: narrowFloor.bottom }
+            floorTop: { desk: floors.desk.top, narrow: floors.narrow.top },
+            floorBottom: { desk: floors.desk.bottom, narrow: floors.narrow.bottom }
         };
     });
 
@@ -229,7 +239,7 @@ function placeNodes(
             layout,
             stack(
                 [floorHeight(layout, BOSS_REM[layout], labelHeight(bossLabel, layout, false))],
-                layout === LAYOUT.DESK ? endFloors.desk[0].bottom : endFloors.narrow.at(-1)!.bottom
+                layout === LAYOUT.DESK ? endFloors.desk[0].bottom : (endFloors.narrow.at(-1)?.bottom ?? lastBottom.narrow)
             )[0]
         ])
     ) as Record<Layout, ReturnType<typeof stack>[number]>;
@@ -238,7 +248,7 @@ function placeNodes(
         id: 'contact',
         kind: NODE_KIND.BOSS,
         line: LINE.ORIGIN,
-        firstOfYear: false,
+        edge: false,
         at: both((layout) => ({ x: middle[layout], y: nodeDepth(layout, bossFloors[layout], BOSS_REM[layout]) })),
         floorTop: { desk: bossFloors.desk.top, narrow: bossFloors.narrow.top },
         floorBottom: { desk: bossFloors.desk.bottom, narrow: bossFloors.narrow.bottom }
@@ -247,6 +257,43 @@ function placeNodes(
     return { stops, ends, boss, height: boss.floorBottom };
 }
 
+
+/**
+ * A tick for every year from the first station's to the last's, in the gutter left of my path.
+ * A year with a station ticks at its first one; a year without sits proportionally between the
+ * ticks around it (halfway, for a single missing year). Pure.
+ */
+export function yearTicks(stops: readonly RunNode[]): YearTick[] {
+    const first = new Map<number, RunNode>();
+
+    for (const stop of stops) {
+        const year = Number(stop.station!.start.slice(0, 4));
+
+        if (!first.has(year)) {
+            first.set(year, stop);
+        }
+    }
+
+    const known = [...first].map(([year, node]) => ({ year, node }));
+    const [from, to] = [known[0].year, known.at(-1)!.year];
+
+    return Array.from({ length: to - from + 1 }, (_, i): YearTick => {
+        const year = from + i;
+        const exact = first.get(year);
+
+        if (exact) {
+            return { year, at: atDepth(both(() => ({ x: AT_TRUNK, y: 0 })), { desk: exact.at.desk.y, narrow: exact.at.narrow.y }) };
+        }
+
+        const before = known.findLast((tick) => tick.year < year)!;
+        const after = known.find((tick) => tick.year > year)!;
+        const share = (year - before.year) / (after.year - before.year);
+        const between = (layout: Layout): number =>
+            before.node.at[layout].y + (after.node.at[layout].y - before.node.at[layout].y) * share;
+
+        return { year, at: both((layout) => ({ x: AT_TRUNK, y: between(layout) })) };
+    });
+}
 
 /** A straight run down to the bottom edge of `from`'s floor, across there, then down onto `to`. */
 function gridPath(from: RunNode, to: Point): Point[] {
@@ -450,6 +497,7 @@ export function buildRun(
         // Side roads go first, so the work lines draw over them where they meet.
         paths: [...roads, ...drawPaths(floors, lanes, roads)],
         walk: walkRoute(floors),
+        years: yearTicks(floors.stops),
         sprite: under(newest.at, both(() => ({ x: AT_TRUNK, y: 0 }))),
         height: floors.height,
         laneCount: lanes.length

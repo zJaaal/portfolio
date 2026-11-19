@@ -8,7 +8,7 @@
     container-type: inline-size;
 }
 
-/* Labels on narrow screens share one column right of every lane; the key and motto align to it. */
+/* Labels on narrow screens share one column right of every lane; the motto and socials align to it. */
 .map {
     --label-left: calc(var(--trunk) + var(--route-lane-pitch) * (var(--lanes) + 1));
 }
@@ -385,6 +385,12 @@ a.hit:focus-visible .label {
     text-wrap: pretty;
 }
 
+/* Another station named in a role takes its line's color, so the link between the two reads. */
+.mention {
+    color: var(--c);
+    font-weight: 600;
+}
+
 .tag {
     font-family: var(--type-pixel-family);
     font-size: var(--type-pixel-size);
@@ -400,7 +406,7 @@ a.hit:focus-visible .label {
 
 /* Years sit left of my path, in the portrait's half-width, where no lane ever runs. */
 .year {
-    --year-gap: var(--space-2);
+    --year-gap: calc(var(--space-4) + var(--space-1));
     left: calc(var(--trunk) - var(--year-gap));
     translate: -100% -50%;
     font-family: var(--type-pixel-family);
@@ -489,38 +495,17 @@ a.hit:focus-visible .label {
     }
 }
 
-/* ---------- after the map: the key and the motto ---------- */
-/* The key and the motto close the page on the intro's column, mirroring the name and bio. */
+/* ---------- after the map: the motto and the socials ---------- */
+/* On phones the motto and the socials start at the page's edge; from tablets up they sit
+   on the intro's column, mirroring the name and bio. */
 .after {
     display: grid;
-    grid-template-columns: var(--portrait) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     column-gap: var(--col-gap);
     padding-bottom: var(--space-16);
 }
 
-.key {
-    grid-column: 2;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-4);
-    padding-top: var(--space-8);
-}
-
-.key span {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-}
-
-.key i {
-    width: var(--space-4);
-    height: var(--space-4);
-    border-radius: 50%;
-    border: var(--route-node-ring) solid var(--c, var(--color-muted));
-}
-
 .motto {
-    grid-column: 2;
     margin-top: var(--space-12);
     font-family: var(--type-title-family);
     font-size: var(--type-title-size);
@@ -536,6 +521,40 @@ a.hit:focus-visible .label {
 
 .motto span:first-child {
     color: var(--color-muted);
+}
+
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    margin: var(--space-8) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-dim);
+    text-decoration: underline;
+    text-decoration-color: var(--color-muted);
+    text-underline-offset: 0.2em;
+}
+
+.socials a:hover {
+    color: var(--color-station);
+    text-decoration-color: currentColor;
+}
+
+.socials a:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.out {
+    width: 1em;
+    height: 1em;
 }
 
 /* ---------- the tree, from tablets up: one fluid layout computed from the map's own width.
@@ -583,12 +602,28 @@ a.hit:focus-visible .label {
         );
     }
 
+    /* The outermost lane has the map's edge to spread into, and a little of the page gutter, so a
+   long name stays whole. */
+    .edge .label {
+        max-width: calc(100cqw - var(--ex) - var(--route-dot) / 2 - var(--space-1) + var(--space-4));
+    }
+
     .name {
         font-size: var(--type-station-size);
     }
 
+    /* Start nodes sit on my path: the tick keeps clear of their ring. */
     .year {
-        --year-gap: var(--space-3);
+        --year-gap: var(--space-6);
+    }
+
+    .after {
+        grid-template-columns: var(--portrait) minmax(0, 1fr);
+    }
+
+    .motto,
+    .socials {
+        grid-column: 2;
     }
 }
 

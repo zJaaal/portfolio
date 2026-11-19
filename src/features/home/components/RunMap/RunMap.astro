@@ -5,8 +5,11 @@ import { LANE_STEP_PCT } from '../../shared/constants';
 import { LINE, NODE_KIND, type RunNode } from '../../shared/models';
 import { acrossCss, downCss } from '../../utils/css';
 import { formatSpan } from '../../utils/dates';
+import { splitMentions } from '../../utils/mentions';
 import { buildRun } from '../../utils/run';
 import { toSegments } from '../../utils/segments';
+import { Icon } from '../../../../shared/components/Icon';
+import { EMAIL, LINKS } from '../../../../shared/constants';
 import { cx } from '../../../../shared/utils/cx';
 import { PixelIcon } from '../PixelIcon';
 import type { PixelIconName } from '../PixelIcon/PixelIcon.constants';
@@ -28,30 +31,23 @@ const copy = new Map(
             name: data.name[locale],
             role: data.role[locale],
             tag: data.ongoing,
-            // Start nodes show their year with the role instead.
+            // Start nodes are a moment, not a span: their year is in the gutter.
             dates: data.line === LINE.ORIGIN ? undefined : formatSpan(data, locale, spanWords)
         }
     ])
 );
-// The start node shows its year with its role, so the label is sized with it.
-const labels = new Map(
-    entries.map(({ id, data }) => {
-        const text = copy.get(id)!;
-        const role = data.line === LINE.ORIGIN ? `${data.start.slice(0, 4)} · ${text.role}` : text.role;
-
-        return [id, { ...text, role }];
-    })
-);
 const run = buildRun(
     entries.map(({ id, data }) => ({ id, line: data.line, start: data.start, ongoing: data.ongoing, page: data.page })),
-    labels,
-    { name: t('map.contact'), role: t('map.contactMeta'), tag: false }
+    copy,
+    // The question, then the address, sized like a station's role and dates.
+    { name: t('map.contact'), role: t('map.contactMeta'), dates: EMAIL, tag: false }
 );
 
 /** Both layouts' coordinates, as custom properties the stylesheet picks from per breakpoint. */
 const at = ({ desk, narrow }: RunNode['at']): string =>
     [
         `--dx: ${acrossCss(desk.x)}`,
+        `--ex: ${acrossCss(desk.x, 'cqw')}`,
         `--dy: ${downCss(desk.y)}`,
         `--nx: ${acrossCss(narrow.x)}`,
         `--ny: ${downCss(narrow.y)}`
@@ -95,8 +91,19 @@ const iconFor = (node: RunNode): PixelIconName => {
 const stops = run.nodes.filter((node) => node.kind === NODE_KIND.START || node.kind === NODE_KIND.STOP);
 const ends = run.nodes.filter((node) => node.kind === NODE_KIND.DOOR || node.kind === NODE_KIND.CLEARED);
 const boss = run.nodes.find((node) => node.kind === NODE_KIND.BOSS)!;
-const years = stops.filter((node) => node.kind === NODE_KIND.STOP && node.firstOfYear);
-const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
+// A role that names another station ("cornerstone of Artemis") sets that name in its line's color.
+const named = entries.map(({ id, data }) => ({ id, name: data.name[locale], line: data.line }));
+const roleParts = (id: string, role: string) =>
+    splitMentions(
+        role,
+        named.filter((station) => station.id !== id)
+    );
+// Email first: it is the way to reach me. The other two leave the site, so they carry the arrow.
+const socials = [
+    { name: EMAIL, href: `mailto:${EMAIL}`, external: false },
+    { name: 'GitHub', href: LINKS.GITHUB, external: true },
+    { name: 'LinkedIn', href: LINKS.LINKEDIN, external: true }
+] as const;
 ---
 
 <div class={styles.map} style={`--lanes: ${run.laneCount}`}>
@@ -112,9 +119,9 @@ const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
 
     <div class={styles.years} aria-hidden="true">
         {
-            years.map((node) => (
-                <span class={cx(styles, 'year', 'at')} style={at(node.at)}>
-                    {node.year}
+            run.years.map((tick) => (
+                <span class={cx(styles, 'year', 'at')} style={at(tick.at)}>
+                    {tick.year}
                 </span>
             ))
         }
@@ -129,7 +136,8 @@ const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
 
                 return (
                     <li
-                        class={cx(styles, 'node', 'at', `line-${node.line}`, node.kind, station.ongoing ? 'live' : 'done')}
+                        id={node.id}
+                        class={cx(styles, 'node', 'at', `line-${node.line}`, node.kind, station.ongoing ? 'live' : 'done', node.edge && 'edge')}
                         data-node={node.id}
                         style={at(node.at)}>
                         <Tag class={styles.hit} href={station.page ? localizedPath(locale, `/work/${node.id}/`) : undefined}>
@@ -140,7 +148,9 @@ const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
                                 <span class={styles.name}>{text.name}</span>
                                 {text.dates && <span class={styles.dates}>{text.dates}</span>}
                                 <span class="meta">
-                                    {node.kind === NODE_KIND.START ? `${node.year} · ${text.role}` : text.role}
+                                    {roleParts(node.id, text.role).map((part) =>
+                                        part.line ? <span class={cx(styles, 'mention', `line-${part.line}`)}>{part.text}</span> : part.text
+                                    )}
                                 </span>
                                 {station.ongoing && <span class={styles.tag}>{t('map.inProgress')}</span>}
                             </span>
@@ -149,12 +159,13 @@ const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
                 );
             })
         }
-        <li class={cx(styles, 'node', 'at', 'boss')} data-node={boss.id} style={at(boss.at)}>
-            <a class={styles.hit} href={localizedPath(locale, '/contact/')}>
+        <li class={cx(styles, 'node', 'at', 'boss')} id={boss.id} data-node={boss.id} style={at(boss.at)}>
+            <a class={styles.hit} href={`mailto:${EMAIL}`}>
                 <span class={styles.tile} data-tile><PixelIcon name="boss" /></span>
                 <span class={styles.label}>
                     <span class={styles.name}>{t('map.contact')}</span>
                     <span class="meta">{t('map.contactMeta')}</span>
+                    <span class={styles.dates}>{EMAIL}</span>
                 </span>
             </a>
         </li>
@@ -186,15 +197,26 @@ const keyLines = [LINE.DOTCMS, LINE.INDEPENDENT, LINE.TOOLING] as const;
 </script>
 
 <div class={styles.after}>
-    <p class={`meta ${styles.key}`}>
-        <span class="sr-only">{t('map.key')}:</span>
-        {keyLines.map((line) => <span class={styles[`line-${line}`]}><i />{t(`line.${line}`)}</span>)}
-    </p>
-
     <!-- The end of the run: the motto (PRODUCT.md, Brand Commitments). -->
     <p class={styles.motto}>
         <span>{t('motto.line1')}</span>
         <span>{t('motto.line2')}</span>
     </p>
+
+    <ul class={`meta ${styles.socials}`} aria-label={t('footer.socials')}>
+        {
+            socials.map((social) => (
+                <li>
+                    <a
+                        href={social.href}
+                        rel={social.external ? 'me noopener' : 'me'}
+                        target={social.external ? '_blank' : undefined}>
+                        {social.name}
+                        {social.external && <Icon name="arrowOutward" class={styles.out} />}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
 </div>
 </div>

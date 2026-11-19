@@ -3,6 +3,16 @@ export const LOCALE_COOKIE = 'lang';
 /** One year. */
 export const LOCALE_COOKIE_MAX_AGE_S = 31_536_000;
 
+export const EMAIL = 'me@zjaaal.dev';
+
+/** The glide to a map node: its length grows with the distance, within these bounds. */
+export const GLIDE = {
+    /** Milliseconds per pixel travelled. */
+    msPerPx: 0.5,
+    minMs: 700,
+    maxMs: 1800
+} as const;
+
 export const LINKS = {
     GITHUB: 'https://github.com/zJaaal',
     LINKEDIN: 'https://www.linkedin.com/in/zjaaal/',

@@ -4,20 +4,25 @@ These are the binding visual rules for every page, in both themes and both langu
 
 **A review comment is a rule for the whole site.** When one page breaks a rule, check every page.
 
-> **Status: draft, written before the build at the owner's request.** It is rewritten from the built site at the finish review. Until then, when a rule here and the built result disagree, raise it and don't quietly diverge.
+> **Status: rewritten from the shipped home (the run map), 2026-11-18.** Station pages, About and Contact are not built yet; their rules below are carried over and marked where still open. When a rule here and the built result disagree, raise it and don't quietly diverge.
 
 ## 0. The world
 
-The site is **one transit line**. It starts at the About terminus (who I am), runs through stations (each shipped thing, with what I owned), and ends at the Contact terminus. Lines have identity colors: **dotCMS** (purple), **independent** (amber), and **tooling** (teal). A small pixel sprite of me rides the line as you scroll. Everything below serves that one idea. No glow, no gradients, no glass, no cards as page structure.
+The site is **a roguelike run map**. My own path (muted grey) drops from the portrait. Each line of work branches off it at its real start date and runs down in its own lane, one node per shipped thing. Every road ends at the Contact "boss". A small pixel sprite of me walks the road as you scroll. Lines have identity colors: **dotCMS** (purple), **independent** (amber) and **tooling** (teal).
+
+- **Nodes are outlined pixel-icon tiles**, never filled discs (the boss is the one filled node). An "in progress" tag marks live work.
+- **Roads are pixels:** square dots on a grid, never a continuous stroke.
+- **Live lines don't end.** They continue as a grey "road ahead" to a `?` door. Finished lines end at a "line cleared" flag.
+- Everything serves that one idea. No glow, no gradients, no glass, no cards as page structure.
 
 ## 1. Words
 
-- **Sentence case everywhere:** headings, buttons, labels, station names (proper nouns keep their capitals). Never Title Case for UI. All caps only in the `pixel` role, which imitates game UI.
+- **Sentence case everywhere:** headings, buttons, labels, node names (proper nouns keep their capitals). Never Title Case for UI. All caps only in the `pixel` role, which imitates game UI.
 - **One narrator, first person:** "I led Content Drive", "Lideré Content Drive". Never "Jalinson is…".
-- **Ownership first:** every station says what I did (*led*, *planned and built*, *built*, *built most of*) before what it's made with.
+- **Ownership first:** every node says what I did (*led*, *planned and built*, *built*, *built most of*) before what it's made with.
 - **Bilingual, equal:** every string exists in `en.json` and `es.json`. Spanish is neutral and uses tú ("Escríbeme", not "Escribime"). Keep product names and English terms of art (Product Engineer, framework, SDK) as they are.
 - **No invented claims:** no metrics, quotes or outcomes that aren't real and sourced.
-- **Personality is seasoning:** game and music references (inventory flavor text, the guitar-tab divider, sprite poses) appear in small text and decoration, never in headings or in the facts about work.
+- **Personality is seasoning:** game and music references (the sprite, the pixel icons, the `?` doors, the "line cleared" and "in progress" tags) appear in small text and decoration, never in headings or in the facts about work.
 
 ## 2. Spacing
 
@@ -30,12 +35,12 @@ A 4px grid (0.25rem) with named steps (`--space-*`). Use a step, never a raw num
 | `1` | 0.25 (4) | Icon to label, meta line to its station name |
 | `2` | 0.5 (8) | Between chips and buttons; tight stacks |
 | `3` | 0.75 (12) | Inside small items |
-| `4` | 1 (16) | Item padding; phone gutter; between rows |
-| `6` | 1.5 (24) | Between stations in a row; between related blocks |
-| `8` | 2 (32) | Section padding on a phone; above a key or legend |
+| `4` | 1 (16) | Item padding; phone gutter; between rows; the line key's swatch |
+| `6` | 1.5 (24) | Between related blocks |
+| `8` | 2 (32) | Section padding on a phone; around the intro and the line key |
 | `12` | 3 (48) | Between sections on a phone |
 | `16` | 4 (64) | Desktop gutter; between sections on desktop |
-| `24`, `32` | 6, 8 (96, 128) | Breathing room around the map and the termini |
+| `24`, `32` | 6, 8 (96, 128) | Breathing room around the map and Contact |
 
 - More space above a heading than below it.
 - Siblings get their spacing from the parent's `gap`, not margins on children.
@@ -45,38 +50,38 @@ A 4px grid (0.25rem) with named steps (`--space-*`). Use a step, never a raw num
 
 | Token | px | Use |
 |---|---|---|
-| `sm` | 4 | Focus ring corners, small tags, inventory items |
+| `sm` | 4 | Focus ring corners, labels, small tags |
 | `md` | 8 | Code blocks, media frames |
 | `pill` | 999 | Buttons and toggles in the header |
-| (circle) | 50% | Stations, termini, the line bullet only |
+| (circle) | 50% | Nodes, the portrait, the key's swatches only |
 
-Corners stay small: this is a printed diagram, not an app of rounded cards.
+Corners stay small: this is a game map, not an app of rounded cards.
 
 ## 4. Type
 
 Three families, all self-hosted (latin + latin-ext so Spanish accents render):
 
-- **Overpass** (variable): the wayfinding voice. It derives from the US highway signage typeface (Highway Gothic). Names, stations, headings, body.
-- **Overpass Mono:** data only, meaning roles, dates, stack lines, code and CLI output. Never a "techy" costume for prose.
-- **Departure Mono:** the pixel role only, for game-flavored small text (inventory, sprite captions, the tab numbers). It never sets more than one line.
+- **Overpass** (variable): the wayfinding voice. It derives from the US highway signage typeface (Highway Gothic). Names, nodes, headings, body.
+- **Overpass Mono:** data only, meaning roles, dates, the line key, stack lines, code and CLI output. Never a "techy" costume for prose.
+- **Departure Mono:** the pixel role only, for game-flavored small text: the "in progress" and "line cleared" tags and the year ticks. It never sets more than one line.
 
 | Role | Token | Size / weight | Use |
 |---|---|---|---|
 | Display | `--type-display-*` | 36→56 / 800 | My name, once per page |
-| Title | `--type-title-*` | 30→44 / 800 | A station page's title |
-| Station | `--type-station-*` | 20→24 / 700 | Station names on the map |
+| Title | `--type-title-*` | 30→44 / 800 | A station page's title; the motto |
+| Station | `--type-station-*` | 20→24 / 700 | Node names on the map (phone: heading size) |
 | Heading | `--type-heading-*` | 20 / 700 | Headings inside a case study |
-| Lead | `--type-lead-*` | 18→22 / 400 | The About bio; a case study's opening line |
-| Body | `--type-body-*` | 17 / 400, 1.6 | Running text |
-| Meta | `--type-meta-*` | 13 / 500 mono | What I owned, the line, dates, the stack |
+| Lead | `--type-lead-*` | 18→22 / 400 | The role line and bio under my name; a case study's opening line |
+| Body | `--type-body-*` | 17 / 400, 1.6 | Running text; the names of life nodes |
+| Meta | `--type-meta-*` | 13 / 500 mono | What I owned, dates, the line key, the stack |
 | Code | `--type-code-*` | 14 / 400 mono | CLI transcripts and code |
-| Pixel | `--type-pixel-*` | 11 / Departure | Flavor text only |
+| Pixel | `--type-pixel-*` | 11 / Departure | Tags and year ticks only |
 
 - Weight carries hierarchy before size.
 - Large type gets negative tracking (the tokens set it); body keeps 0. The tracking floor is −0.04em.
 - Headings use `text-wrap: balance`, paragraphs `text-wrap: pretty`.
 - Use tabular figures (`font-variant-numeric: tabular-nums`) wherever digits line up (dates, versions).
-- No kicker or eyebrow labels above headings. Line names in the key are a legend, not eyebrows.
+- No kicker or eyebrow labels above headings. The line key is a legend, not an eyebrow.
 
 ## 5. Color roles
 
@@ -85,40 +90,63 @@ Each color has one job. A color used outside its role weakens the role. `scripts
 | Role | Dark | Light | Use |
 |---|---|---|---|
 | `bg` | `#120C1F` | `#F7F4FC` | The page. Purple-black and pale lilac, never neutral gray. |
-| `surface` | `#1C1530` | `#FFFFFF` | Code blocks, inventory items, media frames. One level only, never nested. |
+| `surface` | `#1C1530` | `#FFFFFF` | Code blocks, media frames. The map itself sits on `bg`. One level only, never nested. |
 | `text` | `#EDE8F7` | `#18121F` | Names, body, station names |
-| `muted` | `#A9A0C4` | `#46405A` | Meta, roles, legend (≥4.5:1; light aims near 7:1, since thin mono text on the pale page reads fainter than its ratio) |
-| `dim` | `#C4BBDA` | `#3A3350` | Older stations' names: recency is tone (≥4.5:1) |
+| `muted` | `#A9A0C4` | `#46405A` | My own path, roads ahead and `?` doors, meta, roles, year ticks, the key (≥4.5:1; light aims near 7:1, since thin mono text on the pale page reads fainter than its ratio) |
+| `dim` | `#C4BBDA` | `#3A3350` | Names of finished work: recency is tone (≥4.5:1) |
 | `link` | `#A891FF` | `#5536C8` | Links inside running text |
-| `line-dotcms` | `#8B6CF0` | `#5A3CC8` | The dotCMS line and the "zJ" bullet. **Identity, never decoration.** |
+| `line-dotcms` | `#8B6CF0` | `#5A3CC8` | The dotCMS line. **Identity, never decoration.** |
 | `line-independent` | `#F2B544` | `#7A4D00` | Artemis and Che Bondi's line |
 | `line-tooling` | `#4FC9AE` | `#066350` | Scripts and libraries |
-| `station` | `#EDE8F7` | `#18121F` | Station rings and termini |
+| `station` | `#EDE8F7` | `#18121F` | The portrait ring and the Contact boss (the one filled node) |
 | `focus` | text color | text color | The focus ring: 2px, offset 3px |
 | `selection-*` | `#4A3790` / white | `#DCD0FF` / ink | Text selection |
-| `hairline` | `#3A2F57` | `#CFC5E3` | Dividers, borders, the guitar-tab strings (≥1.3:1) |
+| `hairline` | `#3A2F57` | `#CFC5E3` | Dividers and borders (≥1.3:1) |
 
-- **Purple marks what you can follow.** The lines, the bullet and links. Never a background wash, a heading color, or an ornament.
-- **Line colors identify lines.** A station inherits its line's color for its stroke, and on hover the station name's underline takes that color.
-- **Recency is tone.** The newest stations use `text`, and older ones use `dim` at weight 600. Never lower than `dim`.
+- **Purple marks what you can follow.** The dotCMS line and links. Never a background wash, a heading color, or an ornament.
+- **Line colors identify lines.** A node takes its line's color for its ring, icon and road. On hover its name's underline takes that color, and a role that names another node ("cornerstone of Artemis") sets that name in that node's line color.
+- **Grey is mine and what's next.** My own path, side roads, the road ahead and `?` doors use `muted`. A line's color means "walked".
+- **Recency is tone.** Live nodes use `text`, and finished ones use `dim` at weight 600. Never lower than `dim`.
 - **Dark is designed, not inverted.** Light uses deeper purple, amber and teal so the lines keep 3:1 against `bg`.
-- **Themed browser surfaces:** `::selection`, focus rings, link underlines (1px, offset 0.2em, 2px on hover), scrollbars and the caret all use these roles.
+- **Themed browser surfaces:** `::selection`, focus rings, link underlines (1px, offset 0.2em, 2px on hover; the footer's links are `dim`), scrollbars and the caret all use these roles.
 
-## 6. The line
+## 6. The run map
+
+The map is built, not drawn: `features/home/utils/run.ts` computes every position from the stations' real dates, and the stylesheet only places them. Never hand-place a node.
 
 | Token | Value | Use |
 |---|---|---|
-| `--route-stroke-desktop` | 10px | Route stroke at ≥960px |
-| `--route-stroke-phone` | 8px | The left rail on phones |
-| `--route-station-radius` / `-ring` | 14px / 5px | A station: `bg` fill, `station` ring |
-| `--route-terminus-radius` | 22px | About and Contact termini: filled `station` |
-| `--route-sprite-size` | 96px | The sprite: 32px art at 3× (or 8px placeholder at 12×) |
+| `--route-dot` / `-dot-gap` | 0.5rem / 0.25rem | A road's pixel and the gap between pixels |
+| `--route-node` (`-phone`) | 3.25rem (2.5rem) | A work node's tile |
+| `--route-node-ring` | 0.1875rem | The tile's outline |
+| `--route-end` (`-phone`) | 2.25rem (1.5rem) | `?` door and cleared flag |
+| `--route-boss` (`-phone`) | 4.5rem (3rem) | The Contact node |
+| `--route-icon` (`-phone`) | 1.5rem (1rem) | The pixel icon inside a node |
+| `--route-lane-pitch` | 1.75rem | Phone: distance between lanes |
+| `--route-label` | 13rem | Widest label on the tree |
+| `--route-sprite-width` / `-height` | 2.5rem / 3rem | The sprite |
 
-- **One continuous stroke.** The route never breaks between sections. Branches leave and rejoin with a smooth curve, like `git log --graph` drawn by a transit designer.
-- **Every station is a link** with a visible name. There are no hover-only labels and no tooltips.
-- **Desktop:** a horizontal map in the first viewport (≥80em). dotCMS arcs above the trunk; independent work and tooling arc below.
-- **Phone and tablet (<80em, 1280px at default size):** one vertical rail down the left edge, colored by section, with stations stacked to its right.
-- **The sprite** sits on the line. It is decorative, `aria-hidden`, and never covers a station name.
+**Composition**
+
+- **Intro:** the portrait ring, my name, role and bio. Under the bio, a "Now" line links to current work. Under that, the **line key** (see below).
+- **My path** (muted) drops from the portrait through the life nodes (small outlined circles with a muted ring and no icon: where I started, the move, the first library). It is never a color line.
+- **Branches:** each work line leaves my path horizontally at the top of its first node's floor, at its real start, and runs down its own lane. Lanes are ordered newest first, closest to my path, and a lane exists only from its first floor down, so a branch never crosses a lane that's already there.
+- **Floors:** one per node in time order, each tall enough for its label. Work that overlapped runs side by side in different lanes. A road turns at a floor's edge, never through a label.
+- **Side roads** (muted) cross between lanes where the run moves to another line, so the sprite can walk there.
+- **Nodes:** an outlined tile (no fill, `bg` behind it) with a pixel icon per line, drawn on an 8×8 grid in `PixelIcon`. Only the line's icon varies; the ring and icon share the line color. The "in progress" tag (`pixel`, line color) marks live work.
+- **Roads:** pixel dots, trimmed so the first and last pixel sit centered on each node; a pixel always lands exactly on a junction.
+- **Ends:** a live line continues as a muted road ahead to a `?` door (dashed ring). A finished line ends at a "line cleared" flag, one floor below its last node. Every road, doors included, gathers into one road that drops into **Contact**, the boss: the one filled node, bigger than the rest. Contact opens email (`mailto:`) until a Contact page exists.
+- **Years:** a year tick (`pixel`, `muted`) in the left gutter for every year, beside my path. Years never appear inside labels; a node's own dates ("Mar - May 2023", "since Nov 2023") are `meta` in its label.
+- **Line key:** above the map, under the intro, set in `meta`. One entry per line (swatch ring in the line color, name), plus `?` for the next stop and the flag for a cleared line. It is a legend, not navigation.
+- **Footer:** the motto (two lines, the first `muted`), then email, GitHub and LinkedIn as `dim` underlined links. Email first, since it is the way to reach me; the two that leave the site carry the arrow.
+
+**Layouts** (one source of positions, two projections):
+
+- **From 48em: one fluid tree.** Lanes sit at fixed shares of the map's width (the first at 17%, then every 28%), so it fills any container up to `--layout-max-map`. Each label hangs under its node and right of its road, and may be as wide as its lane allows (up to 13rem).
+- **Phones (<48em): a single column.** The lanes pack beside my path at the lane pitch, and every label sits in one shared column to their right, so no label crosses a lane. The key and motto align to that column.
+- **Every named node is a link** with a visible name once its page exists (a node without a page renders as plain text). No hover-only labels, no tooltips. Decorative layers (roads, ticks, sprite, doors, flags) are `aria-hidden`; the ordered list of nodes carries the meaning.
+
+**Hover and focus:** the icon lifts two pixels and floats over a one-bar pixel shadow, like a pickup in a game. The tile never changes size, so the road's pixels around it stay uncovered. The name's underline takes the line color. Focus draws the 2px ring on the tile and on the label.
 
 ## 7. Motion
 
@@ -127,27 +155,42 @@ Motion explains a change; it is never decoration. All durations and easings are 
 | Band | Token | Duration | Use |
 |---|---|---|---|
 | Exit | `--motion-exit` | 150ms | Things leaving |
-| Micro | `--motion-micro` | 180ms | Hover, toggles, the theme switch |
+| Micro | `--motion-micro` | 180ms | Hover, the icon lift, toggles, the theme switch |
 | Enter | `--motion-enter` | 220ms | Things appearing |
-| Page | `--motion-page` | 320ms | A station page sliding in along the line's direction |
-| Sprite | `--motion-sprite-frame` | 120ms/frame | The walk cycle, `steps()` |
+| Page | `--motion-page` | 320ms | Arrival pop; the float cycle is 3×; the sprite's step aside is 1.5× |
+| Sprite | `--motion-sprite-frame` | 120ms/frame | The walk cycle and the hop, `steps()` |
 
-- **One authored moment:** the sprite riding the line. Sections don't each get their own entrance animation.
-- **Easing:** `--motion-ease-out`. No ease-in on UI. Exits are faster than entrances.
-- **Properties:** transform and opacity, plus `clip-path` where it stays smooth. Nothing animates layout.
-- **Reduced motion:** the sprite stops walking and shows the pose of the nearest station, and page transitions become instant.
+**The one authored moment is the sprite walking the road.** Sections don't each get an entrance animation.
+
+- **The walk** (`src/shared/scripts/walk.ts`, constants in `features/home/shared/constants.ts`): as the page scrolls, the sprite walks to the last node above a reading line (55% of the viewport) on its own clock, so a flick of the wheel never makes it jump. Velocity is eased: it speeds up gently and brakes as it nears a node. It rests on the node's center. At the top of the page the reading line starts at the viewport edge and settles over half a viewport of scrolling.
+- **Hover and focus:** when the node it stands on is hovered or focused, it steps aside to the node's left and faces the node, so the icon can float, then steps back.
+- **Arrival:** the node pops (scale 1.2) and sends out one pixel-stepped ring (`steps(4)`); the sprite hops once.
+- **Without JS** the sprite stands on the newest floor.
+- **Easing:** `--motion-ease-out` for UI, `--motion-ease-in-out` for the float and the walk's eased moves. Exits are faster than entrances.
+- **Properties:** transform (including `translate` and `scale`) and opacity. Nothing animates layout.
+- **Reduced motion:** the sprite steps straight to its node with no walking, hop, burst, lift or float. The state still reads: the node it stands on lights up.
 
 ## 8. Surfaces and depth
 
-- **Two levels only:** the page (`bg`) and things on it (`surface`). No cards inside cards and no shadows, since the diagram is flat. Separation comes from hairlines and space.
+- **Two levels only:** the page (`bg`) and things on it (`surface`). No cards inside cards. The map is flat, and its only shadow is the pixel bar under a floating icon (hover and focus). Separation comes from hairlines, space and the `bg` behind each label.
 - **Media** (dotCMS screenshots, the Che Bondi recording) sits in a `md`-radius frame with a hairline border, at its real aspect ratio.
 
 ## 9. Icons and personality
 
-- **One icon set** of authored SVG with a consistent stroke, or none. No emoji or Unicode glyphs as icons, so the theme toggle gets a drawn icon.
+- **Map icons are original 8×8 pixel icons** (`PixelIcon`): one per line, plus the `?` door, the cleared flag and the boss. They are drawn in `currentColor` so they take the line's color. UI controls (theme toggle, the external-link arrow) use Material Symbols Rounded as inlined SVG. No emoji or Unicode glyphs as icons.
 - **No game art, logos or recreated characters.** Personality comes from:
-  - the original sprite;
-  - the guitar-tab divider (six `hairline` strings, a few fret numbers in `pixel`);
-  - inventory flavor text in `pixel`;
-  - Contact as the end of the line.
-- **Restraint:** one personality touch per screen at most, besides the sprite.
+  - the original sprite and the pixel portrait;
+  - the roguelike vocabulary: doors, a cleared flag, a boss, in progress;
+  - Contact as the end of every road.
+- **Restraint:** the map is the personality. Add no other game flourish on the same screen.
+
+## 10. Station pages (next to be designed)
+
+Station pages (`/[lang]/work/[slug]`) inherit the map's world. These are the carried-over rules; nothing here is built yet.
+
+- **Header:** the node's own icon tile in its line color, the name, and the ownership verb in `meta` ("led", "built most of"), so the page opens with what I owned. Title in the `title` role.
+- **Line color** marks the page the way it marks the node: ring, icon and link underlines. No color washes.
+- **Prev/next** ("Previous stop", "Next stop") follows the map's order (time order), not the line's.
+- **Case study body:** `heading`, `body`, `code` and media rules above apply unchanged.
+- **Open:** a mini-map on station pages. The idea from the handoff is a sticky strip showing the whole run with the sprite at the current node, each node a link and a link back to the full map. Whether it fits the run-map tree (and how it reads on phones, and whether the sprite persists across pages) is undecided.
+- **Open:** a "Map" control back to the home map, and whether page transitions use Astro view transitions.
