@@ -1,0 +1,37 @@
+---
+import { EMAIL, LINKS } from '../../constants';
+import { Icon } from '../Icon';
+import styles from './Socials.module.css';
+
+interface Props {
+    /** The list's name for assistive technology ("Elsewhere"). */
+    label: string;
+    /** Placement from the caller: margins, grid column. */
+    class?: string;
+}
+
+const { label, class: className } = Astro.props;
+
+// Email first: it is the way to reach me. The other two leave the site, so they open a new tab with the arrow.
+const socials = [
+    { name: EMAIL, href: `mailto:${EMAIL}`, external: false },
+    { name: 'GitHub', href: LINKS.GITHUB, external: true },
+    { name: 'LinkedIn', href: LINKS.LINKEDIN, external: true }
+] as const;
+---
+
+<ul class:list={['meta', styles.socials, className]} aria-label={label}>
+    {
+        socials.map((social) => (
+            <li>
+                <a
+                    href={social.href}
+                    rel={social.external ? 'me noopener' : 'me'}
+                    target={social.external ? '_blank' : undefined}>
+                    {social.name}
+                    {social.external && <Icon name="arrowOutward" class={styles.out} />}
+                </a>
+            </li>
+        ))
+    }
+</ul>

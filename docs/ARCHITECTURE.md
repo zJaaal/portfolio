@@ -25,14 +25,14 @@ portfolio/
     │   ├── utils/             Pure helpers: locale negotiation, localized paths
     │   ├── constants.ts
     │   └── models.ts
-    ├── content/               Collections: work/{en,es}/*.mdx, plus their media
+    ├── content/               Collections: stations.json (the map), work.json (one case study per station page)
     ├── content.config.ts      Collection schemas (zod)
     ├── i18n/                  en.json, es.json, t() helper, locale config
     ├── styles/                tokens.json (source), tokens.css (generated), global.css, fonts.css
     └── test/                  Test-only helpers; only tests import from here
 ```
 
-The feature names (home, work, …) are decided with the visual direction, not here.
+Features: `home` (the intro and the run map) `work` (station pages) and `lost` (the 404, one per language: the build moves `/[lang]/404/index.html` to `/[lang]/404.html`, since Cloudflare serves the nearest `404.html`). Pieces both use live in `shared/`: the pixel icons, the sprite, the station order (`utils/order.ts`) and date spans (`utils/dates.ts`).
 
 ## Component folder
 

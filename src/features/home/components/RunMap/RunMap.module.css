@@ -524,37 +524,7 @@ a.hit:focus-visible .label {
 }
 
 .socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-6);
-    margin: var(--space-8) 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.socials a {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    color: var(--color-dim);
-    text-decoration: underline;
-    text-decoration-color: var(--color-muted);
-    text-underline-offset: 0.2em;
-}
-
-.socials a:hover {
-    color: var(--color-station);
-    text-decoration-color: currentColor;
-}
-
-.socials a:focus-visible {
-    outline: 0.125rem solid var(--color-focus);
-    outline-offset: 0.1875rem;
-}
-
-.out {
-    width: 1em;
-    height: 1em;
+    margin-top: var(--space-8);
 }
 
 /* ---------- the tree, from tablets up: one fluid layout computed from the map's own width.

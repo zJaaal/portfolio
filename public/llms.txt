@@ -4,20 +4,20 @@
 
 Originally from Venezuela. Left electronics engineering to learn programming in 2020 (C# and .NET). Moved to Buenos Aires, Argentina, in February 2022, where I live now.
 
-The site is in [English](https://zjaaal.dev/en/) and [Spanish](https://zjaaal.dev/es/). The home page is a map of my work in time order; a page for each project is coming.
+The site is in [English](https://zjaaal.dev/en/) and [Spanish](https://zjaaal.dev/es/). The home page is a map of my work in time order; each project has its own page.
 
 ## Work
 
 - dotCMS (open-source content management system), where I have worked since March 2023:
-  - Content Drive (June 2025 to now): leading and building it.
-  - Universal Visual Editor (UVE) and its SDKs (November 2023 to June 2025): part of planning and building it.
-  - New Edit Content (September to November 2023): my team laid its foundations.
-  - Template Builder (May to September 2023): built most of it.
-  - Content Types (March to May 2023): built the redesign of the form builder.
-- [Artemis](https://github.com/zJaaal/artemis) (November 2026 to now): a Node framework for the commands AI agents run, with help, JSON results, meaningful exit codes, confirmation before destructive actions, dry runs and an audit log. On npm as [@zjaaal/artemis](https://www.npmjs.com/package/@zjaaal/artemis).
-- Che Bondi (October 2026 to now): a real-time bus tracker for Buenos Aires. Android app (React Native, Expo, Kotlin) with a Cloudflare Workers backend.
-- dotCMS dev scripts (since November 2023): development-environment scripts I started while building UVE; they became the cornerstone of Artemis and are now built on it.
-- [react-scroll-utilities](https://www.npmjs.com/package/react-scroll-utilities) (October 2022 to January 2023): an npm library of React scroll hooks.
+  - [Content Drive](https://zjaaal.dev/en/work/content-drive/) (June 2025 to now): leading and building it.
+  - [Universal Visual Editor (UVE) and its SDKs](https://zjaaal.dev/en/work/uve/) (November 2023 to June 2025): part of planning and building it.
+  - [New Edit Content](https://zjaaal.dev/en/work/new-edit-content/) (September to November 2023): my team laid its foundations.
+  - [Template Builder](https://zjaaal.dev/en/work/template-builder/) (May to September 2023): built most of it.
+  - [Content Types](https://zjaaal.dev/en/work/content-types/) (March to May 2023): built the redesign of the form builder.
+- [Artemis](https://zjaaal.dev/en/work/artemis/) (November 2026 to now): a Node framework for the commands AI agents run ([source](https://github.com/zJaaal/artemis)), with help, JSON results, meaningful exit codes, confirmation before destructive actions, dry runs and an audit log. On npm as [@zjaaal/artemis](https://www.npmjs.com/package/@zjaaal/artemis).
+- [Che Bondi](https://zjaaal.dev/en/work/che-bondi/) (October 2026 to now): a real-time bus tracker for Buenos Aires. Android app (React Native, Expo, Kotlin) with a Cloudflare Workers backend.
+- [dotCMS dev scripts](https://zjaaal.dev/en/work/dev-scripts/) (since November 2023): development-environment scripts I started while building UVE; they became the cornerstone of Artemis and are now built on it.
+- [react-scroll-utilities](https://zjaaal.dev/en/work/react-scroll-utilities/) (October 2022 to January 2023): an npm library of React scroll hooks ([npm](https://www.npmjs.com/package/react-scroll-utilities)).
 
 ## Links
 

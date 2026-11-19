@@ -1,0 +1,42 @@
+---
+import { PixelIcon } from '../../../../shared/components/PixelIcon';
+import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
+import { cx } from '../../../../shared/utils/cx';
+import styles from './Stops.module.css';
+
+/** A stop to walk to: another station's page, or Contact at the end of the run. */
+export interface Stop {
+    name: string;
+    href: string;
+    icon: PixelIconName;
+    line: string;
+}
+
+interface Props {
+    label: string;
+    previous: (Stop & { caption: string }) | null;
+    next: Stop & { caption: string };
+}
+
+const { label, previous, next } = Astro.props;
+const stops = [previous && { ...previous, side: 'previous' }, { ...next, side: 'next' }].filter(Boolean) as (Stop & {
+    caption: string;
+    side: string;
+})[];
+---
+
+<nav class={styles.stops} aria-label={label}>
+    {
+        stops.map((stop) => (
+            <a class={cx(styles, 'stop', stop.side, `line-${stop.line}`)} href={stop.href}>
+                <span class={styles.tile}>
+                    <PixelIcon name={stop.icon} />
+                </span>
+                <span class={styles.text}>
+                    <span class="meta">{stop.caption}</span>
+                    <span class={styles.name}>{stop.name}</span>
+                </span>
+            </a>
+        ))
+    }
+</nav>

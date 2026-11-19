@@ -1,0 +1,282 @@
+/* ---------- a station's page: one level of the run, in its line's color ---------- */
+/* The node sits where the home's portrait sits; my road runs down from it past every section, and
+   each section heading is a checkpoint on it. One page, one line color. On phones the node and the
+   road take a narrower rail than the home's portrait, so the text keeps its width. */
+.station {
+    --rail: var(--route-boss-phone);
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding: var(--space-8) 0 var(--space-16);
+}
+
+.line-dotcms {
+    --c: var(--color-line-dotcms);
+}
+
+.line-independent {
+    --c: var(--color-line-independent);
+}
+
+.line-tooling {
+    --c: var(--color-line-tooling);
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tile {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: var(--rail);
+    height: var(--rail);
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c);
+    background: var(--color-bg);
+    color: var(--c);
+}
+
+.tile > :global(svg) {
+    width: 45%;
+    height: 45%;
+}
+
+/* The road, in pixel steps, like every road on the map. */
+.road {
+    flex: 1;
+    width: var(--route-dot);
+    background: linear-gradient(to bottom, var(--c) var(--route-dot), transparent 0) 0 0 / var(--route-dot)
+        calc(var(--route-dot) + var(--route-dot-gap)) repeat-y;
+}
+
+.body {
+    min-width: 0;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-muted);
+    text-decoration: none;
+}
+
+.back:hover {
+    color: var(--c);
+}
+
+.back:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.backIcon {
+    width: var(--space-3);
+    height: var(--space-3);
+}
+
+.header {
+    margin-top: var(--space-6);
+}
+
+.name {
+    font-family: var(--type-display-family);
+    font-size: var(--type-display-size);
+    font-weight: var(--type-display-weight);
+    line-height: var(--type-display-leading);
+    letter-spacing: var(--type-display-tracking);
+    text-wrap: balance;
+}
+
+.when {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+}
+
+.tag {
+    font-family: var(--type-pixel-family);
+    font-size: var(--type-pixel-size);
+    letter-spacing: var(--type-pixel-tracking);
+    line-height: var(--type-pixel-leading);
+    text-transform: uppercase;
+    color: var(--c);
+}
+
+.owned {
+    margin-top: var(--space-6);
+    max-width: var(--layout-measure);
+    font-size: var(--type-lead-size);
+    line-height: var(--type-lead-leading);
+    text-wrap: pretty;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--c);
+    text-decoration-color: currentColor;
+}
+
+.links a:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.out {
+    width: 1em;
+    height: 1em;
+}
+
+/* ---------- sections ---------- */
+.section {
+    margin-top: var(--space-16);
+    max-width: var(--layout-measure);
+}
+
+.section p {
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    text-wrap: pretty;
+}
+
+.section p + p {
+    margin-top: var(--space-4);
+}
+
+/* A checkpoint: a ring on my road, level with the heading, in the line's color. */
+.checkpoint {
+    position: relative;
+    margin-bottom: var(--space-4);
+    font-family: var(--type-title-family);
+    font-size: var(--type-title-size);
+    font-weight: var(--type-title-weight);
+    line-height: var(--type-title-leading);
+    letter-spacing: var(--type-title-tracking);
+    text-wrap: balance;
+}
+
+.checkpoint::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * (var(--col-gap) + var(--rail) / 2));
+    top: calc(var(--type-title-leading) * 0.5em);
+    width: var(--space-6);
+    height: var(--space-6);
+    translate: -50% -50%;
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c);
+    background: var(--color-bg);
+}
+
+.decisions {
+    display: grid;
+    gap: var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Each decision opens with one pixel of the road, in the line's color. */
+.decision {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+    font-family: var(--type-heading-family);
+    font-size: var(--type-heading-size);
+    font-weight: var(--type-heading-weight);
+    line-height: var(--type-heading-leading);
+}
+
+.decision::before {
+    content: '';
+    flex: none;
+    width: var(--route-dot);
+    height: var(--route-dot);
+    translate: 0 -0.15em;
+    background: var(--c);
+}
+
+.decisions p {
+    padding-left: calc(var(--route-dot) + var(--space-3));
+    color: var(--color-dim);
+}
+
+/* Media still to come keeps its size, so nothing moves when it arrives. */
+.media {
+    margin: 0;
+}
+
+/* A phone recording stands at a phone's width, not the column's. */
+.portrait .frame {
+    max-width: var(--layout-phone-media);
+}
+
+.frame {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px dashed var(--color-hairline);
+    border-radius: var(--radius-md);
+    color: var(--color-muted);
+}
+
+.frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.caption {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+}
+
+.end {
+    margin-top: var(--space-16);
+    max-width: var(--layout-measure);
+}
+
+.footer {
+    grid-column: 2;
+    max-width: var(--layout-measure);
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-hairline);
+}
+
+@media (max-width: 39.99em) {
+    .checkpoint::before {
+        width: var(--space-4);
+        height: var(--space-4);
+    }
+}
+
+@media (min-width: 40em) {
+    .station {
+        --rail: var(--portrait);
+    }
+
+    .tile {
+        border-width: var(--route-portrait-ring);
+    }
+}

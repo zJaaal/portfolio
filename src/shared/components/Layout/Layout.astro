@@ -79,7 +79,7 @@ const person = personSchema({ url: new URL(localizedPath(locale), site).href, im
         </script>
     </head>
     <body>
-        <Header locale={locale} />
+        <Header locale={locale} path={path} />
         <slot />
     </body>
 </html>

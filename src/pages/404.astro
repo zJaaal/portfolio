@@ -1,11 +1,12 @@
 ---
 import { Layout } from '../shared/components/Layout';
-import styles from './404.module.css';
+import { Lost } from '../features/lost/components/Lost';
+
+/** Outside both languages, the 404 speaks English; the header switch leads to Spanish. */
 ---
 
 <Layout locale="en" title="Off the map · zJaaal">
-    <main class={`wrap ${styles.lost}`}>
-        <h1>Off the map</h1>
-        <p>This stop doesn't exist. <a href="/en/">Back to the line</a> · <a href="/es/">Volver a la línea</a></p>
+    <main class="wrap">
+        <Lost locale="en" />
     </main>
 </Layout>

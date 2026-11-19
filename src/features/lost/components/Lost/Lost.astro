@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
+import { PixelIcon } from '../../../../shared/components/PixelIcon';
+import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
+import { Socials } from '../../../../shared/components/Socials';
+import { Sprite } from '../../../../shared/components/Sprite';
+import { cx } from '../../../../shared/utils/cx';
+import { orderStations } from '../../../../shared/utils/order';
+import styles from './Lost.module.css';
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// The stops that do exist: every station with its own page, in the map's order.
+const built = new Set((await getCollection('work')).map((entry) => entry.id));
+const stops = orderStations(
+    (await getCollection('stations')).filter((entry) => built.has(entry.id)).map((entry) => ({ id: entry.id, ...entry.data }))
+);
+---
+
+<div class={styles.lost}>
+    <!-- My road runs into a door that leads nowhere, and I stand in front of it. -->
+    <div class={styles.rail} aria-hidden="true">
+        <span class={styles.road}></span>
+        <span class={styles.sprite}><Sprite /></span>
+        <span class={styles.door}><PixelIcon name="door" /></span>
+    </div>
+
+    <div class={styles.body}>
+        <h1 class={styles.title}>{t('lost.title')}</h1>
+        <p class={styles.text}>{t('lost.body')}</p>
+
+        <a class={styles.back} href={localizedPath(locale)}>
+            <span class={styles.backIcon} aria-hidden="true"><PixelIcon name="back" /></span>
+            {t('work.back')}
+        </a>
+
+        {
+            stops.length > 0 && (
+                <nav class={styles.open} aria-labelledby="lost-open">
+                    <h2 class={`meta ${styles.label}`} id="lost-open">
+                        {t('lost.open')}
+                    </h2>
+                    <ul class={styles.stops}>
+                        {stops.map((stop) => (
+                            <li>
+                                <a class={cx(styles, 'stop', `line-${stop.line}`)} href={localizedPath(locale, `/work/${stop.id}/`)}>
+                                    <span class={styles.tile}>
+                                        <PixelIcon name={stop.line as PixelIconName} />
+                                    </span>
+                                    <span class={styles.name}>{stop.name[locale]}</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            )
+        }
+
+        <Socials label={t('footer.socials')} class={styles.socials} />
+    </div>
+</div>

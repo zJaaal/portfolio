@@ -1,0 +1,143 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
+import { Icon } from '../../../../shared/components/Icon';
+import { Socials } from '../../../../shared/components/Socials';
+import { PixelIcon } from '../../../../shared/components/PixelIcon';
+import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
+import { EMAIL } from '../../../../shared/constants';
+import { cx } from '../../../../shared/utils/cx';
+import { formatSpan } from '../../../../shared/utils/dates';
+import { neighbors } from '../../utils/stops';
+import { Stops } from '../Stops';
+import { Transcript } from '../Transcript';
+import styles from './Station.module.css';
+
+interface Props {
+    locale: Locale;
+    id: string;
+}
+
+const { locale, id } = Astro.props;
+const t = useTranslations(locale);
+const station = (await getEntry('stations', id))!.data;
+const work = (await getEntry('work', id))!.data;
+const span = formatSpan(station, locale, { now: t('map.now'), since: t('map.since') });
+
+// Previous and next walk the map's order, through the stations that already have a page.
+const built = new Set((await getCollection('work')).map((entry) => entry.id));
+const withPages = (await getCollection('stations'))
+    .filter((entry) => built.has(entry.id))
+    .map((entry) => ({ id: entry.id, ...entry.data }));
+const { previous, next } = neighbors(withPages, id);
+const stop = (other: (typeof withPages)[number]) => ({
+    name: other.name[locale],
+    href: localizedPath(locale, `/work/${other.id}/`),
+    icon: other.line as PixelIconName,
+    line: other.line
+});
+// The run ends at Contact: the last station's next stop is an email.
+const contact = { name: t('map.contact'), href: `mailto:${EMAIL}`, icon: 'boss' as const, line: 'contact' };
+
+const sections = [
+    { key: 'problem', title: t('work.problem') },
+    { key: 'decisions', title: t('work.decisions') },
+    { key: 'proof', title: t('work.proof') },
+    { key: 'hard', title: t('work.hard') },
+    { key: 'now', title: t('work.now') }
+] as const;
+---
+
+<article class={cx(styles, 'station', `line-${station.line}`)}>
+    <!-- The node itself, enlarged, with my road running down the page from it. -->
+    <div class={styles.start} aria-hidden="true">
+        <span class={styles.tile}><PixelIcon name={station.line as PixelIconName} /></span>
+        <span class={styles.road}></span>
+    </div>
+
+    <div class={styles.body}>
+        <a class={cx(styles, 'back')} href={localizedPath(locale, `/#${id}`)}>
+            <span class={styles.backIcon} aria-hidden="true"><PixelIcon name="back" /></span>
+            <span class="meta">{t('work.back')}</span>
+        </a>
+
+        <header class={styles.header}>
+            <h1 class={styles.name}>{station.name[locale]}</h1>
+            <p class={`meta ${styles.when}`}>
+                <span>{span}</span>
+                {station.ongoing && <span class={styles.tag}>{t('map.inProgress')}</span>}
+            </p>
+            <p class={styles.owned}>{work.owned[locale]}</p>
+            {
+                work.links.length > 0 && (
+                    <ul class={`meta ${styles.links}`} aria-label={t('work.links')}>
+                        {work.links.map((link) => (
+                            <li>
+                                <a href={link.href} rel="noopener" target="_blank">
+                                    {link.label}
+                                    <Icon name="arrowOutward" class={styles.out} />
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                )
+            }
+        </header>
+
+        {
+            sections.map((section) => (
+                <section class={styles.section} aria-labelledby={`${section.key}-title`}>
+                    <h2 class={styles.checkpoint} id={`${section.key}-title`}>
+                        {section.title}
+                    </h2>
+
+                    {section.key === 'problem' && work.problem.map((paragraph) => <p>{paragraph[locale]}</p>)}
+
+                    {section.key === 'decisions' && (
+                        <ul class={styles.decisions}>
+                            {work.decisions.map((decision) => (
+                                <li>
+                                    <h3 class={styles.decision}>{decision.title[locale]}</h3>
+                                    <p>{decision.why[locale]}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
+                    {section.key === 'proof' &&
+                        (work.proof.kind === 'transcript' ? (
+                            <Transcript lines={work.proof.lines} caption={work.proof.caption[locale]} label={t('work.transcript')} />
+                        ) : (
+                            <figure class={cx(styles, 'media', work.proof.ratio < 1 && 'portrait')}>
+                                <div class={styles.frame} style={`aspect-ratio: ${work.proof.ratio}`}>
+                                    {work.proof.src ? (
+                                        <img src={work.proof.src} alt={work.proof.alt[locale]} loading="lazy" decoding="async" />
+                                    ) : (
+                                        <span class="meta">{t('work.mediaPending')}</span>
+                                    )}
+                                </div>
+                                <figcaption class={`meta ${styles.caption}`}>{work.proof.caption[locale]}</figcaption>
+                            </figure>
+                        ))}
+
+                    {section.key === 'hard' && work.hard.map((paragraph) => <p>{paragraph[locale]}</p>)}
+
+                    {section.key === 'now' && <p>{work.now[locale]}</p>}
+                </section>
+            ))
+        }
+
+        <div class={styles.end}>
+            <Stops
+                label={t('work.stops')}
+                previous={previous && { ...stop(previous), caption: t('work.prev') }}
+                next={{ ...(next ? stop(next) : contact), caption: t('work.next') }}
+            />
+        </div>
+    </div>
+
+    <!-- After the road ends: how to reach me, for anyone who landed here first. -->
+    <footer class={styles.footer}>
+        <Socials label={t('footer.socials')} />
+    </footer>
+</article>

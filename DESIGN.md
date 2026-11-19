@@ -184,13 +184,14 @@ Motion explains a change; it is never decoration. All durations and easings are 
   - Contact as the end of every road.
 - **Restraint:** the map is the personality. Add no other game flourish on the same screen.
 
-## 10. Station pages (next to be designed)
+## 10. Station pages
 
-Station pages (`/[lang]/work/[slug]`) inherit the map's world. These are the carried-over rules; nothing here is built yet.
+Station pages (`/[lang]/work/[slug]`) are one level of the run. Any station with an entry in `src/content/work.json` gets one, in both languages; the copy comes from the owner's interview.
 
-- **Header:** the node's own icon tile in its line color, the name, and the ownership verb in `meta` ("led", "built most of"), so the page opens with what I owned. Title in the `title` role.
-- **Line color** marks the page the way it marks the node: ring, icon and link underlines. No color washes.
-- **Prev/next** ("Previous stop", "Next stop") follows the map's order (time order), not the line's.
-- **Case study body:** `heading`, `body`, `code` and media rules above apply unchanged.
-- **Open:** a mini-map on station pages. The idea from the handoff is a sticky strip showing the whole run with the sprite at the current node, each node a link and a link back to the full map. Whether it fits the run-map tree (and how it reads on phones, and whether the sprite persists across pages) is undecided.
-- **Open:** a "Map" control back to the home map, and whether page transitions use Astro view transitions.
+- **One page, one line color.** The station's line color marks the node tile, the road, the checkpoints, the decision markers, the links, the "in progress" tag and the terminal prompt. Ground, body text and headings stay neutral; no color washes.
+- **The node and the road:** the node, enlarged, sits where the home's portrait sits, and the road runs down the page from it in pixel steps. Each section heading is a checkpoint ring on it. On phones the rail narrows to the boss size so the text keeps its width.
+- **Header:** "Back to the map" (returns to this node on the home map, centered), the name in `display`, the dates and tag in `meta`, then what I owned as the `lead`, then the project's links.
+- **Sections, in order:** Why it exists, Key decisions (each opens with one road pixel), See it work (a recorded terminal session or a media slot that keeps its size before the media arrives), The hard part (what failed or changed), Where it is now.
+- **The end of the level:** previous and next stop in the map's order, through the stations that have a page, as the map's own tiles. After the last one comes Contact (email).
+- **Footer:** after the road ends, behind a hairline, the same contact row that closes the home (email, GitHub, LinkedIn; `shared/components/Socials`). No motto: it belongs to the end of the run on the home.
+- **Open:** a sticky mini-map, and page transitions.

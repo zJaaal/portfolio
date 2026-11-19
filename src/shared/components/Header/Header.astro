@@ -5,9 +5,11 @@ import styles from './Header.module.css';
 
 interface Props {
     locale: Locale;
+    /** The page's path after the locale, so the language switch opens the same page in the other one. */
+    path?: string;
 }
 
-const { locale } = Astro.props;
+const { locale, path = '/' } = Astro.props;
 const t = useTranslations(locale);
 ---
 
@@ -16,14 +18,14 @@ const t = useTranslations(locale);
     <div class={styles.controls}>
         <nav class={styles.lang} aria-label={t('header.language')} data-current={locale}>
             <a
-                href={localizedPath('en')}
+                href={localizedPath('en', path)}
                 hreflang="en"
                 lang="en"
                 data-locale-link
                 aria-current={locale === 'en' ? 'page' : undefined}>EN</a
             >
             <a
-                href={localizedPath('es')}
+                href={localizedPath('es', path)}
                 hreflang="es"
                 lang="es"
                 data-locale-link

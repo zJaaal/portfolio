@@ -37,15 +37,14 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
    - **Open:** Station links 404 until step 3. The Playwright overlap check lives in a scratch script; it belongs in the step 5 suite.
 
 2. **About:** the origin story, how I work (three or four behavioral sentences, no soft-skills list), and off the clock (guitar, metalcore, Zelda, Terraria, roguelikes).
-3. **Station pages:** Content Drive, UVE + SDKs, New Edit Content, Content Types fields, Template Builder, Artemis, Che Bondi, tooling. Each has "what I owned", the problem, key decisions, media and links.
+3. **Station pages:** the template is built, with nine pages from the owner's interviews (copy in review): react-scroll-utilities, Content Types, Template Builder, New Edit Content, dotCMS dev scripts, UVE + SDKs, Content Drive, Che Bondi and Artemis. Their media slots wait for screenshots and recordings. Every station on the map now has a page. **Next session:** give the station pages more personality (the owner's call: the template is solid but plain), then add the media. A new station gets one by adding its entry to `src/content/work.json`: what I owned, why it exists, key decisions, the proof (a terminal session or media), the hard part and where it is now.
 4. **Contact:** `me@zjaaal.dev`, GitHub, LinkedIn (`https://www.linkedin.com/in/zjaaal/`, already in the JSON-LD `sameAs`).
 5. **Hardening:**
    - an edge Worker for `/` locale negotiation;
    - Vitest (locale parity, utils);
    - Playwright and axe on the built pages;
    - a page-weight budget;
-   - ESLint and Prettier as in CODE_STANDARDS;
-   - a Spanish 404.
+   - ESLint and Prettier as in CODE_STANDARDS.
 
 ## Waiting on the owner
 

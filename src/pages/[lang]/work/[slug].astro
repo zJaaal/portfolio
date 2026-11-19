@@ -1,0 +1,24 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { LOCALES, type Locale } from '../../../i18n';
+import { Layout } from '../../../shared/components/Layout';
+import { Station } from '../../../features/work/components/Station';
+
+/** One page per station that has its case study in `content/work.json`, in both languages. */
+export async function getStaticPaths() {
+    const work = await getCollection('work');
+
+    return LOCALES.flatMap((lang) => work.map((entry) => ({ params: { lang, slug: entry.id } })));
+}
+
+const locale = Astro.params.lang as Locale;
+const slug = Astro.params.slug!;
+const station = (await getEntry('stations', slug))!.data;
+const work = (await getEntry('work', slug))!.data;
+---
+
+<Layout locale={locale} path={`/work/${slug}/`} title={`${station.name[locale]} · zJaaal`} description={work.description[locale]}>
+    <main class="wrap">
+        <Station locale={locale} id={slug} />
+    </main>
+</Layout>

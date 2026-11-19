@@ -1,0 +1,19 @@
+---
+import { LOCALES, useTranslations, type Locale } from '../../i18n';
+import { Layout } from '../../shared/components/Layout';
+import { Lost } from '../../features/lost/components/Lost';
+
+/** A 404 per language; the build moves each to `/[lang]/404.html` (astro.config.mjs). */
+export function getStaticPaths() {
+    return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const t = useTranslations(locale);
+---
+
+<Layout locale={locale} title={`${t('lost.meta')} · zJaaal`}>
+    <main class="wrap">
+        <Lost locale={locale} />
+    </main>
+</Layout>

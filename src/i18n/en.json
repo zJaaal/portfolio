@@ -23,5 +23,21 @@
     "map.lineCleared": "line cleared",
     "map.now": "now",
     "map.since": "since",
-    "meta.ogAlt": "Jalinson Diaz's pixel portrait and a road through his lines of work"
+    "meta.ogAlt": "Jalinson Diaz's pixel portrait and a road through his lines of work",
+    "work.back": "Back to the map",
+    "work.links": "Links",
+    "work.problem": "Why it exists",
+    "work.decisions": "Key decisions",
+    "work.proof": "See it work",
+    "work.transcript": "Terminal session",
+    "work.hard": "The hard part",
+    "work.now": "Where it is now",
+    "work.stops": "Stops",
+    "work.prev": "Previous stop",
+    "work.next": "Next stop",
+    "work.mediaPending": "Coming soon",
+    "lost.meta": "Off the map",
+    "lost.title": "Off the map",
+    "lost.body": "This stop isn't built yet, or it never existed. The road ends here, but the map is one step back.",
+    "lost.open": "Stops you can visit"
 }

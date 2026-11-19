@@ -1,0 +1,52 @@
+/* A recorded terminal session: the station's line color marks the prompt, the rest is the terminal's. */
+.transcript {
+    margin: 0;
+    min-width: 0;
+}
+
+.screen {
+    margin: 0;
+    padding: var(--space-4) var(--space-6);
+    overflow-x: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    font-family: var(--type-code-family);
+    font-size: var(--type-code-size);
+    line-height: var(--type-code-leading);
+    /* Long JSON wraps inside the frame, so the whole result reads without scrolling sideways. */
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 4;
+}
+
+.screen:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.input {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.prompt {
+    color: var(--c, var(--color-muted));
+    user-select: none;
+}
+
+.output {
+    color: var(--color-muted);
+}
+
+.caption {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+    max-width: var(--layout-measure);
+}
+
+@media (max-width: 39.99em) {
+    .screen {
+        padding: var(--space-3) var(--space-4);
+    }
+}
