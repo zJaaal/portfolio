@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
 import { Icon } from '../../../../shared/components/Icon';
+import { Socials } from '../../../../shared/components/Socials';
 import { PixelIcon } from '../../../../shared/components/PixelIcon';
 import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
 import { EMAIL } from '../../../../shared/constants';
@@ -134,4 +135,9 @@ const sections = [
             />
         </div>
     </div>
+
+    <!-- After the road ends: how to reach me, for anyone who landed here first. -->
+    <footer class={styles.footer}>
+        <Socials label={t('footer.socials')} />
+    </footer>
 </article>

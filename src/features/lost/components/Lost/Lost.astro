@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
 import { PixelIcon } from '../../../../shared/components/PixelIcon';
 import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
+import { Socials } from '../../../../shared/components/Socials';
 import { Sprite } from '../../../../shared/components/Sprite';
 import { cx } from '../../../../shared/utils/cx';
 import { orderStations } from '../../../../shared/utils/order';
@@ -60,5 +61,7 @@ const stops = orderStations(
                 </nav>
             )
         }
+
+        <Socials label={t('footer.socials')} class={styles.socials} />
     </div>
 </div>

@@ -8,8 +8,8 @@ import { formatSpan } from '../../../../shared/utils/dates';
 import { splitMentions } from '../../utils/mentions';
 import { buildRun } from '../../utils/run';
 import { toSegments } from '../../utils/segments';
-import { Icon } from '../../../../shared/components/Icon';
-import { EMAIL, LINKS } from '../../../../shared/constants';
+import { EMAIL } from '../../../../shared/constants';
+import { Socials } from '../../../../shared/components/Socials';
 import { cx } from '../../../../shared/utils/cx';
 import { PixelIcon } from '../../../../shared/components/PixelIcon';
 import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
@@ -98,12 +98,6 @@ const roleParts = (id: string, role: string) =>
         role,
         named.filter((station) => station.id !== id)
     );
-// Email first: it is the way to reach me. The other two leave the site, so they carry the arrow.
-const socials = [
-    { name: EMAIL, href: `mailto:${EMAIL}`, external: false },
-    { name: 'GitHub', href: LINKS.GITHUB, external: true },
-    { name: 'LinkedIn', href: LINKS.LINKEDIN, external: true }
-] as const;
 ---
 
 <div class={styles.map} style={`--lanes: ${run.laneCount}`}>
@@ -203,20 +197,6 @@ const socials = [
         <span>{t('motto.line2')}</span>
     </p>
 
-    <ul class={`meta ${styles.socials}`} aria-label={t('footer.socials')}>
-        {
-            socials.map((social) => (
-                <li>
-                    <a
-                        href={social.href}
-                        rel={social.external ? 'me noopener' : 'me'}
-                        target={social.external ? '_blank' : undefined}>
-                        {social.name}
-                        {social.external && <Icon name="arrowOutward" class={styles.out} />}
-                    </a>
-                </li>
-            ))
-        }
-    </ul>
+    <Socials label={t('footer.socials')} class={styles.socials} />
 </div>
 </div>

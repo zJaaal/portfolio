@@ -193,4 +193,5 @@ Station pages (`/[lang]/work/[slug]`) are one level of the run. Any station with
 - **Header:** "Back to the map" (returns to this node on the home map, centered), the name in `display`, the dates and tag in `meta`, then what I owned as the `lead`, then the project's links.
 - **Sections, in order:** Why it exists, Key decisions (each opens with one road pixel), See it work (a recorded terminal session or a media slot that keeps its size before the media arrives), The hard part (what failed or changed), Where it is now.
 - **The end of the level:** previous and next stop in the map's order, through the stations that have a page, as the map's own tiles. After the last one comes Contact (email).
+- **Footer:** after the road ends, behind a hairline, the same contact row that closes the home (email, GitHub, LinkedIn; `shared/components/Socials`). No motto: it belongs to the end of the run on the home.
 - **Open:** a sticky mini-map, and page transitions.

@@ -180,6 +180,10 @@
     }
 }
 
+.socials {
+    margin-top: var(--space-16);
+}
+
 @media (max-width: 39.99em) {
     .stops {
         flex-direction: column;
