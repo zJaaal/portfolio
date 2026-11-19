@@ -11,7 +11,7 @@ Scope: the home page in both languages (`/en`, `/es`), plus the station pages it
 
 Audience and job: a general audience (PRODUCT.md). A visitor skims in under a minute, sees what Jalinson built and owned, then opens one or two stations.
 
-Unresolved: the pixel sprite's final art and the pixel portrait (the sprite is a code placeholder, the portrait is the GitHub avatar pixelated at build time); final copy per node (some roles are `[...]` placeholders); dotCMS screenshots and the Che Bondi recording; station, About and Contact pages (station links render as plain text until they exist).
+Unresolved: the pixel sprite's final art and the pixel portrait (the sprite is a code placeholder, the portrait is the GitHub avatar pixelated at build time); final copy per node (owner review); dotCMS screenshots and the Che Bondi recording; station and About pages (station links 404 until they exist; life nodes without a page render as plain text).
 
 ## Direction contract
 
