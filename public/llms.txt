@@ -4,7 +4,7 @@
 
 Originally from Venezuela. Left electronics engineering to learn programming in 2020 (C# and .NET). Moved to Buenos Aires, Argentina, in February 2022, where I live now.
 
-The site is in English (https://zjaaal.dev/en/) and Spanish (https://zjaaal.dev/es/). The home page is a map of my work in time order; a page for each project is coming.
+The site is in [English](https://zjaaal.dev/en/) and [Spanish](https://zjaaal.dev/es/). The home page is a map of my work in time order; a page for each project is coming.
 
 ## Work
 
@@ -14,12 +14,13 @@ The site is in English (https://zjaaal.dev/en/) and Spanish (https://zjaaal.dev/
   - New Edit Content (September to November 2023): my team laid its foundations.
   - Template Builder (May to September 2023): built most of it.
   - Content Types (March to May 2023): built the redesign of the form builder.
-- Artemis (November 2026 to now): a Node framework for the commands AI agents run, with help, JSON results, meaningful exit codes, confirmation before destructive actions, dry runs and an audit log. https://github.com/zJaaal/artemis (npm: @zjaaal/artemis)
+- [Artemis](https://github.com/zJaaal/artemis) (November 2026 to now): a Node framework for the commands AI agents run, with help, JSON results, meaningful exit codes, confirmation before destructive actions, dry runs and an audit log. On npm as [@zjaaal/artemis](https://www.npmjs.com/package/@zjaaal/artemis).
 - Che Bondi (October 2026 to now): a real-time bus tracker for Buenos Aires. Android app (React Native, Expo, Kotlin) with a Cloudflare Workers backend.
 - dotCMS dev scripts (since November 2023): development-environment scripts I started while building UVE; they became the cornerstone of Artemis and are now built on it.
-- react-scroll-utilities (October 2022 to January 2023): an npm library of React scroll hooks. https://www.npmjs.com/package/react-scroll-utilities
+- [react-scroll-utilities](https://www.npmjs.com/package/react-scroll-utilities) (October 2022 to January 2023): an npm library of React scroll hooks.
 
 ## Links
 
-- GitHub: https://github.com/zJaaal
-- LinkedIn: https://www.linkedin.com/in/zjaaal/
+- [Email](mailto:me@zjaaal.dev): me@zjaaal.dev
+- [GitHub](https://github.com/zJaaal): my public repositories.
+- [LinkedIn](https://www.linkedin.com/in/zjaaal/): my work history.

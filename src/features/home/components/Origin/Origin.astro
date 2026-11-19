@@ -1,5 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import { useTranslations, type Locale } from '../../../../i18n';
+import { cx } from '../../../../shared/utils/cx';
+import { splitMentions } from '../../utils/mentions';
+import { Key } from '../Key';
 import styles from './Origin.module.css';
 
 interface Props {
@@ -8,6 +12,12 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const entries = await getCollection('stations');
+// "Now" names the stations in progress; each name links to its node on the map, in its line's color.
+const now = splitMentions(
+    t('intro.now'),
+    entries.filter(({ data }) => data.ongoing).map(({ id, data }) => ({ id, name: data.name[locale], line: data.line }))
+);
 ---
 
 <div class={styles.origin}>
@@ -22,5 +32,24 @@ const t = useTranslations(locale);
         <h1 class={styles.name}>Jalinson Diaz</h1>
         <p class={styles.role}>{t('intro.role')}</p>
         <p class={styles.bio}>{t('intro.bio')}</p>
+        <p class={styles.now}>
+            {
+                now.map((part) =>
+                    part.id ? (
+                        <a class={cx(styles, 'mention', `line-${part.line}`)} href={`#${part.id}`}>{part.text}</a>
+                    ) : (
+                        part.text
+                    )
+                )
+            }
+        </p>
+    </div>
+
+    <div class={styles.key}>
+        <Key locale={locale} />
     </div>
 </div>
+
+<script>
+    import '../../../../shared/scripts/jump';
+</script>

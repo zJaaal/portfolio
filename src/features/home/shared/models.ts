@@ -26,7 +26,7 @@ export interface LabelText {
     role: string;
     /** Whether it carries a one-line tag (in progress). */
     tag: boolean;
-    /** When it ran, as shown on the map ("Mar – May 2023"); start nodes show their year in the role. */
+    /** When it ran, as shown on the map ("Mar – May 2023");  */
     dates?: string;
 }
 
@@ -74,9 +74,14 @@ export interface RunNode {
     floorBottom: Record<Layout, number>;
     /** The station, for start and stop nodes. */
     station?: RunStation;
-    year?: number;
-    /** Whether this node starts a new year on the map (desktop shows the year in the gutter). */
-    firstOfYear: boolean;
+    /** Whether the node sits in the outermost lane: its label may use the room to the map's edge. */
+    edge: boolean;
+}
+
+/** A year in the gutter: at its first station, or between the ticks around it when none started. */
+export interface YearTick {
+    year: number;
+    at: Point;
 }
 
 export const PATH_STYLE = {
@@ -109,6 +114,8 @@ export interface RunMap {
     sprite: Point;
     /** The road the sprite walks as the page scrolls: every node in time order, then Contact. */
     walk: WalkStep[];
+    /** One tick per year, first to last. */
+    years: YearTick[];
     /** The map's height in rem, per layout. */
     height: Record<Layout, number>;
     laneCount: number;
