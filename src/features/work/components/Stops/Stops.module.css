@@ -1,0 +1,90 @@
+/* The end of the level: the stop behind and the stop ahead, as the map's own tiles. */
+.stops {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-12);
+}
+
+.stop {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.next {
+    margin-left: auto;
+}
+
+.line-dotcms {
+    --c: var(--color-line-dotcms);
+}
+
+.line-independent {
+    --c: var(--color-line-independent);
+}
+
+.line-tooling {
+    --c: var(--color-line-tooling);
+}
+
+.line-contact {
+    --c: var(--color-station);
+}
+
+.tile {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: var(--route-node);
+    height: var(--route-node);
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c);
+    background: var(--color-bg);
+    color: var(--c);
+}
+
+.tile > :global(svg) {
+    width: var(--route-icon);
+    height: var(--route-icon);
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.text :global(.meta) {
+    color: var(--color-muted);
+}
+
+.name {
+    font-family: var(--type-station-family);
+    font-size: var(--type-station-size);
+    font-weight: var(--type-station-weight);
+    line-height: var(--type-station-leading);
+    letter-spacing: var(--type-station-tracking);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 0.0625rem;
+}
+
+.stop:hover .name {
+    text-decoration-color: var(--c);
+}
+
+.stop:focus-visible {
+    outline: none;
+}
+
+.stop:focus-visible .tile {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.stop:focus-visible .name {
+    text-decoration-color: currentColor;
+}

@@ -26,4 +26,40 @@ const stations = defineCollection({
     })
 });
 
-export const collections = { stations };
+/** A line of a recorded terminal session: what was typed, or what came back. */
+const transcriptLine = z.object({ input: z.boolean().default(false), text: z.string() });
+
+/**
+ * A station's own page (`/[lang]/work/[id]/`): a short case study. The id matches its station in
+ * `stations.json`, which already holds the name, line and dates. Copy comes from the owner's
+ * interview; every field is in both languages.
+ */
+const work = defineCollection({
+    loader: file('src/content/work.json'),
+    schema: z.object({
+        /** What I owned, in one or two sentences: the page's lead. */
+        owned: localized,
+        description: localized,
+        links: z.array(z.object({ label: z.string(), href: z.string().url() })).default([]),
+        /** Why it exists, one paragraph per entry. */
+        problem: z.array(localized).min(1),
+        decisions: z.array(z.object({ title: localized, why: localized })).min(1),
+        /** The main artifact: a recorded session, or media still to come (a sized empty slot). */
+        proof: z.discriminatedUnion('kind', [
+            z.object({ kind: z.literal('transcript'), lines: z.array(transcriptLine).min(1), caption: localized }),
+            z.object({
+                kind: z.literal('media'),
+                src: z.string().optional(),
+                alt: localized,
+                caption: localized,
+                /** Width over height, so the slot keeps its size before the media loads. */
+                ratio: z.number().positive()
+            })
+        ]),
+        /** What was hard, or failed first, and what changed because of it. */
+        hard: z.array(localized).min(1),
+        now: localized
+    })
+});
+
+export const collections = { stations, work };

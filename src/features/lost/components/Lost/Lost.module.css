@@ -1,0 +1,187 @@
+/* ---------- off the map: the road runs into a door that leads nowhere ---------- */
+.lost {
+    --rail: var(--route-boss-phone);
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding: var(--space-12) 0 var(--space-24);
+}
+
+.rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* My road, in pixel steps, coming from the map above. */
+.road {
+    width: var(--route-dot);
+    height: var(--space-24);
+    background: linear-gradient(to bottom, var(--color-muted) var(--route-dot), transparent 0) 0 0 / var(--route-dot)
+        calc(var(--route-dot) + var(--route-dot-gap)) repeat-y;
+}
+
+.sprite {
+    width: var(--route-sprite-width);
+    height: var(--route-sprite-height);
+    margin-top: calc(-1 * var(--route-sprite-height) + var(--route-dot));
+}
+
+.sprite :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* The door: dashed, like every door on the map to a stop not built yet. */
+.door {
+    display: grid;
+    place-items: center;
+    width: var(--rail);
+    height: var(--rail);
+    margin-top: var(--space-2);
+    border-radius: 50%;
+    border: var(--route-node-ring) dashed var(--color-muted);
+    color: var(--color-muted);
+}
+
+.door > :global(svg) {
+    width: 45%;
+    height: 45%;
+}
+
+.body {
+    min-width: 0;
+    padding-top: var(--space-12);
+}
+
+.title {
+    font-family: var(--type-display-family);
+    font-size: var(--type-display-size);
+    font-weight: var(--type-display-weight);
+    line-height: var(--type-display-leading);
+    letter-spacing: var(--type-display-tracking);
+    text-wrap: balance;
+}
+
+.text {
+    margin-top: var(--space-4);
+    max-width: var(--layout-measure);
+    font-size: var(--type-lead-size);
+    line-height: var(--type-lead-leading);
+    color: var(--color-dim);
+    text-wrap: pretty;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-8);
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration-color: var(--color-muted);
+}
+
+.back:hover {
+    text-decoration-color: currentColor;
+}
+
+.back:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.backIcon {
+    width: var(--space-3);
+    height: var(--space-3);
+}
+
+.open {
+    margin-top: var(--space-16);
+}
+
+.label {
+    color: var(--color-muted);
+}
+
+.stops {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-8);
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.stop {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.line-dotcms {
+    --c: var(--color-line-dotcms);
+}
+
+.line-independent {
+    --c: var(--color-line-independent);
+}
+
+.line-tooling {
+    --c: var(--color-line-tooling);
+}
+
+.tile {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: var(--route-node-phone);
+    height: var(--route-node-phone);
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c);
+    color: var(--c);
+}
+
+.tile > :global(svg) {
+    width: var(--route-icon-phone);
+    height: var(--route-icon-phone);
+}
+
+.name {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
+}
+
+.stop:hover .name {
+    text-decoration-color: var(--c);
+}
+
+.stop:focus-visible {
+    outline: none;
+}
+
+.stop:focus-visible .tile {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+@media (min-width: 40em) {
+    .lost {
+        --rail: var(--portrait);
+    }
+
+    .door {
+        border-width: var(--route-portrait-ring);
+    }
+}
+
+@media (max-width: 39.99em) {
+    .stops {
+        flex-direction: column;
+    }
+}

@@ -1,3 +1,4 @@
+import { orderStations } from '../../../shared/utils/order';
 import {
     BOSS_REM,
     FLOOR_CLEARANCE_REM,
@@ -110,29 +111,6 @@ interface Floors {
     ends: RunNode[];
     boss: RunNode;
     height: Record<Layout, number>;
-}
-
-/**
- * Stations in time order. Stations that start the same month are ordered so the one on the line
- * the next station continues comes last: the run then flows into the next stop instead of doubling
- * back across the map. Pure.
- */
-export function orderStations(stations: readonly RunStation[]): RunStation[] {
-    const sorted = [...stations].sort((a, b) => a.start.localeCompare(b.start));
-
-    return sorted.map((station, i) => {
-        const group = sorted.filter((other) => other.start === station.start);
-
-        if (group.length < 2) {
-            return station;
-        }
-
-        const next = sorted.find((other) => other.start > station.start);
-        const continues = (s: RunStation): number => (next && s.line === next.line ? 1 : 0);
-        const ordered = [...group].sort((a, b) => continues(a) - continues(b));
-
-        return ordered[i - sorted.indexOf(group[0])];
-    });
 }
 
 /**

@@ -1,0 +1,23 @@
+---
+import styles from './Transcript.module.css';
+
+interface Props {
+    lines: readonly { input: boolean; text: string }[];
+    caption: string;
+    /** The scrollable region's name, for keyboard and screen reader users. */
+    label: string;
+}
+
+const { lines, caption, label } = Astro.props;
+// What was typed ends its line; what came back is followed by a blank line, except at the end.
+const parts = lines.map((line, i) => ({
+    input: line.input,
+    text: line.input ? `${line.text}\n` : `${line.text}${i < lines.length - 1 ? '\n\n' : ''}`
+}));
+---
+
+<figure class={styles.transcript}>
+    <!-- A real session, copied as it ran. Long lines wrap inside the frame, never widen the page. -->
+    <pre class={styles.screen} tabindex="0" aria-label={label}><code>{parts.map((part) => <span class={part.input ? styles.input : styles.output}>{part.input && <span class={styles.prompt} aria-hidden="true">$ </span>}{part.text}</span>)}</code></pre>
+    <figcaption class={`meta ${styles.caption}`}>{caption}</figcaption>
+</figure>

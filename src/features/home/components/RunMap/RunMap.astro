@@ -4,16 +4,16 @@ import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
 import { LANE_STEP_PCT } from '../../shared/constants';
 import { LINE, NODE_KIND, type RunNode } from '../../shared/models';
 import { acrossCss, downCss } from '../../utils/css';
-import { formatSpan } from '../../utils/dates';
+import { formatSpan } from '../../../../shared/utils/dates';
 import { splitMentions } from '../../utils/mentions';
 import { buildRun } from '../../utils/run';
 import { toSegments } from '../../utils/segments';
 import { Icon } from '../../../../shared/components/Icon';
 import { EMAIL, LINKS } from '../../../../shared/constants';
 import { cx } from '../../../../shared/utils/cx';
-import { PixelIcon } from '../PixelIcon';
-import type { PixelIconName } from '../PixelIcon/PixelIcon.constants';
-import { Sprite } from '../Sprite';
+import { PixelIcon } from '../../../../shared/components/PixelIcon';
+import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
+import { Sprite } from '../../../../shared/components/Sprite';
 import styles from './RunMap.module.css';
 
 interface Props {
