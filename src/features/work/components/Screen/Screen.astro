@@ -1,0 +1,83 @@
+---
+import { PixelIcon } from '../../../../shared/components/PixelIcon';
+import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
+import { cx } from '../../../../shared/utils/cx';
+import { versioned } from '../../../../shared/utils/media';
+import styles from './Screen.module.css';
+
+interface Props {
+    /** The station's line: its icon heads the bar, and its color lights the progress road. */
+    line: PixelIconName;
+    /** Where it was recorded, shown in the bar (e.g. "demo.dotcms.com"). */
+    source?: string;
+    /** A still image, or the video's poster. */
+    src?: string;
+    /** The mp4 always; a webm only when it is the smaller file, so browsers that pick it first save bytes. */
+    video?: { mp4: string; webm?: string };
+    alt: string;
+    caption: string;
+    /** Width over height, so the screen keeps its size before the media loads. */
+    ratio: number;
+    /** The replay button's label, the seek slider's name, what shows while the clip loads, and the text of a slot still waiting. */
+    replay: string;
+    seek: string;
+    loading: string;
+    pending: string;
+}
+
+const { line, source, src, video, alt, caption, ratio, replay, seek, loading, pending } = Astro.props;
+const poster = src && versioned(src);
+---
+
+<!-- A recorded screen, framed like a level's replay: a bar with a replay button, the screen matted
+     inside, and a road of pixels under it that lights up as the clip plays and can be dragged to
+     seek. It branches off my road on wide screens. Until the clip can play, the poster dims, a label
+     says it's loading and the road marches, so the poster never passes for the whole demo. -->
+<figure class={cx(styles, 'screen', ratio < 1 && 'portrait')} style={`--ratio: ${ratio}`}>
+    <div class={styles.console}>
+        <div class={styles.bar}>
+            <span class={styles.icon} aria-hidden="true"><PixelIcon name={line} /></span>
+            {source && <span class={`meta ${styles.source}`}>{source}</span>}
+            {
+                video && (
+                    <button class={styles.replay} type="button" data-replay>
+                        {replay}
+                    </button>
+                )
+            }
+        </div>
+
+        <div class={styles.matte}>
+            <div class={styles.frame}>
+                {
+                    video ? (
+                        <>
+                            <video data-loop muted loop playsinline preload="none" poster={poster} aria-label={alt}>
+                                {video.webm && <source src={versioned(video.webm)} type="video/webm" />}
+                                <source src={versioned(video.mp4)} type="video/mp4" />
+                            </video>
+                            <span class={styles.loading} role="status">
+                                {loading}
+                            </span>
+                        </>
+                    ) : src ? (
+                        <img src={poster} alt={alt} loading="lazy" decoding="async" />
+                    ) : (
+                        <span class="meta">{pending}</span>
+                    )
+                }
+            </div>
+        </div>
+
+        {
+            video && (
+                <div class={styles.track} data-progress>
+                    <span class={styles.lit} aria-hidden="true" />
+                    <span class={styles.head} aria-hidden="true" />
+                    <input class={styles.seek} type="range" min="0" max="1000" step="1" value="0" aria-label={seek} data-seek />
+                </div>
+            )
+        }
+    </div>
+    <figcaption class={`meta ${styles.caption}`}>{caption}</figcaption>
+</figure>

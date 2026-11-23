@@ -37,9 +37,13 @@ const transcriptLine = z.object({ input: z.boolean().default(false), text: z.str
 const work = defineCollection({
     loader: file('src/content/work.json'),
     schema: z.object({
-        /** What I owned, in one or two sentences: the page's lead. */
+        /** The opening line, set large: what it is, in plain words. */
+        headline: localized,
+        /** What I owned, in one or two sentences: the page's lead under the headline. */
         owned: localized,
         description: localized,
+        /** Key features, a few words each: what it does, for a one-glance skim under the opening. */
+        features: z.array(localized).min(1),
         links: z.array(z.object({ label: z.string(), href: z.string().url() })).default([]),
         /** Why it exists, one paragraph per entry. */
         problem: z.array(localized).min(1),
@@ -49,7 +53,13 @@ const work = defineCollection({
             z.object({ kind: z.literal('transcript'), lines: z.array(transcriptLine).min(1), caption: localized }),
             z.object({
                 kind: z.literal('media'),
+                /** A still image, or a looping video's poster. Paths are under `public/`. */
                 src: z.string().optional(),
+                /** A short muted loop of the work, as MP4 (H.264) and WebM (VP9); `src` is its poster. */
+                // webm only where it comes out smaller than the mp4; the mp4 always plays.
+                video: z.object({ mp4: z.string(), webm: z.string().optional() }).optional(),
+                /** Where it was recorded, shown in the screen's bar (e.g. "demo.dotcms.com"). */
+                source: z.string().optional(),
                 alt: localized,
                 caption: localized,
                 /** Width over height, so the slot keeps its size before the media loads. */
@@ -58,6 +68,10 @@ const work = defineCollection({
         ]),
         /** What was hard, or failed first, and what changed because of it. */
         hard: z.array(localized).min(1),
+        /** My own line, set large as the opening of the section it belongs to (and not repeated there). */
+        punchline: z.object({ section: z.enum(['problem', 'hard']), text: localized }).optional(),
+        /** What went right, when the hard part turned into something good. It gets the same room. */
+        win: z.array(localized).optional(),
         now: localized
     })
 });

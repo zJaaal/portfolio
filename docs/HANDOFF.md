@@ -25,7 +25,7 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
   - **Origin:** the line starts before dotCMS: Venezuela, electronics, learning to program in 2020, the move to Buenos Aires (2022-02), react-scroll-utilities, then dotCMS.
   - **Termini:** About starts the line, and Contact ends it with the motto.
   - **Level select:** each station opens its own page (`/[lang]/work/[slug]`). The map shrinks into a sticky mini-map with the sprite at the current station, and each page ends with previous and next stops. On phones the stops sit in a bottom bar.
-  - **Sprite:** a 10×12 pixel-art placeholder of the owner rides the line. The final art (and a pixel portrait) is still to be made. For now the portrait is the GitHub avatar pixelated.
+  - **Sprite:** a 10×12 pixel-art placeholder of the owner rides the line. The final art is still to be made. The portrait is a photo shown pixelated.
   - **Responsive:** horizontal map at ≥1280px; three vertical rails at 640–1279 and below 640.
 - **Copy:** approved so far: bio, under-construction text, motto (both languages). Every other string needs owner review.
 - **Icons:** Material Symbols Rounded, inlined as SVG paths (`src/shared/constants.ts`).
@@ -50,7 +50,7 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
 
 - **Media:** the Che Bondi screen recording, and dotCMS screenshots (Content Drive, UVE, Content Types, Template Builder).
 - **Links:** URLs of the UVE and SDK blog posts.
-- **Sprite and portrait:** who makes the sprite's final pixel art. The portrait now comes from the GitHub avatar at build time (`pnpm portrait`): change the photo on GitHub, then redeploy. The owner is taking a new photo.
+- **Sprite and portrait:** who makes the sprite's final pixel art. The portrait is built from `src/assets/portrait.jpg` (cropped square) by `pnpm portrait`: replace that file, then redeploy.
 
 ## Gotchas
 

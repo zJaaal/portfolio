@@ -132,6 +132,6 @@ dist
 # Personal product record: local only (owner, 2026-11-18)
 PRODUCT.md
 
-# Built from the GitHub avatar by scripts/build-portrait.ts on every dev start and build
+# Built from src/assets/portrait.jpg by scripts/build-portrait.ts on every dev start and build
 public/portrait.png
 public/og.png

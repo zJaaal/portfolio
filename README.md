@@ -25,7 +25,7 @@ pnpm dev                # http://localhost:4321
 |---|---|
 | `pnpm dev` | Generates the token CSS and the portrait, then starts the dev server |
 | `pnpm build` | Generates the token CSS and the portrait, then builds to `dist/` |
-| `pnpm portrait` | Downloads my GitHub avatar and builds the pixel portrait and the share card (`public/portrait.png`, `public/og.png`); falls back to the placeholder offline |
+| `pnpm portrait` | Builds the pixel portrait and the share card (`public/portrait.png`, `public/og.png`) from `src/assets/portrait.jpg` |
 | `pnpm check` | Types (`astro check`) plus a WCAG contrast check of every color pair, in both themes |
 | `pnpm preview` | Serves `dist/` locally through Wrangler |
 | `pnpm release` | Builds and deploys by hand (CI normally does this) |

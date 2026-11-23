@@ -1,6 +1,10 @@
 [
   {
     "id": "react-scroll-utilities",
+    "headline": {
+      "en": "React hooks that move things with the scroll.",
+      "es": "Hooks de React que mueven cosas con el scroll."
+    },
     "owned": {
       "en": "Mine, from the first commit to npm: I designed it, built it, tested it and shipped it, and learned how to do each of those along the way.",
       "es": "Mía, del primer commit a npm: la diseñé, la construí, la probé y la publiqué, y aprendí a hacer cada una de esas cosas en el camino."
@@ -23,14 +27,36 @@
         "href": "https://react-scroll-utilities.netlify.app"
       }
     ],
-    "problem": [
+    "features": [
       {
-        "en": "I was building WordPress pages that needed animations on scroll, writing them by hand in plain JavaScript, and it was really hard. So I thought: I should make a library. And I made it in React, as a challenge, to really understand React. I learned a lot of it by getting it wrong.",
-        "es": "Estaba haciendo páginas en WordPress que necesitaban animaciones con el scroll, escritas a mano en JavaScript puro, y era muy difícil. Así que pensé: debería hacer una librería. Y la hice en React, como desafío, para entender React de verdad. Aprendí mucho equivocándome."
+        "en": "How close an element is to the screen",
+        "es": "Qué tan cerca está un elemento de la pantalla"
       },
       {
-        "en": "The result is a lightweight library of hooks and components: how close an element is to the screen, which way you're scrolling, values and colors that change as you scroll, and shapes that move with it.",
-        "es": "El resultado es una librería liviana de hooks y componentes: qué tan cerca está un elemento de la pantalla, hacia dónde scrolleas, valores y colores que cambian con el scroll, y formas que se mueven con él."
+        "en": "Which way you are scrolling",
+        "es": "Hacia dónde scrolleas"
+      },
+      {
+        "en": "Values and colors that change with the scroll",
+        "es": "Valores y colores que cambian con el scroll"
+      },
+      {
+        "en": "Shapes that move with the scroll",
+        "es": "Formas que se mueven con el scroll"
+      },
+      {
+        "en": "One render per scroll change",
+        "es": "Un render por cada cambio de scroll"
+      },
+      {
+        "en": "16 versions on npm",
+        "es": "16 versiones en npm"
+      }
+    ],
+    "problem": [
+      {
+        "en": "I was building WordPress pages that needed animations on scroll, writing them by hand in plain JavaScript, and it was really hard. So I thought: I should make a library. And I made it in React, as a challenge, to really understand React.",
+        "es": "Estaba haciendo páginas en WordPress que necesitaban animaciones con el scroll, escritas a mano en JavaScript puro, y era muy difícil. Así que pensé: debería hacer una librería. Y la hice en React, como desafío, para entender React de verdad."
       }
     ],
     "decisions": [
@@ -58,14 +84,20 @@
     "proof": {
       "kind": "media",
       "alt": {
-        "en": "The react-scroll-utilities demo: shapes and colors moving with the scroll",
-        "es": "La demo de react-scroll-utilities: formas y colores que se mueven con el scroll"
+        "en": "The react-scroll-utilities demo site, scrolled: distance counters, arrows that follow the scroll direction, and colors and shapes that change with the scroll",
+        "es": "El sitio de demo de react-scroll-utilities, con scroll: contadores de distancia, flechas que siguen la dirección del scroll, y colores y formas que cambian con el scroll"
       },
       "caption": {
-        "en": "The demo site: shapes and colors that move with the scroll.",
-        "es": "El sitio de demo: formas y colores que se mueven con el scroll."
+        "en": "The demo site: distances, direction, colors and shapes that follow the scroll. Scroll back, and the arrows turn around.",
+        "es": "El sitio de demo: distancias, dirección, colores y formas que siguen el scroll. Vuelves hacia arriba, y las flechas se dan vuelta."
       },
-      "ratio": 1.6
+      "ratio": 1.6,
+      "src": "/media/work/react-scroll-utilities.jpg",
+      "video": {
+        "mp4": "/media/work/react-scroll-utilities.mp4",
+        "webm": "/media/work/react-scroll-utilities.webm"
+      },
+      "source": "react-scroll-utilities.netlify.app"
     },
     "hard": [
       {
@@ -80,10 +112,21 @@
     "now": {
       "en": "Finished: 16 versions on npm, the last in January 2023. It's close to my heart, and it's the library that got me my job at dotCMS.",
       "es": "Terminada: 16 versiones en npm, la última en enero de 2023. La tengo en el corazón, y es la librería que me consiguió el trabajo en dotCMS."
+    },
+    "punchline": {
+      "section": "problem",
+      "text": {
+        "en": "I learned a lot of it by getting it wrong.",
+        "es": "Aprendí mucho equivocándome."
+      }
     }
   },
   {
     "id": "content-types",
+    "headline": {
+      "en": "The form builder behind every content type in dotCMS.",
+      "es": "El editor de formularios detrás de cada content type de dotCMS."
+    },
     "owned": {
       "en": "My first big project at dotCMS. Our designer redesigned the form builder, and I built it, rewriting its styles on top of the ones the whole product shares.",
       "es": "Mi primer proyecto grande en dotCMS. Nuestro diseñador rediseñó el editor de formularios, y yo lo construí, reescribiendo sus estilos sobre los que comparte todo el producto."
@@ -98,14 +141,28 @@
         "href": "https://github.com/dotCMS/core/pull/24793"
       }
     ],
+    "features": [
+      {
+        "en": "Add and arrange fields in rows",
+        "es": "Agregar y ordenar campos en filas"
+      },
+      {
+        "en": "dotCMS's shared colors and spacing",
+        "es": "Los colores y espaciados compartidos de dotCMS"
+      },
+      {
+        "en": "SCSS that became the project example",
+        "es": "SCSS que quedó como ejemplo del proyecto"
+      }
+    ],
     "problem": [
       {
         "en": "Content types define the structure of the content in dotCMS, and the form builder is where you add and arrange their fields.",
         "es": "Los content types definen la estructura del contenido en dotCMS, y el editor de formularios es donde agregas y ordenas sus campos."
       },
       {
-        "en": "The old builder didn't look bad, but it didn't feel like the rest of dotCMS. Our designer redesigned it to fit in context, and my job was to make it real.",
-        "es": "El editor anterior no se veía mal, pero no se sentía parte del resto de dotCMS. Nuestro diseñador lo rediseñó para que encajara en contexto, y mi trabajo fue hacerlo realidad."
+        "en": "The old builder didn't look bad, but our designer redesigned it to fit in context.",
+        "es": "El editor anterior no se veía mal, pero nuestro diseñador lo rediseñó para que encajara en contexto."
       }
     ],
     "decisions": [
@@ -133,14 +190,20 @@
     "proof": {
       "kind": "media",
       "alt": {
-        "en": "The redesigned Content Types form builder in dotCMS",
-        "es": "El editor de formularios de Content Types rediseñado en dotCMS"
+        "en": "The Content Types field builder in the dotCMS demo: a Date and Time field is dragged into a row and set up, and a field is moved by its handle",
+        "es": "El editor de campos de Content Types en la demo de dotCMS: se arrastra un campo Date and Time a una fila y se configura, y se mueve un campo por su manija"
       },
       "caption": {
-        "en": "The redesigned form builder: fields in rows, in the same colors and spacing as the rest of dotCMS.",
-        "es": "El editor de formularios rediseñado: campos en filas, con los mismos colores y espaciados que el resto de dotCMS."
+        "en": "Drag a field into a row, set it up, move fields around: the redesigned builder, in the same colors and spacing as the rest of dotCMS.",
+        "es": "Arrastras un campo a una fila, lo configuras, mueves campos: el editor rediseñado, con los mismos colores y espaciados que el resto de dotCMS."
       },
-      "ratio": 1.6
+      "ratio": 1.6,
+      "src": "/media/work/content-types.jpg",
+      "video": {
+        "mp4": "/media/work/content-types.mp4",
+        "webm": "/media/work/content-types.webm"
+      },
+      "source": "demo.dotcms.com"
     },
     "hard": [
       {
@@ -155,10 +218,21 @@
     "now": {
       "en": "Fully shipped. As far as I know it hasn't needed changes since, beyond a theme change across the whole product, which wasn't my work.",
       "es": "Terminado y en uso. Hasta donde sé, no necesitó cambios desde entonces, más allá de un cambio de tema en todo el producto, que no fue trabajo mío."
+    },
+    "punchline": {
+      "section": "problem",
+      "text": {
+        "en": "It didn't feel like the rest of dotCMS. My job was to make it real.",
+        "es": "No se sentía parte del resto de dotCMS. Mi trabajo fue hacerlo realidad."
+      }
     }
   },
   {
     "id": "template-builder",
+    "headline": {
+      "en": "Page layouts by drag and drop, on a 12-column grid.",
+      "es": "Layouts de página con drag and drop, en una grilla de 12 columnas."
+    },
     "owned": {
       "en": "I built most of it, from the proof of concept to the release: the core, the drag and drop and the rules of the grid. The hard calls, like how rows and columns render, we made as a team.",
       "es": "Construí la mayor parte, desde la prueba de concepto hasta el lanzamiento: el núcleo, el drag and drop y las reglas de la grilla. Las decisiones difíciles, como cómo se renderizan filas y columnas, las tomamos en equipo."
@@ -171,6 +245,28 @@
       {
         "label": "PR: detecting a full row",
         "href": "https://github.com/dotCMS/core/pull/25513"
+      }
+    ],
+    "features": [
+      {
+        "en": "Drag and drop rows and boxes",
+        "es": "Drag and drop de filas y cajas"
+      },
+      {
+        "en": "A 12-column grid",
+        "es": "Una grilla de 12 columnas"
+      },
+      {
+        "en": "A full row says no before you drop",
+        "es": "Una fila llena avisa antes de soltar"
+      },
+      {
+        "en": "Containers, styles and a sidebar",
+        "es": "Contenedores, estilos y una barra lateral"
+      },
+      {
+        "en": "Autosave",
+        "es": "Guardado automático"
       }
     ],
     "problem": [
@@ -218,19 +314,25 @@
     "proof": {
       "kind": "media",
       "alt": {
-        "en": "The dotCMS Template Builder: rows and boxes on a 12-column grid",
-        "es": "El Template Builder de dotCMS: filas y cajas en una grilla de 12 columnas"
+        "en": "The Template Builder in the dotCMS demo: a row and a box are added, the box is resized, a full row refuses another box, and a sidebar and a theme are picked",
+        "es": "El Template Builder en la demo de dotCMS: se agregan una fila y una caja, la caja se redimensiona, una fila llena rechaza otra caja, y se eligen una barra lateral y un tema"
       },
       "caption": {
-        "en": "Rows and boxes on a 12-column grid: drag a box in, and a full row says no before you drop.",
-        "es": "Filas y cajas en una grilla de 12 columnas: arrastras una caja, y una fila llena dice que no antes de soltarla."
+        "en": "Rows and boxes on a 12-column grid: drag a box in, resize it, and a full row says no before you drop. Then a sidebar and a theme.",
+        "es": "Filas y cajas en una grilla de 12 columnas: arrastras una caja, la redimensionas, y una fila llena dice que no antes de soltarla. Después, una barra lateral y un tema."
       },
-      "ratio": 1.6
+      "ratio": 1.6,
+      "src": "/media/work/template-builder.jpg",
+      "video": {
+        "mp4": "/media/work/template-builder.mp4",
+        "webm": "/media/work/template-builder.webm"
+      },
+      "source": "demo.dotcms.com"
     },
     "hard": [
       {
-        "en": "Making it work took cleverness. The library wasn't easy, and some of what we needed it didn't do, so the core was me hammering nails until it held.",
-        "es": "Hacerlo funcionar pidió ingenio. La librería no era fácil, y no hacía parte de lo que necesitábamos, así que el núcleo fui yo clavando clavos hasta que aguantó."
+        "en": "Making it work took cleverness. The library wasn't easy, and some of what we needed it didn't do.",
+        "es": "Hacerlo funcionar pidió ingenio. La librería no era fácil, y no hacía parte de lo que necesitábamos."
       },
       {
         "en": "A really fun project. I learned a lot, and I still keep the proof of concept.",
@@ -240,10 +342,21 @@
     "now": {
       "en": "Fully shipped. It runs in its own Templates portlet and inside UVE.",
       "es": "Terminado y en uso. Funciona en su propio portlet de Templates y dentro de UVE."
+    },
+    "punchline": {
+      "section": "hard",
+      "text": {
+        "en": "The core was me hammering nails until it held.",
+        "es": "El núcleo fui yo clavando clavos hasta que aguantó."
+      }
     }
   },
   {
     "id": "uve",
+    "headline": {
+      "en": "Edit any page visually, whatever framework built it.",
+      "es": "Edita cualquier página visualmente, sin importar el framework."
+    },
     "owned": {
       "en": "I was on it from the beginning to the end of my part, and worked on all of it: the editor, drag and drop, the communication between the editor and the site, and the SDKs. All before AI.",
       "es": "Estuve desde el principio hasta el final de mi parte, y trabajé en todo: el editor, el drag and drop, la comunicación entre el editor y el sitio, y los SDKs. Todo antes de la IA."
@@ -266,14 +379,36 @@
         "href": "https://www.dotcms.com/blog/how-to-build-a-universal-javascript-sdk-with-rollupjs"
       }
     ],
+    "features": [
+      {
+        "en": "Edit any page as a canvas",
+        "es": "Editar cualquier página como un lienzo"
+      },
+      {
+        "en": "Create, move, drop, delete and publish content",
+        "es": "Crear, mover, soltar, borrar y publicar contenido"
+      },
+      {
+        "en": "Drag and drop across the iframe",
+        "es": "Drag and drop a través del iframe"
+      },
+      {
+        "en": "SDKs for React and Angular",
+        "es": "SDKs para React y Angular"
+      },
+      {
+        "en": "A core SDK for any JavaScript environment",
+        "es": "Un SDK base para cualquier entorno JavaScript"
+      }
+    ],
     "problem": [
       {
         "en": "Its predecessor, Edit Mode Anywhere, was clunky and tied to Next.js or to traditional dotCMS pages. Teams building their sites with anything else couldn't edit them visually.",
         "es": "Su antecesor, Edit Mode Anywhere, era torpe y estaba atado a Next.js o a las páginas tradicionales de dotCMS. Los equipos que hacían sus sitios con otra cosa no podían editarlos visualmente."
       },
       {
-        "en": "UVE turns the page into a canvas inside dotCMS: you create, edit, move, drop, delete and publish content on pages built with any supported framework. The SDKs connect the site to the editor and to dotCMS's data, and render it in the framework with almost no effort. Add the SDK to your framework of choice, and that's it.",
-        "es": "UVE convierte la página en un lienzo dentro de dotCMS: creas, editas, mueves, sueltas, borras y publicas contenido en páginas hechas con cualquier framework soportado. Los SDKs conectan el sitio con el editor y con los datos de dotCMS, y lo renderizan en el framework casi sin esfuerzo. Agregas el SDK a tu framework preferido, y listo."
+        "en": "UVE turns the page into a canvas inside dotCMS: you create, edit, move, drop, delete and publish content on pages built with any supported framework. The SDKs connect the site to the editor and to dotCMS's data, and render it in the framework with almost no effort.",
+        "es": "UVE convierte la página en un lienzo dentro de dotCMS: creas, editas, mueves, sueltas, borras y publicas contenido en páginas hechas con cualquier framework soportado. Los SDKs conectan el sitio con el editor y con los datos de dotCMS, y lo renderizan en el framework casi sin esfuerzo."
       }
     ],
     "decisions": [
@@ -311,14 +446,19 @@
     "proof": {
       "kind": "media",
       "alt": {
-        "en": "A headless page edited as a canvas inside dotCMS's Universal Visual Editor",
-        "es": "Una página headless editada como lienzo dentro del Universal Visual Editor de dotCMS"
+        "en": "UVE in the dotCMS demo: a block's tools, its form beside the page, tablet and phone previews, and the page's rows",
+        "es": "UVE en la demo de dotCMS: las herramientas de un bloque, su formulario junto a la página, vistas de tablet y teléfono, y las filas de la página"
       },
       "caption": {
-        "en": "A page from a headless site, edited as a canvas inside dotCMS.",
-        "es": "Una página de un sitio headless, editada como lienzo dentro de dotCMS."
+        "en": "The page is the canvas: hover a block for its tools, edit it beside the page, preview it on any device, and see its structure.",
+        "es": "La página es el lienzo: pasas el mouse por un bloque para ver sus herramientas, lo editas junto a la página, la previsualizas en cualquier dispositivo y ves su estructura."
       },
-      "ratio": 1.6
+      "ratio": 1.6,
+      "src": "/media/work/uve.jpg",
+      "video": {
+        "mp4": "/media/work/uve.mp4"
+      },
+      "source": "demo.dotcms.com"
     },
     "hard": [
       {
@@ -333,10 +473,21 @@
     "now": {
       "en": "UVE ships in dotCMS, and customers use it mostly with Angular, Angular SSR and React with Next.js, with proofs of concept on .NET and PHP. I'm not its main developer anymore since I moved to lead Content Drive, but I still send fixes and features now and then.",
       "es": "UVE es parte de dotCMS, y los clientes lo usan sobre todo con Angular, Angular SSR y React con Next.js, con pruebas de concepto en .NET y PHP. Ya no soy su desarrollador principal desde que pasé a liderar Content Drive, pero todavía mando arreglos y funciones de vez en cuando."
+    },
+    "punchline": {
+      "section": "problem",
+      "text": {
+        "en": "Add the SDK to your framework of choice, and that's it.",
+        "es": "Agregas el SDK a tu framework preferido, y listo."
+      }
     }
   },
   {
     "id": "new-edit-content",
+    "headline": {
+      "en": "The base of the new content editor in dotCMS.",
+      "es": "La base del nuevo editor de contenido de dotCMS."
+    },
     "owned": {
       "en": "My team laid its foundations: research, planning, the architecture and the base of the design. Then the project went to another team, and we started UVE.",
       "es": "Mi equipo sentó sus bases: investigación, planificación, la arquitectura y la base del diseño. Después el proyecto pasó a otro equipo, y empezamos UVE."
@@ -349,6 +500,24 @@
       {
         "label": "PR: the new editor behind a feature flag",
         "href": "https://github.com/dotCMS/core/pull/26242"
+      }
+    ],
+    "features": [
+      {
+        "en": "Its own Angular library",
+        "es": "Su propia librería de Angular"
+      },
+      {
+        "en": "Behind a flag, per content type",
+        "es": "Detrás de un flag, por content type"
+      },
+      {
+        "en": "Text, text area, calendar and tag fields",
+        "es": "Campos de texto, área de texto, calendario y tags"
+      },
+      {
+        "en": "Opens from every editor entry point",
+        "es": "Se abre desde cada punto de entrada del editor"
       }
     ],
     "problem": [
@@ -382,28 +551,45 @@
     "proof": {
       "kind": "media",
       "alt": {
-        "en": "The new Edit Content screen in dotCMS",
-        "es": "La nueva pantalla de Edit Content en dotCMS"
+        "en": "The new Edit Content in the dotCMS demo today: an event opened from Content Drive, its title, a date picked in the calendar, and its details and tags",
+        "es": "El nuevo Edit Content en la demo de dotCMS hoy: un evento abierto desde Content Drive, su título, una fecha elegida en el calendario, y sus detalles y tags"
       },
       "caption": {
-        "en": "The first version of the new editor, behind its feature flag.",
-        "es": "La primera versión del nuevo editor, detrás de su feature flag."
+        "en": "The editor today, carried on by another team from the foundation we laid: text, calendar and tag fields among them.",
+        "es": "El editor hoy, continuado por otro equipo desde la base que sentamos: entre ellos, los campos de texto, calendario y tags."
       },
-      "ratio": 1.6
+      "ratio": 1.6,
+      "src": "/media/work/new-edit-content.jpg",
+      "video": {
+        "mp4": "/media/work/new-edit-content.mp4",
+        "webm": "/media/work/new-edit-content.webm"
+      },
+      "source": "demo.dotcms.com"
     },
     "hard": [
       {
-        "en": "We built it expecting to finish it. When it was handed over, the foundation had to stand on its own for the team that came next.",
-        "es": "Lo construimos pensando que lo íbamos a terminar. Cuando pasó a otro equipo, la base tuvo que sostenerse sola para quienes siguieron."
+        "en": "We built it expecting to finish it. Then it was handed over to the team that came next.",
+        "es": "Lo construimos pensando que lo íbamos a terminar. Después pasó al equipo que siguió."
       }
     ],
     "now": {
       "en": "Another team carried it on from that foundation, while we moved on to UVE.",
       "es": "Otro equipo lo continuó desde esa base, mientras nosotros pasamos a UVE."
+    },
+    "punchline": {
+      "section": "hard",
+      "text": {
+        "en": "The foundation had to stand on its own.",
+        "es": "La base tuvo que sostenerse sola."
+      }
     }
   },
   {
     "id": "dev-scripts",
+    "headline": {
+      "en": "One command to bring up dotCMS, ready to work.",
+      "es": "Un comando para levantar dotCMS, listo para trabajar."
+    },
     "owned": {
       "en": "Mine: I wrote them for my own days at dotCMS, starting while I built UVE, and later rebuilt them on Artemis.",
       "es": "Míos: los escribí para mi propio día a día en dotCMS, empezando mientras construía UVE, y después los reconstruí sobre Artemis."
@@ -413,14 +599,36 @@
       "es": "Los scripts que levantan mi entorno de desarrollo de dotCMS con un solo comando, y cómo se volvieron la piedra angular de Artemis."
     },
     "links": [],
+    "features": [
+      {
+        "en": "One command brings up dotCMS",
+        "es": "Un comando levanta dotCMS"
+      },
+      {
+        "en": "Docker, the server and the frontend",
+        "es": "Docker, el servidor y el frontend"
+      },
+      {
+        "en": "Terminal tabs and panes in Warp",
+        "es": "Pestañas y paneles de terminal en Warp"
+      },
+      {
+        "en": "Feature flags and tokens set for you",
+        "es": "Feature flags y tokens configurados solos"
+      },
+      {
+        "en": "Now the art CLI, on Artemis",
+        "es": "Hoy es la CLI art, sobre Artemis"
+      }
+    ],
     "problem": [
       {
         "en": "Bringing up dotCMS locally meant the same routine every time: start Docker, open terminal tabs, run the server and the frontend, then set feature flags, UI colors and the tokens for the UVE examples by hand.",
         "es": "Levantar dotCMS en local era la misma rutina cada vez: iniciar Docker, abrir pestañas de terminal, correr el servidor y el frontend, y después configurar a mano los feature flags, los colores de la UI y los tokens de los ejemplos de UVE."
       },
       {
-        "en": "So I wrote scripts, then a tiny command engine to run them: a command with a name, a description and an action, and a list of steps to run once dotCMS was up. An AppleScript opened the tabs and panes in Warp and typed the commands. One command, and the whole environment came up configured.",
-        "es": "Así que escribí scripts, y después un motor de comandos chiquito para correrlos: un comando con nombre, descripción y acción, y una lista de pasos para correr cuando dotCMS estuviera arriba. Un AppleScript abría las pestañas y paneles en Warp y escribía los comandos. Un solo comando, y todo el entorno quedaba levantado y configurado."
+        "en": "So I wrote scripts, then a tiny command engine to run them: a command with a name, a description and an action, and a list of steps to run once dotCMS was up. An AppleScript opened the tabs and panes in Warp and typed the commands.",
+        "es": "Así que escribí scripts, y después un motor de comandos chiquito para correrlos: un comando con nombre, descripción y acción, y una lista de pasos para correr cuando dotCMS estuviera arriba. Un AppleScript abría las pestañas y paneles en Warp y escribía los comandos."
       }
     ],
     "decisions": [
@@ -458,14 +666,19 @@
     "proof": {
       "kind": "media",
       "alt": {
-        "en": "art dotcms start bringing up dotCMS and its terminal tabs in Warp",
-        "es": "art dotcms start levantando dotCMS y sus pestañas de terminal en Warp"
+        "en": "Claude Code in Warp is asked to start dotCMS, runs art, and Warp opens a tab where dotCMS boots and the startup steps run: site alias, feature flags, image, admin colors and UVE config",
+        "es": "Se le pide a Claude Code en Warp que levante dotCMS, corre art, y Warp abre una pestaña donde dotCMS arranca y corren los pasos de inicio: alias del sitio, feature flags, imagen, colores del admin y config de UVE"
       },
       "caption": {
-        "en": "One command: dotCMS, the frontend and the terminal tabs, ready to work.",
-        "es": "Un solo comando: dotCMS, el frontend y las pestañas de terminal, listos para trabajar."
+        "en": "Ask an agent to start dotCMS: it runs art, Warp opens the tab, and once dotCMS is up the startup steps set everything. The boot is sped up.",
+        "es": "Le pides a un agente que levante dotCMS: corre art, Warp abre la pestaña, y cuando dotCMS está arriba los pasos de inicio dejan todo configurado. El arranque va acelerado."
       },
-      "ratio": 1.6
+      "ratio": 1.8333,
+      "src": "/media/work/dev-scripts.jpg",
+      "video": {
+        "mp4": "/media/work/dev-scripts.mp4"
+      },
+      "source": "Warp · art"
     },
     "hard": [
       {
@@ -476,10 +689,21 @@
     "now": {
       "en": "Done, and updated when I need them. They're the first project built on Artemis, and where its story starts.",
       "es": "Terminados, y los actualizo cuando los necesito. Son el primer proyecto construido sobre Artemis, y donde empieza su historia."
+    },
+    "punchline": {
+      "section": "problem",
+      "text": {
+        "en": "One command, and the whole environment came up configured.",
+        "es": "Un solo comando, y todo el entorno quedaba levantado y configurado."
+      }
     }
   },
   {
     "id": "content-drive",
+    "headline": {
+      "en": "All the content in dotCMS, in one place.",
+      "es": "Todo el contenido de dotCMS, en un solo lugar."
+    },
     "owned": {
       "en": "I lead it: I plan it with product, split and delegate the work, build it, test what I delegated, and answer for how it turns out. Product brought the vision and the design; I make it real, and push back when something can be better.",
       "es": "Lo lidero: lo planifico con producto, reparto y delego el trabajo, lo construyo, pruebo lo que delegué y respondo por cómo sale. Producto trajo la visión y el diseño; yo lo hago realidad, y discuto sus ideas cuando algo puede quedar mejor."
@@ -494,10 +718,32 @@
         "href": "https://github.com/dotCMS/core"
       }
     ],
+    "features": [
+      {
+        "en": "Site Browser and Content Search in one place",
+        "es": "Site Browser y Content Search en un solo lugar"
+      },
+      {
+        "en": "Edit, move, copy and delete content",
+        "es": "Editar, mover, copiar y borrar contenido"
+      },
+      {
+        "en": "Organize content in folders",
+        "es": "Organizar contenido en carpetas"
+      },
+      {
+        "en": "Shareable URLs: the folder, view and filters travel with the link",
+        "es": "URLs para compartir: la carpeta, la vista y los filtros viajan con el enlace"
+      },
+      {
+        "en": "No switching tools",
+        "es": "Sin cambiar de herramienta"
+      }
+    ],
     "problem": [
       {
-        "en": "Managing content is the heart of a CMS, so it has to feel excellent. In dotCMS it was split across two tools, the Site Browser and Content Search, and both felt clunky.",
-        "es": "Gestionar contenido es el corazón de un CMS, así que tiene que sentirse excelente. En dotCMS estaba repartido en dos herramientas, el Site Browser y Content Search, y las dos se sentían torpes."
+        "en": "In dotCMS it was split across two tools, the Site Browser and Content Search, and both felt clunky.",
+        "es": "En dotCMS estaba repartido en dos herramientas, el Site Browser y Content Search, y las dos se sentían torpes."
       },
       {
         "en": "Content Drive brings both into one modern place, and goes further: you edit, move, copy and delete content, and organize it in folders, without switching tools.",
@@ -539,14 +785,20 @@
     "proof": {
       "kind": "media",
       "alt": {
-        "en": "Content Drive in dotCMS: content and folders in one view",
-        "es": "Content Drive en dotCMS: contenido y carpetas en una sola vista"
+        "en": "Content Drive in the dotCMS demo: a row's actions, two files selected, a folder in the grid, a content type filter and a search",
+        "es": "Content Drive en la demo de dotCMS: las acciones de una fila, dos archivos seleccionados, una carpeta en la grilla, un filtro por content type y una búsqueda"
       },
       "caption": {
-        "en": "Content and folders in one place: edit, move, copy, delete and organize without switching tools.",
-        "es": "Contenido y carpetas en un solo lugar: editar, mover, copiar, borrar y organizar sin cambiar de herramienta."
+        "en": "Actions on any row, several at once, folders in a grid or a list, filters and search: content and folders in one place.",
+        "es": "Acciones en cualquier fila, varias a la vez, carpetas en grilla o lista, filtros y búsqueda: contenido y carpetas en un solo lugar."
       },
-      "ratio": 1.6
+      "ratio": 1.6,
+      "src": "/media/work/content-drive.jpg",
+      "video": {
+        "mp4": "/media/work/content-drive.mp4",
+        "webm": "/media/work/content-drive.webm"
+      },
+      "source": "demo.dotcms.com"
     },
     "hard": [
       {
@@ -561,10 +813,21 @@
     "now": {
       "en": "Almost there: we're building the last features and polishing it for release. So far it has been really well received.",
       "es": "Ya casi: estamos construyendo las últimas funciones y puliéndolo para el lanzamiento. Hasta ahora lo han recibido muy bien."
+    },
+    "punchline": {
+      "section": "problem",
+      "text": {
+        "en": "Managing content is the heart of a CMS, so it has to feel excellent.",
+        "es": "Gestionar contenido es el corazón de un CMS, así que tiene que sentirse excelente."
+      }
     }
   },
   {
     "id": "che-bondi",
+    "headline": {
+      "en": "Know where your bus is, live, in Buenos Aires.",
+      "es": "Sabé dónde está tu bondi, en vivo, en Buenos Aires."
+    },
     "owned": {
       "en": "Mine, end to end: the architecture, the data, the Android app and the backend behind it. I set the vision and the specs, and steered AI with Spec Kit to build it.",
       "es": "Mío de punta a punta: la arquitectura, los datos, la app de Android y el backend detrás. Yo definí la visión y las especificaciones, y guié a la IA con Spec Kit para construirlo."
@@ -574,18 +837,40 @@
       "es": "Che Bondi, un rastreador de colectivos en tiempo real para Buenos Aires que construí solo: por qué existe, las decisiones clave y la pelea con los datos."
     },
     "links": [],
+    "features": [
+      {
+        "en": "Follow up to four buses at once",
+        "es": "Seguí hasta cuatro bondis a la vez"
+      },
+      {
+        "en": "A notification when your bus is close",
+        "es": "Un aviso cuando tu bondi está cerca"
+      },
+      {
+        "en": "Keeps following with the app closed",
+        "es": "Sigue con la app cerrada"
+      },
+      {
+        "en": "Favorite lines, on the map",
+        "es": "Líneas favoritas, en el mapa"
+      },
+      {
+        "en": "Lines, stops and buses near you",
+        "es": "Líneas, paradas y bondis cerca tuyo"
+      },
+      {
+        "en": "English and Spanish, light and dark",
+        "es": "Español e inglés, claro y oscuro"
+      }
+    ],
     "problem": [
       {
-        "en": "I wanted to see where my bus was, so I'd know how long I had to wait at the stop. In Buenos Aires the apps either had no information or felt years old. I had the idea in 2025 but no time to build it. When I started exploring AI on my own, it became possible.",
-        "es": "Quería ver dónde estaba mi colectivo, para saber cuánto tenía que esperar en la parada. En Buenos Aires las apps no tenían información o se sentían viejas. Tuve la idea en 2025, pero no el tiempo para construirla. Cuando empecé a explorar la IA por mi cuenta, se volvió posible."
+        "en": "So I'd know how long I had to wait at the stop. In Buenos Aires the apps either had no information or felt years old. I had the idea in 2025 but no time to build it. When I started exploring AI on my own, it became possible.",
+        "es": "Para saber cuánto tenía que esperar en la parada. En Buenos Aires las apps no tenían información o se sentían viejas. Tuve la idea en 2025, pero no el tiempo para construirla. Cuando empecé a explorar la IA por mi cuenta, se volvió posible."
       },
       {
         "en": "The city's transport API, which I got a key for in 2025, had a huge dataset, mostly outdated and often wrong. So the real work started with the data: research, scraping, and crossing it all with the buses' live GPS until it matched the streets.",
         "es": "La API de transporte de la ciudad, para la que conseguí una clave en 2025, tenía un dataset enorme, desactualizado y muchas veces equivocado. Así que el trabajo real empezó por los datos: investigar, hacer scraping y cruzar todo con el GPS en vivo de los colectivos hasta que coincidiera con las calles."
-      },
-      {
-        "en": "The app tracks up to four buses at once, keeps favorite lines, shows them on the map, notifies you when they're close, and lets you browse lines, stops, and the buses and stops near you. In English and Spanish, with several themes, light and dark.",
-        "es": "La app sigue hasta cuatro colectivos a la vez, guarda líneas favoritas, los muestra en el mapa, te avisa cuando están cerca y te deja explorar líneas, paradas, y los colectivos y paradas cerca tuyo. En español e inglés, con varios temas, claro y oscuro."
       }
     ],
     "decisions": [
@@ -622,15 +907,21 @@
     ],
     "proof": {
       "kind": "media",
+      "src": "/media/work/che-bondi.jpg",
+      "video": {
+        "mp4": "/media/work/che-bondi.mp4",
+        "webm": "/media/work/che-bondi.webm"
+      },
+      "source": "Che Bondi · Android",
       "alt": {
-        "en": "Che Bondi on an Android phone: following a bus on the map",
-        "es": "Che Bondi en un teléfono Android: siguiendo un colectivo en el mapa"
+        "en": "Che Bondi on an Android phone: the live map, a line's route and arrivals, following a bus, and a stop's arrivals with an alert",
+        "es": "Che Bondi en un teléfono Android: el mapa en vivo, el recorrido y los arribos de una línea, siguiendo un bondi, y los arribos de una parada con aviso"
       },
       "caption": {
         "en": "Pick a line, follow the bus, and get a notification when it's close.",
         "es": "Eliges una línea, sigues el colectivo y te llega un aviso cuando está cerca."
       },
-      "ratio": 0.4615
+      "ratio": 0.4774
     },
     "hard": [
       {
@@ -645,10 +936,21 @@
     "now": {
       "en": "A closed beta, by invitation, with friends and my partner. We use it every day, and I'm polishing it to decide whether to launch it to the public. In my friends' words, it beats the competition in UX and feel.",
       "es": "Una beta cerrada, por invitación, con amigos y mi pareja. La usamos todos los días, y la estoy puliendo para decidir si la lanzo al público. En palabras de mis amigos, le gana a la competencia en experiencia y sensación."
+    },
+    "punchline": {
+      "section": "problem",
+      "text": {
+        "en": "I wanted to see where my bus was.",
+        "es": "Quería ver dónde estaba mi colectivo."
+      }
     }
   },
   {
     "id": "artemis",
+    "headline": {
+      "en": "A framework for the commands AI agents run.",
+      "es": "Un framework para los comandos que corren los agentes de IA."
+    },
     "owned": {
       "en": "Mine from the first commit: I designed it and built it, then used AI to steer it and move faster.",
       "es": "Es mío desde el primer commit: lo diseñé y lo construí, y después usé IA para guiarlo y avanzar más rápido."
@@ -667,14 +969,40 @@
         "href": "https://www.npmjs.com/package/@zjaaal/artemis"
       }
     ],
+    "features": [
+      {
+        "en": "--help and one JSON result per command",
+        "es": "--help y un único resultado JSON por comando"
+      },
+      {
+        "en": "Exit codes that mean something",
+        "es": "Códigos de salida con significado"
+      },
+      {
+        "en": "A confirmation before anything destructive",
+        "es": "Confirmación antes de cualquier cosa destructiva"
+      },
+      {
+        "en": "A dry run first",
+        "es": "Primero, un dry run"
+      },
+      {
+        "en": "An audit log of every run",
+        "es": "Un registro de auditoría de cada ejecución"
+      },
+      {
+        "en": "Git worktrees managed by commands",
+        "es": "Worktrees de Git manejados por comandos"
+      }
+    ],
     "problem": [
       {
         "en": "At dotCMS I kept running the same steps to bring up my development environment. So I wrote a small command engine: add steps, and it runs them in order. It started Docker, opened tabs and panes in Warp, and ran the commands that set everything up, all from one command, with nothing left to do by hand. That engine is what Artemis is today.",
         "es": "En dotCMS repetía una y otra vez los mismos pasos para levantar mi entorno de desarrollo. Así que escribí un motor de comandos simple: agregas pasos y los corre en orden. Levantaba Docker, abría pestañas y paneles en Warp y corría los comandos que dejaban todo configurado, todo con un solo comando y sin tocar nada después. Ese motor es lo que hoy es Artemis."
       },
       {
-        "en": "Then agents arrived. They like the command line, but nobody keeps a record of what they run, and they go rogue, by mistake or by skipping steps. Artemis keeps that record, stops anything destructive until it is confirmed, and behaves the same way every time.",
-        "es": "Después llegaron los agentes. Les gusta la línea de comandos, pero nadie lleva registro de lo que corren, y se desvían, por error o por saltarse pasos. Artemis lleva ese registro, frena todo lo destructivo hasta que se confirma y se comporta siempre igual."
+        "en": "Then agents arrived. They like the command line, but nobody keeps a record of what they run, and they go rogue, by mistake or by skipping steps. Artemis keeps that record, and stops anything destructive until it is confirmed.",
+        "es": "Después llegaron los agentes. Les gusta la línea de comandos, pero nadie lleva registro de lo que corren, y se desvían, por error o por saltarse pasos. Artemis lleva ese registro, y frena todo lo destructivo hasta que se confirma."
       }
     ],
     "decisions": [
@@ -750,15 +1078,24 @@
       {
         "en": "Artemis started as a way to save tokens: let agents write and run scripts for complex tasks instead of working step by step. My benchmarks said no. It burns about the same tokens as doing the job with plain Bash or a CLI.",
         "es": "Artemis nació para ahorrar tokens: que los agentes escribieran y corrieran scripts para tareas complejas en lugar de ir paso a paso. Mis benchmarks dijeron que no. Gasta más o menos los mismos tokens que hacer el trabajo solo con Bash o una CLI."
-      },
-      {
-        "en": "The same benchmarks showed what it is good at: letting agents run commands safely, with an audit of everything they ran, and managing worktrees. So that is what it became.",
-        "es": "Esos mismos benchmarks mostraron para qué sí sirve: dejar que los agentes corran comandos de forma segura, con una auditoría de todo lo que corrieron, y manejar worktrees. En eso se convirtió."
       }
     ],
     "now": {
       "en": "For now I'm its only user. It's open source on GitHub and npm, and I'm sharing it with my colleagues next.",
       "es": "Por ahora soy su único usuario. Es código abierto en GitHub y npm, y lo próximo es compartirlo con mis compañeros."
+    },
+    "win": [
+      {
+        "en": "The same benchmarks showed what it is good at: letting agents run commands safely, with an audit of everything they ran, and managing worktrees. So that is what it became.",
+        "es": "Esos mismos benchmarks mostraron para qué sí sirve: dejar que los agentes corran comandos de forma segura, con una auditoría de todo lo que corrieron, y manejar worktrees. En eso se convirtió."
+      }
+    ],
+    "punchline": {
+      "section": "problem",
+      "text": {
+        "en": "It behaves the same way every time.",
+        "es": "Se comporta siempre igual."
+      }
     }
   }
 ]
