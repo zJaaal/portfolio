@@ -88,3 +88,10 @@
 .stop:focus-visible .name {
     text-decoration-color: currentColor;
 }
+
+/* Phones: when the two stops don't fit on one row, the next one stacks under the previous. */
+@media (max-width: 39.99em) {
+    .next {
+        margin-left: 0;
+    }
+}

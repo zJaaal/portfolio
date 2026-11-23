@@ -1,0 +1,262 @@
+/* ---------- a recorded screen, framed as a replay of the level ---------- */
+.screen {
+    position: relative;
+    margin: 0;
+    max-width: min(var(--layout-stage), 66svh * var(--ratio) + 2 * var(--space-3));
+}
+
+/* The console: one surface around the screen, with the bar on top and the road at the bottom. */
+.console {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: 0 var(--space-1);
+}
+
+.icon {
+    flex: none;
+    width: var(--space-4);
+    height: var(--space-4);
+    color: var(--c);
+}
+
+.source {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* A small pixel-type button: the bar's one control. Its label is `text`, not the line color: at
+   pixel size the dotCMS purple on the surface only just clears 4.5:1 and reads faint. */
+.replay {
+    margin-left: auto;
+    padding: var(--space-1) var(--space-2);
+    font-family: var(--type-pixel-family);
+    font-size: var(--type-pixel-size);
+    letter-spacing: var(--type-pixel-tracking);
+    line-height: var(--type-pixel-leading);
+    text-transform: uppercase;
+    color: var(--color-text);
+    background: none;
+    border: 1px solid var(--c);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--motion-micro) var(--motion-ease-out),
+        color var(--motion-micro) var(--motion-ease-out);
+}
+
+.replay:hover {
+    background: var(--c);
+    color: var(--color-bg);
+}
+
+.replay:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+/* The screen sits inset in the console, so a bright app reads as a screen, not a hole in the page. */
+.matte {
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+}
+
+.frame {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+    background: var(--color-bg);
+    border: 1px dashed var(--color-hairline);
+    border-radius: var(--radius-sm);
+    color: var(--color-muted);
+}
+
+/* Once the media is there the dashes go: they only mark a slot still waiting. */
+.frame:has(video, img) {
+    border: 0;
+}
+
+.frame video,
+.frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Loading: the poster steps back and a pixel label says the clip is on its way. The script sets
+   `data-state` on the figure only when the clip is wanted and can't play yet, after a short grace,
+   so a fast connection never sees it. */
+.frame video {
+    transition: opacity var(--motion-micro) var(--motion-ease-out);
+}
+
+.loading {
+    position: absolute;
+    display: none;
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--type-pixel-family);
+    font-size: var(--type-pixel-size);
+    letter-spacing: var(--type-pixel-tracking);
+    line-height: var(--type-pixel-leading);
+    text-transform: uppercase;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--c);
+    border-radius: var(--radius-sm);
+}
+
+.screen[data-state='loading'] video {
+    opacity: 0.35;
+}
+
+.screen[data-state='loading'] .loading {
+    display: block;
+}
+
+/* The road marches while it loads: a short run of lit pixels walks along it, a pixel at a time. */
+.track::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    display: none;
+    color: var(--c);
+    background: inherit;
+    mask: linear-gradient(to right, transparent 47%, #000 47% 53%, transparent 53%) 100% 0 / 300% 100% no-repeat;
+}
+
+.screen[data-state='loading'] .track::after {
+    display: block;
+    animation: march 1.6s steps(32) infinite;
+}
+
+.screen[data-state='loading'] .head {
+    opacity: 0;
+}
+
+@keyframes march {
+    to {
+        mask-position: 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .screen[data-state='loading'] .track::after {
+        animation: none;
+        mask: none;
+        opacity: 0.4;
+    }
+}
+
+/* A phone recording stands at a phone's width, not the column's. */
+.portrait {
+    max-width: var(--layout-phone-media);
+}
+
+/* The road under the screen, in pixels: dim ahead, lit in the line color up to where the clip is.
+   A range input on top makes it a slider: drag or click to seek, arrows from the keyboard. */
+.track,
+.lit {
+    height: var(--route-dot);
+    background: linear-gradient(to right, currentColor var(--route-dot), transparent 0) 0 0 /
+        calc(var(--route-dot) + var(--route-dot-gap)) var(--route-dot) repeat-x;
+}
+
+.track {
+    position: relative;
+    margin: var(--space-1) var(--space-1) var(--space-2);
+    color: var(--color-hairline);
+}
+
+/* Lit with clip-path, not width: the pixels never move, and nothing reflows as the clip plays. */
+.lit {
+    position: absolute;
+    inset: 0;
+    color: var(--c);
+    clip-path: inset(0 calc(100% - var(--progress, 0) * 100%) 0 0);
+}
+
+/* The playhead: one bigger pixel, moved with translate along a full-width rail. */
+.head {
+    position: absolute;
+    inset: 0;
+    translate: calc(var(--progress, 0) * 100%) 0;
+    pointer-events: none;
+}
+
+.head::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: var(--space-3);
+    height: var(--space-3);
+    translate: -50% -50%;
+    background: var(--c);
+    box-shadow: 0 0 0 0.125rem var(--color-surface);
+}
+
+/* The real control, invisible, over the whole road with a taller hit area. */
+.seek {
+    position: absolute;
+    inset: calc(-1 * var(--space-2)) 0;
+    width: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.track:has(.seek:focus-visible) {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: var(--space-2);
+    border-radius: var(--radius-sm);
+}
+
+.caption {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+    max-width: var(--layout-measure);
+}
+
+/* Wide screens: a short road leaves my road at a junction ring and runs into the console's bar.
+   The ring sits on top, so the junction never shows my road's pixels between steps. */
+@media (min-width: 64em) {
+    .screen::before,
+    .screen::after {
+        content: '';
+        position: absolute;
+        top: calc(var(--space-3) + var(--space-2));
+        translate: 0 -50%;
+    }
+
+    .screen::before {
+        right: 100%;
+        width: calc(var(--col-gap) + var(--rail) / 2);
+        height: var(--route-dot);
+        background: linear-gradient(to left, var(--c) var(--route-dot), transparent 0) 100% 0 /
+            calc(var(--route-dot) + var(--route-dot-gap)) var(--route-dot) repeat-x;
+    }
+
+    .screen::after {
+        left: calc(-1 * (var(--col-gap) + var(--rail) / 2));
+        width: var(--space-4);
+        height: var(--space-4);
+        translate: -50% -50%;
+        border-radius: 50%;
+        border: var(--route-node-ring) solid var(--c);
+        background: var(--color-bg);
+    }
+}

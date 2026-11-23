@@ -1,21 +1,20 @@
 /**
- * Builds the portrait and the share card from the owner's GitHub avatar, so changing the photo on
- * GitHub updates the site on its next build. Writes, into public/:
- * - portrait.png: the avatar downscaled to a 40×40 pixel grid (the site shows it pixelated);
+ * Builds the portrait and the share card from the photo in src/assets/portrait.jpg (already cropped
+ * square). Writes, into public/:
+ * - portrait.png: the photo downscaled to a 40×40 pixel grid (the site shows it pixelated);
  * - og.png: a 1200×630 share card drawn from shapes only (no text, so no fonts are needed on the
  *   build machine): the portrait, then a pixel road through one node per line color.
- * If GitHub can't be reached, both are built from portrait-placeholder.png and the build goes on.
  *
  * Usage: node scripts/build-portrait.ts
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import { AVATAR_REQUEST_PX, AVATAR_TIMEOUT_MS, CARD, GITHUB_USER, PORTRAIT_PX } from './constants.ts';
+import { CARD, PORTRAIT_PX } from './constants.ts';
 
 const PUBLIC = (name: string): string => fileURLToPath(new URL(`../public/${name}`, import.meta.url));
+const SOURCE_PATH = fileURLToPath(new URL('../src/assets/portrait.jpg', import.meta.url));
 const TOKENS_PATH = fileURLToPath(new URL('../src/styles/tokens.json', import.meta.url));
-const AVATAR_URL = `https://github.com/${GITHUB_USER}.png?size=${AVATAR_REQUEST_PX}`;
 
 interface Theme {
     bg: string;
@@ -24,22 +23,6 @@ interface Theme {
     lineDotcms: string;
     lineIndependent: string;
     lineTooling: string;
-}
-
-async function avatar(): Promise<{ image: Buffer; source: string }> {
-    try {
-        const response = await fetch(AVATAR_URL, { signal: AbortSignal.timeout(AVATAR_TIMEOUT_MS) });
-
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-
-        return { image: Buffer.from(await response.arrayBuffer()), source: 'GitHub' };
-    } catch (error) {
-        console.warn(`portrait: GitHub avatar unavailable (${String(error)}); using the placeholder`);
-
-        return { image: readFileSync(PUBLIC('portrait-placeholder.png')), source: 'placeholder' };
-    }
 }
 
 /** A row of road pixels from x0 to x1 at height y. */
@@ -79,8 +62,12 @@ function cardSvg(theme: Theme): string {
 
 async function main(): Promise<void> {
     const theme = (JSON.parse(readFileSync(TOKENS_PATH, 'utf8')) as { color: { dark: Theme } }).color.dark;
-    const { image, source } = await avatar();
-    const grid = await sharp(image).resize(PORTRAIT_PX, PORTRAIT_PX, { fit: 'cover' }).removeAlpha().png().toBuffer();
+    const grid = await sharp(SOURCE_PATH)
+        .rotate()
+        .resize(PORTRAIT_PX, PORTRAIT_PX, { fit: 'cover' })
+        .removeAlpha()
+        .png()
+        .toBuffer();
 
     await sharp(grid).toFile(PUBLIC('portrait.png'));
 
@@ -99,7 +86,7 @@ async function main(): Promise<void> {
         .png()
         .toFile(PUBLIC('og.png'));
 
-    console.log(`portrait: built portrait.png and og.png from the ${source} image`);
+    console.log('portrait: built portrait.png and og.png from src/assets/portrait.jpg');
 }
 
 await main();

@@ -20,7 +20,7 @@ The site is **a roguelike run map**. My own path (muted grey) drops from the por
 - **Sentence case everywhere:** headings, buttons, labels, node names (proper nouns keep their capitals). Never Title Case for UI. All caps only in the `pixel` role, which imitates game UI.
 - **One narrator, first person:** "I led Content Drive", "Lideré Content Drive". Never "Jalinson is…".
 - **Ownership first:** every node says what I did (*led*, *planned and built*, *built*, *built most of*) before what it's made with.
-- **Bilingual, equal:** every string exists in `en.json` and `es.json`. Spanish is neutral and uses tú ("Escríbeme", not "Escribime"). Keep product names and English terms of art (Product Engineer, framework, SDK) as they are.
+- **Bilingual, equal:** every string exists in `en.json` and `es.json`. Spanish is neutral and uses tú ("Escríbeme", not "Escribime"). The one exception is Che Bondi's page: the app is for Buenos Aires, so its Spanish may sound Argentine ("colectivo", "cerca tuyo") (owner, 2026-11-23). Keep product names and English terms of art (Product Engineer, framework, SDK) as they are.
 - **No invented claims:** no metrics, quotes or outcomes that aren't real and sourced.
 - **Personality is seasoning:** game and music references (the sprite, the pixel icons, the `?` doors, the "line cleared" and "in progress" tags) appear in small text and decoration, never in headings or in the facts about work.
 
@@ -67,8 +67,8 @@ Three families, all self-hosted (latin + latin-ext so Spanish accents render):
 
 | Role | Token | Size / weight | Use |
 |---|---|---|---|
-| Display | `--type-display-*` | 36→56 / 800 | My name, once per page |
-| Title | `--type-title-*` | 30→44 / 800 | A station page's title; the motto |
+| Display | `--type-display-*` | 36→56 / 800 | My name on the home; a station page's headline. Once per page |
+| Title | `--type-title-*` | 30→44 / 800 | A station's punchline; the motto |
 | Station | `--type-station-*` | 20→24 / 700 | Node names on the map (phone: heading size) |
 | Heading | `--type-heading-*` | 20 / 700 | Headings inside a case study |
 | Lead | `--type-lead-*` | 18→22 / 400 | The role line and bio under my name; a case study's opening line |
@@ -189,9 +189,11 @@ Motion explains a change; it is never decoration. All durations and easings are 
 Station pages (`/[lang]/work/[slug]`) are one level of the run. Any station with an entry in `src/content/work.json` gets one, in both languages; the copy comes from the owner's interview.
 
 - **One page, one line color.** The station's line color marks the node tile, the road, the checkpoints, the decision markers, the links, the "in progress" tag and the terminal prompt. Ground, body text and headings stay neutral; no color washes.
-- **The node and the road:** the node, enlarged, sits where the home's portrait sits, and the road runs down the page from it in pixel steps. Each section heading is a checkpoint ring on it. On phones the rail narrows to the boss size so the text keeps its width.
-- **Header:** "Back to the map" (returns to this node on the home map, centered), the name in `display`, the dates and tag in `meta`, then what I owned as the `lead`, then the project's links.
-- **Sections, in order:** Why it exists, Key decisions (each opens with one road pixel), See it work (a recorded terminal session or a media slot that keeps its size before the media arrives), The hard part (what failed or changed), Where it is now.
+- **The node and the road:** the node (boss size) sits beside "Back to the map", and the road runs down the page from it in pixel steps. Each section heading is a checkpoint ring on it.
+- **Opening, in my words** (owner's pick, 2026-11-19, "In my words"): the name is small (`station` size, weight 800) with the dates and tag in `meta` beside it. The loudest line is the **headline**: what it is, in plain words ("All the content in dotCMS, in one place.") in `display`. What I owned follows as the `lead` in `dim`, then the project's links. (Ownership-only headlines like "Mine, end to end." read oddly as the biggest line: owner, 2026-11-23.)
+- **Sections, in order:** What it does (the key features: a few words each, one per line, each opened by one road pixel), What it fixes, The calls I made, See it work (a recorded terminal session or a media slot that keeps its size before the media arrives), The hard part, What went right (only when the hard part turned into something good; its checkpoint ring is filled), Where it's at. From 64em each section is two columns: the heading on the left (sticky, 3 shares) and the answer on the right (7 shares). Each call I made is a row with a `station`-size title, split by hairlines. See it work sits under its heading (`space-8` between them, not sticky), at most `--layout-stage` (56rem) wide and two thirds of the screen tall.
+- **The punchline:** one line of mine (`punchline` in `work.json`) opens the section it belongs to (What it fixes, or The hard part), set in `title`. It is cut from that section's paragraphs, never repeated in them (owner, 2026-11-23).
+- **A recording is a replay** (`work/components/Screen`): one `surface` console with a bar (the line's pixel icon, the source in `meta`, a "Replay" tag in `pixel`), the screen matted inside, and a road of pixels under it that lights up in the line color as the clip plays (`--progress`, `shared/scripts/loop.ts`). From 64em a short road branches from my road into the bar. Clips are muted loops that play only on screen; with reduced motion they wait with controls.
 - **The end of the level:** previous and next stop in the map's order, through the stations that have a page, as the map's own tiles. After the last one comes Contact (email).
 - **Footer:** after the road ends, behind a hairline, the same contact row that closes the home (email, GitHub, LinkedIn; `shared/components/Socials`). No motto: it belongs to the end of the run on the home.
 - **Open:** a sticky mini-map, and page transitions.
