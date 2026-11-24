@@ -1,7 +1,7 @@
 ---
 import '../../../styles/global.css';
 import { LOCALES, localizedPath, useTranslations, type Locale } from '../../../i18n';
-import { THEME_STORAGE_KEY } from '../../constants';
+import { ARRIVING_KEY, SCROLL_KEY, THEME_STORAGE_KEY } from '../../constants';
 import { personSchema } from '../../utils/person';
 import { Header } from '../Header';
 
@@ -77,9 +77,41 @@ const person = personSchema({ url: new URL(localizedPath(locale), site).href, im
                 /* ignoreStorageBlocked */
             }
         </script>
+
+        <!-- How this page was reached (navigate.ts): a new page, or the same page in the other
+             language. It picks the arrival (global.css), from first paint. `data-fallback` marks a
+             browser without cross-document view transitions (Firefox), which animates <main> itself. -->
+        <script is:inline define:vars={{ arriving: ARRIVING_KEY }}>
+            try {
+                const root = document.documentElement;
+                const kind = sessionStorage.getItem(arriving);
+                sessionStorage.removeItem(arriving);
+                if (!('onpagereveal' in window)) {
+                    root.dataset.fallback = '';
+                }
+                if (kind === 'page' || kind === 'lang') {
+                    root.dataset.arriving = kind;
+                }
+            } catch {
+                /* ignoreStorageBlocked */
+            }
+        </script>
     </head>
     <body>
         <Header locale={locale} path={path} />
         <slot />
+
+        <!-- A language switch opens the other language where the visitor was, before first paint. -->
+        <script is:inline define:vars={{ scroll: SCROLL_KEY }}>
+            try {
+                const y = sessionStorage.getItem(scroll);
+                sessionStorage.removeItem(scroll);
+                if (y !== null) {
+                    scrollTo(0, Number(y));
+                }
+            } catch {
+                /* ignoreStorageBlocked */
+            }
+        </script>
     </body>
 </html>

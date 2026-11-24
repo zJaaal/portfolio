@@ -43,7 +43,15 @@ function glideTo(to: number): void {
     glide = requestAnimationFrame(step);
 }
 
-function center(node: HTMLElement, smooth: boolean): void {
+/**
+ * Where focus goes once a node is centered. `none` on arrival from another page: the browser already
+ * starts keyboard navigation at the node in the address, and a ring nobody asked for reads as a
+ * stray selection. A jump inside the map moves focus to the node, with the ring only when the jump
+ * came from the keyboard.
+ */
+type Focus = 'none' | 'quiet' | 'visible';
+
+function center(node: HTMLElement, smooth: boolean, focus: Focus): void {
     const tile = node.querySelector<HTMLElement>('[data-tile]') ?? node;
     const box = tile.getBoundingClientRect();
     const max = document.documentElement.scrollHeight - innerHeight;
@@ -57,7 +65,10 @@ function center(node: HTMLElement, smooth: boolean): void {
         scrollTo(0, to);
     }
 
-    node.querySelector<HTMLElement>('a')?.focus({ preventScroll: true });
+    if (focus !== 'none') {
+        // `focusVisible` is a newer option: where it's ignored, the browser decides the ring itself.
+        node.querySelector<HTMLElement>('a')?.focus({ preventScroll: true, focusVisible: focus === 'visible' } as FocusOptions);
+    }
 }
 
 document.addEventListener('click', (event) => {
@@ -74,7 +85,8 @@ document.addEventListener('click', (event) => {
 
     event.preventDefault();
     history.pushState(null, '', link.hash);
-    center(node, true);
+    // A click with no pointer position behind it (detail 0) came from the keyboard.
+    center(node, true, event.detail === 0 ? 'visible' : 'quiet');
 });
 
 // Arriving with a node in the address (a shared link, or back and forward) centers it too.
@@ -82,7 +94,7 @@ const arrive = (): void => {
     const node = nodeFor(location.hash);
 
     if (node) {
-        center(node, false);
+        center(node, false, 'none');
     }
 };
 

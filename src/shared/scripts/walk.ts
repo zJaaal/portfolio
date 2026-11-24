@@ -158,7 +158,12 @@ function start(run: HTMLElement): void {
 
         node.addEventListener('pointerenter', enter);
         node.addEventListener('pointerleave', leave);
-        node.addEventListener('focusin', enter);
+        // Only a focus the visitor can see moves it: a quiet focus (a jump made with the mouse) doesn't.
+        node.addEventListener('focusin', (event) => {
+            if ((event.target as Element).matches(':focus-visible')) {
+                enter();
+            }
+        });
         node.addEventListener('focusout', leave);
     }
 

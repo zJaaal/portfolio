@@ -1,4 +1,5 @@
 import { THEME_STORAGE_KEY } from '../constants';
+import { prefersReducedMotion } from './motion';
 
 const THEME = { LIGHT: 'light', DARK: 'dark' } as const;
 
@@ -34,9 +35,7 @@ function render(): void {
     }
 }
 
-function toggle(): void {
-    const next = effectiveTheme() === THEME.DARK ? THEME.LIGHT : THEME.DARK;
-
+function apply(next: Theme): void {
     document.documentElement.dataset.theme = next;
 
     try {
@@ -46,6 +45,26 @@ function toggle(): void {
     }
 
     render();
+}
+
+/**
+ * The new theme sweeps in from the toggle's corner with a stepped, pixel edge (a same-document view
+ * transition; the sweep is in global.css). Without view transitions, or with reduced motion, it just switches.
+ */
+function toggle(): void {
+    const next = effectiveTheme() === THEME.DARK ? THEME.LIGHT : THEME.DARK;
+    const root = document.documentElement;
+
+    if (!document.startViewTransition || prefersReducedMotion()) {
+        apply(next);
+        return;
+    }
+
+    root.dataset.transition = 'theme';
+
+    const transition = document.startViewTransition(() => apply(next));
+
+    void transition.finished.finally(() => delete root.dataset.transition);
 }
 
 for (const button of document.querySelectorAll('[data-theme-toggle]')) {

@@ -1,9 +1,16 @@
 .header {
+    /* Its own layer in a language switch, so it holds still while the page crossfades. */
+    view-transition-name: site-header;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--space-4);
     min-height: 4rem;
+}
+
+/* In a theme switch the circle covers everything, the header included. */
+:global(html[data-transition='theme']) .header {
+    view-transition-name: none;
 }
 
 .home {
@@ -23,9 +30,12 @@
     gap: var(--space-2);
 }
 
-/* A segmented pill: the current language is filled, the other is a plain link. */
+/* A segmented pill: a thumb sits under the current language and slides to the other one when it
+   is picked (locale.ts moves `data-current` before the page changes). */
 .lang {
-    display: flex;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     padding: 0.1875rem;
     border: 1px solid var(--color-hairline);
@@ -35,7 +45,24 @@
     font-weight: 600;
 }
 
+.lang::before {
+    content: '';
+    position: absolute;
+    top: 0.1875rem;
+    bottom: 0.1875rem;
+    left: 0.1875rem;
+    width: calc(50% - 0.1875rem);
+    border-radius: var(--radius-pill);
+    background: var(--color-text);
+    transition: translate var(--motion-enter) var(--motion-ease-out);
+}
+
+.lang[data-current='es']::before {
+    translate: 100% 0;
+}
+
 .lang a {
+    position: relative;
     color: var(--color-muted);
     text-decoration: none;
     min-width: 2.75rem;
@@ -43,18 +70,21 @@
     display: grid;
     place-items: center;
     border-radius: var(--radius-pill);
-    transition:
-        color var(--motion-micro) var(--motion-ease-out),
-        background var(--motion-micro) var(--motion-ease-out);
+    transition: color var(--motion-enter) var(--motion-ease-out);
 }
 
 .lang a:hover {
     color: var(--color-text);
 }
 
-.lang a[aria-current] {
-    background: var(--color-text);
+.lang[data-current='en'] a[hreflang='en'],
+.lang[data-current='es'] a[hreflang='es'] {
     color: var(--color-bg);
+}
+
+.lang a:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.125rem;
 }
 
 .theme {
@@ -80,6 +110,19 @@
 
 :global(html[data-effective='light']) .theme :global(.when-light) {
     display: block;
+}
+
+/* The icon turns in as it swaps, sun for moon. */
+.theme :global(svg) {
+    animation: turn-in var(--motion-reveal) var(--motion-ease-out);
+}
+
+@keyframes turn-in {
+    from {
+        rotate: -90deg;
+        scale: 0.6;
+        opacity: 0;
+    }
 }
 
 :global(html[data-effective='light']) .theme :global(.when-dark) {

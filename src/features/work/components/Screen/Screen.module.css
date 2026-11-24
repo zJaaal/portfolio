@@ -66,9 +66,12 @@
     outline-offset: 0.1875rem;
 }
 
-/* The screen sits inset in the console, so a bright app reads as a screen, not a hole in the page. */
+/* The screen sits in a dark bezel, like a monitor's: a white app keeps its edge against the white
+   console in light mode, and reads as a screen, not a hole in the page, in dark mode. */
 .matte {
     overflow: hidden;
+    padding: var(--space-2);
+    background: var(--color-bezel);
     border-radius: var(--radius-sm);
 }
 

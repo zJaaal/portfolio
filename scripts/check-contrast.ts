@@ -28,8 +28,8 @@ const HEX_CHANNEL_LENGTH = 2;
 const CHANNEL_MAX = 255;
 const RATIO_DECIMALS = 2;
 
-/** [foreground, background, minimum]: keys of a theme in tokens.json. */
-const PAIRS = [
+/** [foreground, background, minimum, only in this theme?]: keys of a theme in tokens.json. */
+const PAIRS: readonly (readonly [string, string, number, string?])[] = [
     ['text', 'bg', TEXT_MIN],
     ['text', 'surface', TEXT_MIN],
     ['muted', 'bg', TEXT_MIN],
@@ -48,12 +48,25 @@ const PAIRS = [
     ['lineDotcms', 'surface', CONTROL_MIN],
     ['lineIndependent', 'surface', CONTROL_MIN],
     ['lineTooling', 'surface', CONTROL_MIN],
+    // The pickup colors (my own things on About): rings and icons, and the page color on a lit node.
+    ['pickupCoral', 'bg', TEXT_MIN],
+    ['pickupRose', 'bg', TEXT_MIN],
+    ['pickupSky', 'bg', TEXT_MIN],
+    ['pickupCoral', 'surface', CONTROL_MIN],
+    ['pickupRose', 'surface', CONTROL_MIN],
+    ['pickupSky', 'surface', CONTROL_MIN],
+    ['bg', 'pickupCoral', CONTROL_MIN],
+    ['bg', 'pickupRose', CONTROL_MIN],
+    ['bg', 'pickupSky', CONTROL_MIN],
     ['station', 'bg', CONTROL_MIN],
     ['focus', 'bg', CONTROL_MIN],
     ['focus', 'surface', CONTROL_MIN],
+    // The bezel around a recorded screen must hold its edge against the console in light mode,
+    // where most recorded apps are white too (dark mode separates them by brightness on its own).
+    ['bezel', 'surface', CONTROL_MIN, 'light'],
     ['hairline', 'bg', HAIRLINE_MIN],
     ['hairline', 'surface', HAIRLINE_MIN]
-] as const;
+];
 
 type Theme = Record<string, string>;
 
@@ -94,7 +107,7 @@ export function contrast(a: string, b: string): number {
 /** Every pair of every theme. Pure: no files, no output. */
 export function checks(themes: Record<string, Theme>): Check[] {
     return Object.entries(themes).flatMap(([theme, colors]) =>
-        PAIRS.map(([fg, bg, minimum]) => ({
+        PAIRS.filter(([, , , only]) => !only || only === theme).map(([fg, bg, minimum]) => ({
             theme,
             fg,
             bg,

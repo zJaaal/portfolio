@@ -1,0 +1,18 @@
+---
+import { LOCALES, useTranslations, type Locale } from '../../i18n';
+import { Layout } from '../../shared/components/Layout';
+import { About } from '../../features/about/components/About';
+
+export function getStaticPaths() {
+    return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const t = useTranslations(locale);
+---
+
+<Layout locale={locale} path="/about/" title={`${t('about.title')} · zJaaal`} description={t('about.description')}>
+    <main class="wrap">
+        <About locale={locale} />
+    </main>
+</Layout>
