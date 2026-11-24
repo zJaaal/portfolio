@@ -121,6 +121,101 @@ ul {
     white-space: nowrap;
 }
 
+/* ---------- transitions between states of the site ---------- */
+/* Every page change, the language switch included: the old page blurs out as the new one comes into
+   focus, so text changing language reads as one word turning into the other. The header holds
+   still (its own layer). Browsers without cross-document view transitions just change the page. */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+}
+
+::view-transition-old(root) {
+    animation: dissolve-out var(--motion-leave) var(--motion-ease-settle) both;
+}
+
+::view-transition-new(root) {
+    animation: dissolve-in var(--motion-arrive) var(--motion-ease-settle) both;
+}
+
+@keyframes dissolve-out {
+    to {
+        opacity: 0;
+        filter: blur(0.25rem);
+        translate: 0 -0.5rem;
+    }
+}
+
+/* It starts faint, not invisible, so the change reads as the page settling, never as a blank flash. */
+@keyframes dissolve-in {
+    from {
+        opacity: 0.3;
+        filter: blur(0.25rem);
+        translate: 0 1rem;
+    }
+}
+
+/* A language switch is the same page in other words: it only fades, nothing moves. */
+html[data-arriving='lang']::view-transition-old(root) {
+    animation: fade-out var(--motion-leave) var(--motion-ease-settle) both;
+}
+
+html[data-arriving='lang']::view-transition-new(root) {
+    animation: fade-in var(--motion-arrive) var(--motion-ease-settle) both;
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        filter: blur(0.125rem);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0.3;
+        filter: blur(0.15rem);
+    }
+}
+
+/* The same arrivals where the browser can't animate across pages (Firefox): <main> comes into
+   focus from first paint; the header, outside it, holds still. Backwards only: once it has
+   arrived, no filter or translate stays on <main> (either would make it the containing block for
+   anything fixed inside it). */
+html[data-fallback][data-arriving='page'] main {
+    animation: dissolve-in var(--motion-arrive) var(--motion-ease-settle) backwards;
+}
+
+html[data-fallback][data-arriving='lang'] main {
+    animation: fade-in var(--motion-arrive) var(--motion-ease-settle) backwards;
+}
+
+/* Switching theme: the new one sweeps in from the toggle's corner (top right) to the opposite one,
+   its edge a staircase of pixel steps, like the roads. One sweep: every part of the page changes
+   once, with nothing blinking. The mask (twice the page in each direction) holds the new theme in
+   its upper-right triangle; moving it carries that stepped diagonal across the page. */
+html[data-transition='theme']::view-transition-old(root) {
+    animation: none;
+}
+
+html[data-transition='theme']::view-transition-new(root) {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' preserveAspectRatio='none' shape-rendering='crispEdges'%3E%3Cpath d='M0 0 48 0 48 48 47 48 47 47 46 47 46 46 45 46 45 45 44 45 44 44 43 44 43 43 42 43 42 42 41 42 41 41 40 41 40 40 39 40 39 39 38 39 38 38 37 38 37 37 36 37 36 36 35 36 35 35 34 35 34 34 33 34 33 33 32 33 32 32 31 32 31 31 30 31 30 30 29 30 29 29 28 29 28 28 27 28 27 27 26 27 26 26 25 26 25 25 24 25 24 24 23 24 23 23 22 23 22 22 21 22 21 21 20 21 20 20 19 20 19 19 18 19 18 18 17 18 17 17 16 17 16 16 15 16 15 15 14 15 14 14 13 14 13 13 12 13 12 12 11 12 11 11 10 11 10 10 9 10 9 9 8 9 8 8 7 8 7 7 6 7 6 6 5 6 5 5 4 5 4 4 3 4 3 3 2 3 2 2 1 2 1 1 0 1 0 0z'/%3E%3C/svg%3E");
+    mask-size: 200% 200%;
+    mask-repeat: no-repeat;
+    animation: sweep var(--motion-reveal) var(--motion-ease-in-out) both;
+}
+
+@keyframes sweep {
+    from {
+        mask-position: 0% 100%;
+    }
+
+    to {
+        mask-position: 100% 0%;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

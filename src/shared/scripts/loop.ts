@@ -15,6 +15,19 @@ const VISIBLE_RATIO = 0.35;
 const SEEK_STEPS = 1000;
 const LOADING_GRACE_MS = 250;
 
+/**
+ * Plays a clip. The native controls come back only when the browser refuses to start it on its own
+ * (autoplay blocked: `NotAllowedError`), so the visitor can press play. A play cut short by a pause,
+ * as when a clip scrolls out of view before it starts (`AbortError`), is no reason to show them.
+ */
+function start(video: HTMLVideoElement): void {
+    video.play().catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === 'NotAllowedError') {
+            video.controls = true;
+        }
+    });
+}
+
 function wire(video: HTMLVideoElement): void {
     const figure = video.closest('figure');
     const road = figure?.querySelector<HTMLElement>('[data-progress]');
@@ -76,7 +89,7 @@ function wire(video: HTMLVideoElement): void {
     replay?.addEventListener('click', () => {
         video.currentTime = 0;
         show(0);
-        void video.play().catch(() => (video.controls = true));
+        start(video);
     });
 }
 
@@ -98,7 +111,7 @@ if (reduced.matches) {
         (entries) => {
             for (const entry of entries) {
                 const video = entry.target as HTMLVideoElement;
-                if (entry.isIntersecting) void video.play().catch(() => (video.controls = true));
+                if (entry.isIntersecting) start(video);
                 else video.pause();
             }
         },

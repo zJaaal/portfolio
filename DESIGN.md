@@ -99,12 +99,17 @@ Each color has one job. A color used outside its role weakens the role. `scripts
 | `line-independent` | `#F2B544` | `#7A4D00` | Artemis and Che Bondi's line |
 | `line-tooling` | `#4FC9AE` | `#066350` | Scripts and libraries |
 | `station` | `#EDE8F7` | `#18121F` | The portrait ring and the Contact boss (the one filled node) |
+| `pickup-coral` | `#F28B66` | `#A8401F` | My own life on About: Maracaibo, electronic engineering, a marker, an item |
+| `pickup-rose` | `#F2789A` | `#A3213F` | My own life on About: learning to program, a marker, an item |
+| `pickup-sky` | `#7EC3E8` | `#1F6188` | My own life on About: Buenos Aires, a marker, an item |
 | `focus` | text color | text color | The focus ring: 2px, offset 3px |
 | `selection-*` | `#4A3790` / white | `#DCD0FF` / ink | Text selection |
+| `bezel` | `#0A0612` | `#241C33` | The dark frame around a recorded screen, so a white app keeps its edge on a white console (≥3:1 on `surface` in light) |
 | `hairline` | `#3A2F57` | `#CFC5E3` | Dividers and borders (≥1.3:1) |
 
 - **Purple marks what you can follow.** The dotCMS line and links. Never a background wash, a heading color, or an ornament.
 - **Line colors identify lines.** A node takes its line's color for its ring, icon and road. On hover its name's underline takes that color, and a role that names another node ("cornerstone of Artemis") sets that name in that node's line color.
+- **Pickup colors are my own life, on About only.** Coral, rose and sky come from the sprite's palette (sneakers, shirt, eyes). They color the life stops on About's road, the "How I work" markers and the off-the-clock inventory. Never on the map, never for work, never as a wash.
 - **Grey is mine and what's next.** My own path, side roads, the road ahead and `?` doors use `muted`. A line's color means "walked".
 - **Recency is tone.** Live nodes use `text`, and finished ones use `dim` at weight 600. Never lower than `dim`.
 - **Dark is designed, not inverted.** Light uses deeper purple, amber and teal so the lines keep 3:1 against `bg`.
@@ -157,10 +162,16 @@ Motion explains a change; it is never decoration. All durations and easings are 
 | Exit | `--motion-exit` | 150ms | Things leaving |
 | Micro | `--motion-micro` | 180ms | Hover, the icon lift, toggles, the theme switch |
 | Enter | `--motion-enter` | 220ms | Things appearing |
-| Page | `--motion-page` | 320ms | Arrival pop; the float cycle is 3×; the sprite's step aside is 1.5× |
+| Page | `--motion-page` | 320ms | Arrival pop; the float cycle is 3×; the sprite's step aside is 1.5×; |
+| Reveal | `--motion-reveal` | 480ms | The theme switch's staircase sweep; the toggle's icon turning in |
+| Leave | `--motion-leave` | 300ms | The old page fading out (where the browser keeps it on screen) |
+| Arrive | `--motion-arrive` | 520ms | The new page settling in, from faint (30%) and slightly blurred, on `--motion-ease-settle` (a cubic ease-out: the UI ease-out is so front-loaded the arrival would be over in a blink) |
 | Sprite | `--motion-sprite-frame` | 120ms/frame | The walk cycle and the hop, `steps()` |
 
 **The one authored moment is the sprite walking the road.** Sections don't each get an entrance animation.
+
+- **Between pages** (cross-document view transitions, `global.css`): the old page blurs out as the new one comes into focus, so a language switch reads as the words turning into the other language. The header is its own layer and holds still. The language pill's thumb slides to the new language first (`locale.ts`). Browsers without cross-document view transitions (Firefox) get the arrival on `<main>` from `navigate.ts`, from first paint; the header still holds. **Nothing delays a navigation:** links go at once, and only the arrival animates (`leave`, `arrive`). It starts faint, never invisible, so it never flashes the empty page. **A language switch doesn't move:** it is the same page in other words, so it only fades, and it opens at the scroll position it left from (restored before first paint).
+- **Theme switch** (`theme.ts`, the sweep in `global.css`): the new theme sweeps in from the toggle's corner to the opposite one, its edge a staircase of pixel steps like the roads (`--motion-reveal`). Every part of the page changes once: **no full-screen flicker or pixel dither, ever** (photosensitive seizures, WCAG 2.3.1); the toggle's icon turns in. Without view transitions it switches instantly.
 
 - **The walk** (`src/shared/scripts/walk.ts`, constants in `features/home/shared/constants.ts`): as the page scrolls, the sprite walks to the last node above a reading line (55% of the viewport) on its own clock, so a flick of the wheel never makes it jump. Velocity is eased: it speeds up gently and brakes as it nears a node. It rests on the node's center. At the top of the page the reading line starts at the viewport edge and settles over half a viewport of scrolling.
 - **Hover and focus:** when the node it stands on is hovered or focused, it steps aside to the node's left and faces the node, so the icon can float, then steps back.

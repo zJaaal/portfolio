@@ -12,6 +12,13 @@ function monthYear(yearMonth: string, locale: string): { month: string; year: st
     return { month: name.charAt(0).toUpperCase() + name.slice(1), year: String(year) };
 }
 
+/** A single month, for a stop on a road: "Feb 2022" ("Feb 2022" in Spanish too). Pure. */
+export function formatMonth(yearMonth: string, locale: string): string {
+    const { month, year } = monthYear(yearMonth, locale);
+
+    return `${month} ${year}`;
+}
+
 /**
  * When a station ran, for its label: "Mar – May 2023", "Nov 2023 – Jun 2025", "Jun 2025 – now",
  * or "since Nov 2023" for finished work that still gets updates. The year is said once when both

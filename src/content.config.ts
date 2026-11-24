@@ -76,4 +76,36 @@ const work = defineCollection({
     })
 });
 
-export const collections = { stations, work };
+/**
+ * The About page (`/[lang]/about/`): one entry, from the owner's interview (PRODUCT.md, About).
+ * Its road runs in the map's order; a stop with `station` links to that station's page.
+ */
+const about = defineCollection({
+    loader: file('src/content/about.json'),
+    schema: z.object({
+        /** Where the road runs, shown small beside the name. */
+        place: localized,
+        /** The lead under the motto. */
+        lead: localized,
+        road: z
+            .array(
+                z.object({
+                    /** A year and month on the map's time axis, or a place where the date isn't the point. */
+                    when: z.union([yearMonth, localized]),
+                    title: localized,
+                    text: localized,
+                    station: z.string().optional(),
+                    /** Its pixel icon; the last stop, now, shows my sprite instead. */
+                    icon: z.string().optional(),
+                    /** Its node's color: a pickup color for my own life, the line's color for work, or now. */
+                    color: z.enum(['coral', 'rose', 'sky', 'dotcms', 'tooling', 'independent', 'now'])
+                })
+            )
+            .min(1),
+        /** How I work: three or four behavioral sentences, not a skills list. */
+        work: z.array(localized).min(3).max(4),
+        offClock: z.array(z.object({ title: localized, text: localized, icon: z.string(), color: z.enum(['coral', 'rose', 'sky']) })).min(1)
+    })
+});
+
+export const collections = { stations, work, about };

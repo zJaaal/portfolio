@@ -85,9 +85,13 @@
     --motion-micro: 180ms;
     --motion-enter: 220ms;
     --motion-page: 320ms;
+    --motion-reveal: 480ms;
+    --motion-leave: 300ms;
+    --motion-arrive: 520ms;
     --motion-sprite-frame: 120ms;
     --motion-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --motion-ease-settle: cubic-bezier(0.33, 1, 0.68, 1);
     --layout-gutter-phone: 1rem;
     --layout-gutter-desktop: 4rem;
     --layout-max-map: 90rem;
@@ -98,6 +102,7 @@
     --layout-breakpoint-desktop: 80em;
     --color-bg: #F7F4FC;
     --color-surface: #FFFFFF;
+    --color-bezel: #241C33;
     --color-hairline: #CFC5E3;
     --color-text: #18121F;
     --color-muted: #46405A;
@@ -106,6 +111,9 @@
     --color-line-dotcms: #5A3CC8;
     --color-line-independent: #7A4D00;
     --color-line-tooling: #066350;
+    --color-pickup-coral: #A8401F;
+    --color-pickup-rose: #A3213F;
+    --color-pickup-sky: #1F6188;
     --color-station: #18121F;
     --color-on-badge: #FFFFFF;
     --color-focus: #18121F;
@@ -120,6 +128,7 @@
         color-scheme: dark;
         --color-bg: #120C1F;
         --color-surface: #1C1530;
+        --color-bezel: #0A0612;
         --color-hairline: #3A2F57;
         --color-text: #EDE8F7;
         --color-muted: #A9A0C4;
@@ -128,6 +137,9 @@
         --color-line-dotcms: #8B6CF0;
         --color-line-independent: #F2B544;
         --color-line-tooling: #4FC9AE;
+        --color-pickup-coral: #F28B66;
+        --color-pickup-rose: #F2789A;
+        --color-pickup-sky: #7EC3E8;
         --color-station: #EDE8F7;
         --color-on-badge: #120C1F;
         --color-focus: #EDE8F7;
@@ -139,6 +151,7 @@
     color-scheme: dark;
     --color-bg: #120C1F;
     --color-surface: #1C1530;
+    --color-bezel: #0A0612;
     --color-hairline: #3A2F57;
     --color-text: #EDE8F7;
     --color-muted: #A9A0C4;
@@ -147,6 +160,9 @@
     --color-line-dotcms: #8B6CF0;
     --color-line-independent: #F2B544;
     --color-line-tooling: #4FC9AE;
+    --color-pickup-coral: #F28B66;
+    --color-pickup-rose: #F2789A;
+    --color-pickup-sky: #7EC3E8;
     --color-station: #EDE8F7;
     --color-on-badge: #120C1F;
     --color-focus: #EDE8F7;

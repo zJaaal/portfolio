@@ -2,7 +2,7 @@
 
 Where the rebuild stands, and what comes next. Update this at the end of every working session.
 
-_Last updated: 2026-11-18_
+_Last updated: 2026-11-23_
 
 ## Live now
 
@@ -36,8 +36,8 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
 1. **The map:** merged. A roguelike run map (see the code in `features/home`): my path drops from the portrait, each work line branches off it, every road ends at Contact, and a pixel sprite walks it as the page scrolls. One fluid tree from 48em up, a column on phones. Contact is a `mailto:` link showing the address. The key (lines, next stop, line cleared) sits under the intro, before the map. Years are a gutter tick for every year 2020 to 2026 (first node of the year; years without a node sit halfway between neighbours). A cleared line's flag sits one floor below its last station. The intro has a draft "Now" line linking to the map nodes; the owner rewrites it.
    - **Open:** Station links 404 until step 3. The Playwright overlap check lives in a scratch script; it belongs in the step 5 suite.
 
-2. **About:** the origin story, how I work (three or four behavioral sentences, no soft-skills list), and off the clock (guitar, metalcore, Zelda, Terraria, roguelikes).
-3. **Station pages:** the template is built, with nine pages from the owner's interviews (copy in review): react-scroll-utilities, Content Types, Template Builder, New Edit Content, dotCMS dev scripts, UVE + SDKs, Content Drive, Che Bondi and Artemis. Their media slots wait for screenshots and recordings. Every station on the map now has a page. **Next session:** give the station pages more personality (the owner's call: the template is solid but plain), then add the media. A new station gets one by adding its entry to `src/content/work.json`: what I owned, why it exists, key decisions, the proof (a terminal session or media), the hard part and where it is now.
+2. **About:** built (`/[lang]/about/`, `features/about`, copy in `src/content/about.json` from the owner's interview, facts in PRODUCT.md). The motto as headline; "The road here" as a small road of icon nodes (life stops in the pickup colors, work stops in their line's color, now holds the sprite); "How I work" (four sentences); "Off the clock" as an inventory (music, video games, twisty puzzles). No personal photos (the owner's call). The home intro links to it with a button, and the portrait does too.
+3. **Station pages:** shipped (PR #8). Each opens with what it is, key features and a punchline, and has a recorded demo in a replay frame (dark bezel, loading state, hashed media URLs cached a year). A new station gets a page by adding its entry to `src/content/work.json`.
 4. **Contact:** `me@zjaaal.dev`, GitHub, LinkedIn (`https://www.linkedin.com/in/zjaaal/`, already in the JSON-LD `sameAs`).
 5. **Hardening:**
    - an edge Worker for `/` locale negotiation;
@@ -48,7 +48,7 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
 
 ## Waiting on the owner
 
-- **Media:** the Che Bondi screen recording, and dotCMS screenshots (Content Drive, UVE, Content Types, Template Builder).
+- **Portrait:** the owner is taking a new photo. Swap `src/assets/portrait.jpg` (square, face centered), run `pnpm portrait` to check, ship.
 - **Links:** URLs of the UVE and SDK blog posts.
 - **Sprite and portrait:** who makes the sprite's final pixel art. The portrait is built from `src/assets/portrait.jpg` (cropped square) by `pnpm portrait`: replace that file, then redeploy.
 
@@ -56,6 +56,9 @@ It is available in English (`/en/`) and Spanish (`/es/`). `/` opens in English u
 
 - **Node:** run `nvm use` (Node 24) first. Corepack with pnpm 12 fails on Node 22.
 - **Language switch:** it was a two-station track, and the owner found it confusing; it is now a segmented `EN | ES` pill.
+- **Transitions:** page changes use cross-document view transitions (Chrome, Safari) and `navigate.ts` for Firefox; nothing may delay a navigation, and no full-screen flicker or dither (WCAG 2.3.1). The theme switch is a stepped sweep from the toggle.
+- **Dev vs prod:** the dev server 404s `/en` without the trailing slash; Cloudflare redirects it. Restart the dev server after a content-schema change (stale data store).
+- **Pushing media:** large pushes over HTTPS can drop; `http.postBuffer` is raised in this repo's git config.
 - **`pnpm deploy`:** a pnpm built-in that shadows any script with that name. The manual deploy script is `pnpm release`.
 - **`PRODUCT.md`:** local only (gitignored). It was purged from `main`'s history on 2026-11-18. GitHub still keeps PR #2's original commit under the pull request, and only GitHub Support can remove that.
 - **Private repos:** Che Bondi (`project-millennium-falcon`) and `dotcms-scripts` are private, so never link them.

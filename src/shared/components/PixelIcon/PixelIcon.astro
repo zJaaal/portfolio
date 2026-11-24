@@ -4,12 +4,24 @@ import styles from './PixelIcon.module.css';
 
 interface Props {
     name: PixelIconName;
+    /** Centers the lit pixels themselves rather than the 8×8 grid, for an icon alone in a round tile. */
+    fit?: boolean;
 }
 
-const { name } = Astro.props;
+const { name, fit = false } = Astro.props;
 const pixels = PIXEL_ICONS[name].flatMap((row, y) => [...row].flatMap((cell, x) => (cell === LIT ? [{ x, y }] : [])));
+
+// The drawing's own bounds, squared, so an icon with an empty row or column still sits centered.
+const xs = pixels.map((p) => p.x);
+const ys = pixels.map((p) => p.y);
+const width = Math.max(...xs) - Math.min(...xs) + 1;
+const height = Math.max(...ys) - Math.min(...ys) + 1;
+const side = Math.max(width, height);
+const viewBox = fit
+    ? `${Math.min(...xs) - (side - width) / 2} ${Math.min(...ys) - (side - height) / 2} ${side} ${side}`
+    : `0 0 ${PIXEL_GRID} ${PIXEL_GRID}`;
 ---
 
-<svg class={styles.icon} viewBox={`0 0 ${PIXEL_GRID} ${PIXEL_GRID}`} shape-rendering="crispEdges" fill="currentColor" aria-hidden="true">
+<svg class={styles.icon} viewBox={viewBox} shape-rendering="crispEdges" fill="currentColor" aria-hidden="true">
     {pixels.map(({ x, y }) => <rect x={x} y={y} width="1" height="1" />)}
 </svg>

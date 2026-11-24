@@ -1,0 +1,174 @@
+[
+  {
+    "id": "about",
+    "place": {
+      "en": "Maracaibo → Buenos Aires",
+      "es": "Maracaibo → Buenos Aires"
+    },
+    "lead": {
+      "en": "From Maracaibo to Buenos Aires, and from electronic engineering to product engineering. A long road, and I'm still on it.",
+      "es": "De Maracaibo a Buenos Aires, y de la ingeniería electrónica a la ingeniería de producto. Un camino largo, y sigo en él."
+    },
+    "road": [
+      {
+        "when": {
+          "en": "Maracaibo",
+          "es": "Maracaibo"
+        },
+        "title": {
+          "en": "Where it started",
+          "es": "Donde empezó"
+        },
+        "text": {
+          "en": "I grew up in Maracaibo, Zulia, in Venezuela. In secondary school I learned circuits and knew right away I wanted that for a career.",
+          "es": "Crecí en Maracaibo, Zulia, en Venezuela. En la secundaria aprendí circuitos y supe enseguida que quería dedicarme a eso."
+        },
+        "icon": "home",
+        "color": "coral"
+      },
+      {
+        "when": {
+          "en": "University",
+          "es": "Universidad"
+        },
+        "title": {
+          "en": "Electronic engineering",
+          "es": "Ingeniería electrónica"
+        },
+        "text": {
+          "en": "I studied electronic engineering and left when the country's situation made it too hard to go on. The university has fixed a lot of that since. Its introduction to programming stayed with me.",
+          "es": "Estudié ingeniería electrónica y la dejé cuando la situación del país hizo muy difícil seguir. La universidad ha mejorado mucho desde entonces. Su introducción a la programación se quedó conmigo."
+        },
+        "icon": "chip",
+        "color": "coral"
+      },
+      {
+        "when": {
+          "en": "2020",
+          "es": "2020"
+        },
+        "title": {
+          "en": "Learned to program",
+          "es": "Aprendí a programar"
+        },
+        "text": {
+          "en": "A friend asked if I wanted to learn. He sent me videos and docs, helped me set everything up, and I started with small games in Lua, then C# and .NET, the stack he knew. I worked the counter at a liquor store and studied in my free time, until my computer broke and I had to stop.",
+          "es": "Un amigo me preguntó si quería aprender. Me pasó videos y documentación, me ayudó a instalar todo y empecé con juegos pequeños en Lua, y después C# y .NET, el stack que él conocía. Trabajaba atendiendo clientes en una licorería y estudiaba en mi tiempo libre, hasta que se me dañó la computadora y tuve que parar."
+        },
+        "icon": "code",
+        "color": "rose"
+      },
+      {
+        "when": "2022-02",
+        "title": {
+          "en": "Buenos Aires",
+          "es": "Buenos Aires"
+        },
+        "text": {
+          "en": "My aunt gave me a chance to move. It was all or nothing, and I picked all. Leaving most of my family and friends was the hardest part. With no computer, I learned JavaScript, HTML and CSS in a paper notebook, which I still have, until my uncle lent me his laptop. I changed stacks to find a job as fast as I could.",
+          "es": "Mi tía me dio la oportunidad de mudarme. Era todo o nada, y elegí todo. Lo más difícil fue dejar a gran parte de mi familia y mis amigos. Sin computadora, aprendí JavaScript, HTML y CSS en un cuaderno de papel, que todavía tengo, hasta que mi tío me prestó su laptop. Cambié de stack para conseguir trabajo lo antes posible."
+        },
+        "icon": "plane",
+        "color": "sky"
+      },
+      {
+        "when": "2022-10",
+        "title": {
+          "en": "react-scroll-utilities",
+          "es": "react-scroll-utilities"
+        },
+        "text": {
+          "en": "Many interviews didn't work out, and I kept building. react-scroll-utilities was the project I shipped to npm.",
+          "es": "Muchas entrevistas no salieron y seguí construyendo. react-scroll-utilities fue el proyecto que publiqué en npm."
+        },
+        "station": "react-scroll-utilities",
+        "icon": "package",
+        "color": "tooling"
+      },
+      {
+        "when": "2023-03",
+        "title": {
+          "en": "Joined dotCMS",
+          "es": "Entré a dotCMS"
+        },
+        "text": {
+          "en": "dotCMS reached out through a reference. Several rounds of interviews, and I didn't know Angular: I learned the basics for the challenge and passed it.",
+          "es": "dotCMS me contactó por una referencia. Fueron varias rondas de entrevistas y no sabía Angular: aprendí lo básico para el desafío y lo pasé."
+        },
+        "icon": "dotcms",
+        "color": "dotcms"
+      },
+      {
+        "when": {
+          "en": "Now",
+          "es": "Ahora"
+        },
+        "title": {
+          "en": "Still on the road",
+          "es": "Sigo en camino"
+        },
+        "text": {
+          "en": "I lead Content Drive at dotCMS, and build Artemis and Che Bondi on my own.",
+          "es": "Lidero Content Drive en dotCMS, y construyo Artemis y Che Bondi por mi cuenta."
+        },
+        "color": "now"
+      }
+    ],
+    "work": [
+      {
+        "en": "Before I build, I research and ask questions until the picture is clear, then plan with the whole of it in mind.",
+        "es": "Antes de construir, investigo y pregunto hasta tener la visión clara, y planifico con el panorama completo en mente."
+      },
+      {
+        "en": "Teammates come to me for guidance, a second opinion, or a fresh angle on a problem.",
+        "es": "Mi equipo me busca para orientación, una segunda opinión u otra mirada sobre un problema."
+      },
+      {
+        "en": "I defend communication and flexibility. We're human and we make mistakes; what matters is owning them and fixing them.",
+        "es": "Defiendo la comunicación y la flexibilidad. Somos humanos y nos equivocamos; lo que importa es hacernos cargo y corregirlo."
+      },
+      {
+        "en": "AI is my executor and my research tool. It brings me the information; I make the calls.",
+        "es": "La IA es mi ejecutor y mi herramienta de investigación. Ella me trae la información; yo tomo las decisiones."
+      }
+    ],
+    "offClock": [
+      {
+        "title": {
+          "en": "Music",
+          "es": "Música"
+        },
+        "text": {
+          "en": "I listen to a bit of everything, mostly metal, rock, metalcore and rap: Erra, Linkin Park, Bring Me the Horizon. I've played guitar for a year and a half, and just got a seven-string for the heavier songs.",
+          "es": "Escucho de todo, sobre todo metal, rock, metalcore y rap: Erra, Linkin Park, Bring Me the Horizon. Toco guitarra desde hace un año y medio, y hace poco me compré una de siete cuerdas para las canciones más pesadas."
+        },
+        "icon": "music",
+        "color": "rose"
+      },
+      {
+        "title": {
+          "en": "Video games",
+          "es": "Videojuegos"
+        },
+        "text": {
+          "en": "Open worlds, puzzles and roguelikes are the ones that hook me.",
+          "es": "Los mundos abiertos, los puzzles y los roguelikes son los que más me enganchan."
+        },
+        "icon": "gamepad",
+        "color": "sky"
+      },
+      {
+        "title": {
+          "en": "Twisty puzzles",
+          "es": "Cubos Rubik"
+        },
+        "text": {
+          "en": "I love them, and I have a few: two 3x3s, a 3x3 Mirror, a 4x4 Axis, a 7x7 and a Pyraminx.",
+          "es": "Me encantan, y tengo varios: dos 3x3, un 3x3 Mirror, un 4x4 Axis, un 7x7 y un Pyraminx."
+        },
+        "icon": "cube",
+        "color": "coral"
+      }
+    ]
+  }
+]

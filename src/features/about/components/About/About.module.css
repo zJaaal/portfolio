@@ -1,0 +1,424 @@
+/* ---------- About: the start of the line, on my own muted road ---------- */
+/* Built like a station page (the node beside the way back, the road down the page, a checkpoint
+   per section), but the node is my portrait and the road is my own path's grey, as on the map. */
+.about {
+    --c: var(--color-muted);
+    --rail: var(--route-boss-phone);
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding: var(--space-8) 0 var(--space-16);
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tile {
+    flex: none;
+    width: var(--rail);
+    height: var(--rail);
+    overflow: hidden;
+    border-radius: 50%;
+    border: var(--route-portrait-ring) solid var(--color-station);
+    background: var(--color-surface);
+}
+
+.tile img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+
+.road {
+    flex: 1;
+    width: var(--route-dot);
+    background: linear-gradient(to bottom, var(--c) var(--route-dot), transparent 0) 0 0 / var(--route-dot)
+        calc(var(--route-dot) + var(--route-dot-gap)) repeat-y;
+}
+
+.body {
+    min-width: 0;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--rail);
+    color: var(--color-muted);
+    text-decoration: none;
+}
+
+.back:hover {
+    color: var(--color-text);
+}
+
+.back:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.backIcon {
+    width: var(--space-3);
+    height: var(--space-3);
+}
+
+/* ---------- opening: the motto large ---------- */
+.header {
+    margin-top: var(--space-8);
+}
+
+.who {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-4);
+}
+
+.name {
+    font-family: var(--type-station-family);
+    font-size: var(--type-station-size);
+    font-weight: var(--type-display-weight);
+    line-height: var(--type-station-leading);
+    letter-spacing: var(--type-station-tracking);
+}
+
+/* The motto, set on its two lines; each line keeps whole where the width allows. */
+.headline {
+    margin-top: var(--space-4);
+    font-family: var(--type-display-family);
+    font-size: var(--type-display-size);
+    font-weight: var(--type-display-weight);
+    line-height: var(--type-display-leading);
+    letter-spacing: var(--type-display-tracking);
+}
+
+.headline span {
+    display: block;
+}
+
+.lead {
+    max-width: 44ch;
+    margin-top: var(--space-6);
+    font-size: var(--type-lead-size);
+    line-height: var(--type-lead-leading);
+    color: var(--color-dim);
+    text-wrap: pretty;
+}
+
+/* ---------- sections: the heading on the left, the answer on the right ---------- */
+.section {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-16);
+}
+
+.checkpoint {
+    position: relative;
+    font-family: var(--type-heading-family);
+    font-size: var(--type-heading-size);
+    font-weight: var(--type-heading-weight);
+    line-height: var(--type-heading-leading);
+    text-wrap: balance;
+}
+
+.checkpoint::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * (var(--col-gap) + var(--rail) / 2));
+    top: calc(var(--type-heading-leading) * 0.5em);
+    width: var(--space-4);
+    height: var(--space-4);
+    translate: -50% -50%;
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--c);
+    background: var(--color-bg);
+}
+
+/* The road here: a small road of its own, one node per stop with its pixel icon. My own life takes
+   the pickup colors (from my sprite's palette); work takes its line's color; now holds my sprite. */
+.stops,
+.work,
+.off {
+    min-width: 0;
+    max-width: var(--layout-measure);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.stops {
+    --node: var(--space-12);
+    display: grid;
+    gap: var(--space-8);
+}
+
+.stopItem {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--node) minmax(0, 1fr);
+    column-gap: var(--space-6);
+    align-items: start;
+}
+
+/* One color per stop or item, for its node, icon and date. */
+.c-coral {
+    --stop-c: var(--color-pickup-coral);
+}
+
+.c-rose {
+    --stop-c: var(--color-pickup-rose);
+}
+
+.c-sky {
+    --stop-c: var(--color-pickup-sky);
+}
+
+.c-dotcms {
+    --stop-c: var(--color-line-dotcms);
+}
+
+.c-tooling {
+    --stop-c: var(--color-line-tooling);
+}
+
+.c-independent {
+    --stop-c: var(--color-line-independent);
+}
+
+.c-now {
+    --stop-c: var(--color-text);
+}
+
+.node {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: var(--node);
+    height: var(--node);
+    border-radius: 50%;
+    border: var(--route-node-ring) solid var(--stop-c);
+    background: var(--color-bg);
+    color: var(--stop-c);
+    transition: background-color var(--motion-micro) var(--motion-ease-out),
+        color var(--motion-micro) var(--motion-ease-out);
+}
+
+.node > :global(svg) {
+    width: 42%;
+    height: 42%;
+    transition: translate var(--motion-micro) var(--motion-ease-out),
+        filter var(--motion-micro) var(--motion-ease-out);
+}
+
+/* Now: I stand in the last node. My sprite keeps its own colors. */
+.c-now .node > :global(svg) {
+    width: 46%;
+    height: 56%;
+}
+
+.c-now .node :global(.legs-together) {
+    display: none;
+}
+
+/* Hover: the node lights up in its color and the icon lifts over a pixel shadow, like a pickup. */
+.stopItem:hover .node {
+    background: var(--stop-c);
+    color: var(--color-bg);
+}
+
+.c-now:hover .node {
+    background: var(--color-bg);
+}
+
+.stopItem:hover .node > :global(svg),
+.slot:hover .item > :global(svg) {
+    translate: 0 -0.125rem;
+    filter: drop-shadow(0 0.25rem 0 color-mix(in srgb, currentColor 35%, transparent));
+}
+
+/* The road between two nodes, in pixel steps. */
+.stopItem:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--node) / 2 - var(--route-dot) / 2);
+    top: var(--node);
+    bottom: calc(-1 * var(--space-8));
+    width: var(--route-dot);
+    background: linear-gradient(to bottom, var(--color-muted) var(--route-dot), transparent 0) 0 0 / var(--route-dot)
+        calc(var(--route-dot) + var(--route-dot-gap)) repeat-y;
+}
+
+.when {
+    margin-top: var(--space-1);
+    color: var(--stop-c);
+    font-variant-numeric: tabular-nums;
+}
+
+.stop {
+    margin: var(--space-1) 0 var(--space-2);
+    font-family: var(--type-station-family);
+    font-size: var(--type-station-size);
+    font-weight: var(--type-station-weight);
+    line-height: var(--type-station-leading);
+    letter-spacing: var(--type-station-tracking);
+    text-wrap: balance;
+}
+
+.stop a {
+    color: inherit;
+    text-decoration-color: var(--color-hairline);
+    text-underline-offset: 0.2em;
+}
+
+.stop a:hover {
+    text-decoration-color: currentColor;
+}
+
+.stop a:focus-visible {
+    outline: 0.125rem solid var(--color-focus);
+    outline-offset: 0.1875rem;
+}
+
+.stops p:not(.when),
+.work li,
+.slot p {
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    text-wrap: pretty;
+}
+
+.stops p:not(.when) {
+    color: var(--color-dim);
+}
+
+/* How I work: four sentences, each its own step. */
+.work {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.work li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+}
+
+.work li::before {
+    content: '';
+    flex: none;
+    width: var(--route-dot);
+    height: var(--route-dot);
+    translate: 0 -0.15em;
+    background: var(--color-pickup-coral);
+}
+
+.work li:nth-child(3n + 2)::before {
+    background: var(--color-pickup-rose);
+}
+
+.work li:nth-child(3n + 3)::before {
+    background: var(--color-pickup-sky);
+}
+
+/* Off the clock: an inventory, one slot per thing, its icon large, each in its pickup color. */
+.off {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.slot {
+    display: grid;
+    grid-template-columns: var(--space-16) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    transition: border-color var(--motion-micro) var(--motion-ease-out);
+}
+
+.slot:hover {
+    border-color: var(--stop-c);
+}
+
+.item {
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: var(--space-16);
+    height: var(--space-16);
+    border: var(--route-node-ring) solid var(--stop-c);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    color: var(--stop-c);
+}
+
+.item > :global(svg) {
+    width: 46%;
+    height: 46%;
+    transition: translate var(--motion-micro) var(--motion-ease-out),
+        filter var(--motion-micro) var(--motion-ease-out);
+}
+
+.itemName {
+    font-family: var(--type-pixel-family);
+    font-size: var(--type-pixel-size);
+    letter-spacing: var(--type-pixel-tracking);
+    line-height: var(--type-pixel-leading);
+    text-transform: uppercase;
+    color: var(--stop-c);
+}
+
+.slot p {
+    margin-top: var(--space-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .node,
+    .node > :global(svg),
+    .item > :global(svg),
+    .slot {
+        transition: none;
+    }
+}
+
+.end {
+    margin-top: var(--space-24);
+    max-width: var(--layout-measure);
+}
+
+.footer {
+    grid-column: 2;
+    max-width: var(--layout-measure);
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-hairline);
+}
+
+@media (min-width: 40em) {
+    .about {
+        --rail: var(--route-boss);
+    }
+}
+
+@media (min-width: 64em) {
+
+    .section {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+        column-gap: var(--space-12);
+    }
+
+    .side {
+        position: sticky;
+        top: var(--space-8);
+        align-self: start;
+    }
+}

@@ -1,5 +1,9 @@
 export const THEME_STORAGE_KEY = 'theme';
 export const LOCALE_COOKIE = 'lang';
+/** Session flag: how this page was reached ('page' or 'lang'), so it arrives with the right transition. */
+export const ARRIVING_KEY = 'arriving';
+/** Session value: the scroll position a language switch left from, so the other language opens there. */
+export const SCROLL_KEY = 'scroll';
 /** One year. */
 export const LOCALE_COOKIE_MAX_AGE_S = 31_536_000;
 

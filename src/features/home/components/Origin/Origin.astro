@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import { useTranslations, type Locale } from '../../../../i18n';
+import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
+import { PixelIcon } from '../../../../shared/components/PixelIcon';
 import { cx } from '../../../../shared/utils/cx';
 import { splitMentions } from '../../utils/mentions';
 import { Key } from '../Key';
@@ -22,9 +23,10 @@ const now = splitMentions(
 
 <div class={styles.origin}>
     <div class={styles.start}>
-        <div class={styles.portrait}>
+        <!-- The portrait is the start of my own line, and a way into its story. -->
+        <a class={styles.portrait} href={localizedPath(locale, '/about/')} tabindex="-1">
             <img src="/portrait.png" width="40" height="40" alt="Jalinson Diaz" />
-        </div>
+        </a>
         <div class={styles.stem} aria-hidden="true"></div>
     </div>
 
@@ -43,6 +45,10 @@ const now = splitMentions(
                 )
             }
         </p>
+        <a class={styles.aboutLink} href={localizedPath(locale, '/about/')}>
+            {t('about.link')}
+            <span class={styles.aboutArrow} aria-hidden="true"><PixelIcon name="back" /></span>
+        </a>
     </div>
 
     <div class={styles.key}>

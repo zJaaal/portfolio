@@ -1,0 +1,129 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { localizedPath, useTranslations, type Locale } from '../../../../i18n';
+import { PixelIcon } from '../../../../shared/components/PixelIcon';
+import type { PixelIconName } from '../../../../shared/components/PixelIcon/PixelIcon.constants';
+import { Socials } from '../../../../shared/components/Socials';
+import { Sprite } from '../../../../shared/components/Sprite';
+import { cx } from '../../../../shared/utils/cx';
+import { formatMonth } from '../../../../shared/utils/dates';
+import { Stops } from '../../../work/components/Stops';
+import styles from './About.module.css';
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const about = (await getEntry('about', 'about'))!.data;
+
+// The road's stops: a month on the map's axis, or a word where the date isn't the point.
+const road = about.road.map((stop) => ({
+    when: typeof stop.when === 'string' ? formatMonth(stop.when, locale) : stop.when[locale],
+    title: stop.title[locale],
+    text: stop.text[locale],
+    href: stop.station && localizedPath(locale, `/work/${stop.station}/`),
+    icon: stop.icon as PixelIconName | undefined,
+    color: stop.color
+}));
+
+// About starts the line: its next stop is the first station with a page, in the map's order.
+const built = new Set((await getCollection('work')).map((entry) => entry.id));
+const first = (await getCollection('stations')).filter((entry) => built.has(entry.id)).sort((a, b) => a.data.start.localeCompare(b.data.start))[0];
+const next = {
+    name: first.data.name[locale],
+    href: localizedPath(locale, `/work/${first.id}/`),
+    icon: first.data.line as PixelIconName,
+    line: first.data.line,
+    caption: t('work.next')
+};
+---
+
+<article class={styles.about}>
+    <!-- My own node: the portrait, with my own muted road running down the page from it. -->
+    <div class={styles.start} aria-hidden="true">
+        <span class={styles.tile}><img src="/portrait.png" width="40" height="40" alt="" /></span>
+        <span class={styles.road}></span>
+    </div>
+
+    <div class={styles.body}>
+        <a class={styles.back} href={localizedPath(locale)}>
+            <span class={styles.backIcon} aria-hidden="true"><PixelIcon name="back" /></span>
+            <span class="meta">{t('work.back')}</span>
+        </a>
+
+        <!-- The motto is the loudest line on the page. -->
+        <header class={styles.header}>
+            <div class={styles.who}>
+                <h1 class={styles.name}>{t('about.title')}</h1>
+                <p class="meta">{about.place[locale]}</p>
+            </div>
+            <p class={styles.headline}>
+                <span>{t('motto.line1')}</span>
+                <span>{t('motto.line2')}</span>
+            </p>
+            <p class={styles.lead}>{about.lead[locale]}</p>
+        </header>
+
+        <section class={styles.section} aria-labelledby="road-title">
+            <div class={styles.side}>
+                <h2 class={styles.checkpoint} id="road-title">{t('about.road')}</h2>
+            </div>
+            <ol class={styles.stops}>
+                {
+                    road.map((stop) => (
+                        <li class={cx(styles, 'stopItem', `c-${stop.color}`)}>
+                            {/* Each stop is a node like the map's; the last one, now, is me. */}
+                            <span class={styles.node} aria-hidden="true">
+                                {stop.icon ? <PixelIcon name={stop.icon} fit /> : <Sprite />}
+                            </span>
+                            <div>
+                                <p class={`meta ${styles.when}`}>{stop.when}</p>
+                                <h3 class={styles.stop}>{stop.href ? <a href={stop.href}>{stop.title}</a> : stop.title}</h3>
+                                <p>{stop.text}</p>
+                            </div>
+                        </li>
+                    ))
+                }
+            </ol>
+        </section>
+
+        <section class={styles.section} aria-labelledby="work-title">
+            <div class={styles.side}>
+                <h2 class={styles.checkpoint} id="work-title">{t('about.work')}</h2>
+            </div>
+            <ul class={styles.work}>
+                {about.work.map((line) => <li>{line[locale]}</li>)}
+            </ul>
+        </section>
+
+        <section class={styles.section} aria-labelledby="off-title">
+            <div class={styles.side}>
+                <h2 class={styles.checkpoint} id="off-title">{t('about.offClock')}</h2>
+            </div>
+            <!-- An inventory: one slot per thing, its pixel icon large. -->
+            <ul class={styles.off}>
+                {
+                    about.offClock.map((item) => (
+                        <li class={cx(styles, 'slot', `c-${item.color}`)}>
+                            <span class={styles.item} aria-hidden="true">
+                                <PixelIcon name={item.icon as PixelIconName} fit />
+                            </span>
+                            <h3 class={styles.itemName}>{item.title[locale]}</h3>
+                            <p>{item.text[locale]}</p>
+                        </li>
+                    ))
+                }
+            </ul>
+        </section>
+
+        <div class={styles.end}>
+            <Stops label={t('work.stops')} previous={null} next={next} />
+        </div>
+    </div>
+
+    <footer class={styles.footer}>
+        <Socials label={t('footer.socials')} />
+    </footer>
+</article>
